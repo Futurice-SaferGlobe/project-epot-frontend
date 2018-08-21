@@ -1,6 +1,6 @@
 # Project EPON
 
-> Project EPON frontend
+> Project EPON front-end
 
 ## Build Setup
 
