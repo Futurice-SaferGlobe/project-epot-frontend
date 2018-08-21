@@ -24,8 +24,6 @@ export default class CanvasApplication extends Application {
     this.activeOperationIndex = 0
     this.onOperationChange = null
 
-    this.eventBus = null
-
     this.createViewport()
     this.resizeCanvas()
     this.setResizeEventListener()
