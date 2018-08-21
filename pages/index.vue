@@ -41,9 +41,11 @@ export default {
     ...mapActions(['fetchOperations']),
 
     async initCanvas() {
-      // We'll import the CanvasApplication dynamically, in order to make the initial load much faster
-      // TODO: Make the Vue part of the application independent enough from the canvas one, so the site is
-      // usable as fast as possible on first page load
+      // We'll import the CanvasApplication dynamically,
+      // in order to make the initial load much faster
+      // TODO: Make the Vue part of the application independent
+      // enough from the canvas one, so the site is
+      // usable as fast as possible on first page load.
       const {
         default: CanvasApplication
       } = await import(/* webpackChunkName: "main-canvas" */ '@/canvas/CanvasApplication')

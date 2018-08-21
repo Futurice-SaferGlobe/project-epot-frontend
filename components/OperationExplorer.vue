@@ -1,20 +1,20 @@
 <template>
   <div class="operation-explorer">
     <div class="wrapper">
-      <div @click="eb" class="arrow-wrapper">
+      <button @click="eb" class="arrow-wrapper">
         <svg class="arrow arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 105" width="1rem">
             <path fill-rule="nonzero" d="M35.18 105L.356 52.982 35.825 0H66.11l.693.464-35.159 52.518L66.468 105H35.18z"/>
         </svg>
-      </div>
+      </button>
       <div class="info">
         <h1 class="operation-name">{{name}}</h1>
         <span class="area">{{area}}</span>
       </div>
-      <div @click="eb" class="arrow-wrapper">
+      <button @click="eb" class="arrow-wrapper">
         <svg class="arrow arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 105" width="1rem">
             <path fill-rule="nonzero" d="M35.18 105L.356 52.982 35.825 0H66.11l.693.464-35.159 52.518L66.468 105H35.18z"/>
         </svg>
-      </div>
+      </button>
     </div>
   </div>
 </template>
@@ -75,6 +75,7 @@ export default {
     }
 
     .arrow-wrapper {
+      outline: none;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -111,6 +112,10 @@ export default {
             transform: translateX(-5px);
           }
         }
+      }
+
+      &:active {
+        background-color: darken(#148fe5, 10%);
       }
     }
   }
