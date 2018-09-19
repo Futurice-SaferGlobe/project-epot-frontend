@@ -1,17 +1,20 @@
 <template>
   <div v-if="operationsCollection.length >= 1" class="container">
     <operation-explorer class="explorer" :name="activeOperationData.operation" :area="activeOperationData.area"/>
-    <canvas-container class="canvas" v-if="provider.canvas" :data="{operationsCollection}"/>
+    <canvas-container class="canvas" v-if="provider.canvas && canvasApplicationLoaded" :data="{operationsCollection}"/>
+    <loading-component v-else/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
+import LoadingComponent from '@/components/LoadingComponent'
 import CanvasContainer from '@/components/CanvasContainer'
 import OperationExplorer from '@/components/OperationExplorer'
 
 export default {
   data: () => ({
+    canvasApplicationLoaded: false,
     provider: {
       canvas: null
     }
@@ -24,6 +27,7 @@ export default {
   },
 
   components: {
+    LoadingComponent,
     CanvasContainer,
     OperationExplorer
   },
@@ -37,23 +41,20 @@ export default {
     ...mapActions(['fetchOperations']),
 
     async initCanvas() {
-      // We'll import the CanvasApplication dynamically,
-      // in order to make the initial load much faster
-      // TODO: Make the Vue part of the application independent
-      // enough from the canvas one, so the site is
-      // usable as fast as possible on first page load.
       const {
         default: CanvasApplication
       } = await import(/* webpackChunkName: "main-canvas" */ '@/canvas/CanvasApplication')
 
       this.provider.canvas = new CanvasApplication()
-
-      this.fetchOperations()
     }
   },
 
   mounted() {
-    this.initCanvas()
+    this.fetchOperations()
+
+    this.initCanvas().then(() => {
+      this.canvasApplicationLoaded = true
+    })
   }
 }
 </script>
