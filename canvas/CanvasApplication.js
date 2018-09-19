@@ -7,9 +7,11 @@ export default class CanvasApplication extends Application {
   constructor() {
     super({
       transparent: true,
-      resolution: window.devicePixelRatio,
+      resolution: 1, // TODO: figure out the device pixel ratio and calculate coords correctly
       antialias: false
     })
+
+    console.log('pixel ratio', window.devicePixelRatio)
 
     const { clientWidth, clientHeight } = document.documentElement
     this.documentClientWidth = clientWidth
