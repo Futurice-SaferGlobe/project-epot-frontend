@@ -14,6 +14,10 @@ export const state = () => ({
 /** @type GetterTree */
 export const getters = {
   activeOperationData: state => {
+    if (state.operationsCollection.length <= 0) {
+      return null
+    }
+
     return state.operationsCollection[state.selectedOperationIndex]
   }
 }
@@ -37,24 +41,27 @@ export const mutations = {
    * @param {string} operationId
    */
   changeSelectedOperationIndex(state, operationId) {
-    const opQuery = state.operationsCollection
+    console.log('hei')
+    const opIndexQuery = state.operationsCollection
       .map(op => op.internalId)
       .indexOf(operationId)
 
-    if (opQuery >= 0) {
-      state.selectedOperationIndex = opQuery
+    if (opIndexQuery >= 0) {
+      state.selectedOperationIndex = opIndexQuery
     }
   }
 }
 
 /** @type ActionTree */
 export const actions = {
-  async fetchOperations({ commit }) {
-    // @ts-ignore
-    const dummyOperations = await this.$axios.$get(
-      'http://localhost:3000/epon-dummy.json'
-    )
+  async fetchOperations({ commit, state }) {
+    if (state.operationsCollection.length <= 0) {
+      // @ts-ignore
+      const dummyOperations = await this.$axios.$get(
+        'http://localhost:3000/epon-dummy.json'
+      )
 
-    commit('createOperations', dummyOperations)
+      commit('createOperations', dummyOperations)
+    }
   }
 }

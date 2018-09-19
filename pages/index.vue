@@ -1,6 +1,6 @@
 <template>
   <div v-if="operationsCollection.length >= 1" class="container">
-    <operation-explorer class="explorer" :name="activeOperationData.operation" :area="activeOperationData.area"/>
+    <operation-explorer class="explorer" v-if="activeOperationData" :name="activeOperationData.operation" :area="activeOperationData.area"/>
     <canvas-container class="canvas" v-if="provider.canvas && canvasApplicationLoaded" :data="{operationsCollection}"/>
     <loading-component v-else/>
   </div>
@@ -38,6 +38,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['changeSelectedOperationIndex']),
     ...mapActions(['fetchOperations']),
 
     async initCanvas() {
@@ -50,10 +51,11 @@ export default {
   },
 
   mounted() {
-    this.fetchOperations()
-
-    this.initCanvas().then(() => {
-      this.canvasApplicationLoaded = true
+    this.fetchOperations().then(() => {
+      this.changeSelectedOperationIndex('unamid')
+      this.initCanvas().then(() => {
+        this.canvasApplicationLoaded = true
+      })
     })
   }
 }
