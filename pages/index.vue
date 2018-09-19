@@ -1,13 +1,12 @@
 <template>
-  <section v-if="operationsCollection.length >= 1" class="container">
+  <div v-if="operationsCollection.length >= 1" class="container">
     <operation-explorer class="explorer" :name="activeOperationData.operation" :area="activeOperationData.area"/>
-    <canvas-container class="canvas" v-if="operationsCollection.length >= 1" :data="{operationsCollection}">
-    </canvas-container>
-  </section>
+    <canvas-container class="canvas" v-if="provider.canvas" :data="{operationsCollection}"/>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 import CanvasContainer from '@/components/CanvasContainer'
 import OperationExplorer from '@/components/OperationExplorer'
 
@@ -31,10 +30,7 @@ export default {
 
   computed: {
     ...mapState(['operationsCollection', 'selectedOperationIndex']),
-
-    activeOperationData() {
-      return this.operationsCollection[this.selectedOperationIndex]
-    }
+    ...mapGetters(['activeOperationData'])
   },
 
   methods: {
@@ -56,7 +52,7 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
     this.initCanvas()
   }
 }
