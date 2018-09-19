@@ -51,11 +51,11 @@ export default {
   },
 
   mounted() {
-    this.fetchOperations().then(() => {
-      this.changeSelectedOperationIndex('unamid')
-      this.initCanvas().then(() => {
-        this.canvasApplicationLoaded = true
-      })
+    this.fetchOperations()
+    this.changeSelectedOperationIndex(0)
+
+    this.initCanvas().then(() => {
+      this.canvasApplicationLoaded = true
     })
   }
 }

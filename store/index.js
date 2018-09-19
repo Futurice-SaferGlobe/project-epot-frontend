@@ -8,7 +8,7 @@ import { MutationTree, ActionTree, Mutation, GetterTree } from 'vuex'
 /** @type State */
 export const state = () => ({
   operationsCollection: [],
-  selectedOperationIndex: 0
+  selectedOperationIndex: null
 })
 
 /** @type GetterTree */
@@ -38,16 +38,19 @@ export const mutations = {
   /**
    * @type Mutation<State>
    * @param {State} state
-   * @param {string} operationId
+   * @param {string|number} operationId
    */
   changeSelectedOperationIndex(state, operationId) {
-    console.log('hei')
-    const opIndexQuery = state.operationsCollection
-      .map(op => op.internalId)
-      .indexOf(operationId)
+    if (typeof operationId === 'number') {
+      state.selectedOperationIndex = operationId
+    } else if (typeof operationId === 'string') {
+      const opIndexQuery = state.operationsCollection
+        .map(op => op.internalId)
+        .indexOf(operationId)
 
-    if (opIndexQuery >= 0) {
-      state.selectedOperationIndex = opIndexQuery
+      if (opIndexQuery >= 0) {
+        state.selectedOperationIndex = opIndexQuery
+      }
     }
   }
 }
