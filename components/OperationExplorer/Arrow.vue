@@ -1,6 +1,6 @@
 <template functional>
     <button class="arrow-wrapper">
-      <svg :class="`arrow arrow-${props.angle}`" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 105" width="1rem">
+      <svg :class="`arrow arrow-${props.angle}`" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 105" width="20px">
         <path fill-rule="nonzero" d="M35.18 105L.356 52.982 35.825 0H66.11l.693.464-35.159 52.518L66.468 105H35.18z"/>
       </svg>
     </button>
