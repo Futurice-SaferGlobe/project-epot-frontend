@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Spinner from './Spinner'
+import Spinner from './LoadingComponent/Spinner'
 
 export default {
   components: {
