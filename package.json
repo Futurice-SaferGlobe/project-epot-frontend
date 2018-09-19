@@ -9,7 +9,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('Please install dependencies using Yarn.')\""
   },
   "lint-staged": {
     "*.{js,json,css,scss,md}": [
