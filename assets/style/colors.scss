@@ -4,7 +4,7 @@ $color-steel-gray: #272432;
 $color-turbo: #f5c723;
 $color-curious-blue: #328ccd;
 $color-mongoose: #aa8570;
-$color-white: mix(white, $color-bunker, 70%);
+$color-white: mix(#e3ddff, $color-bunker, 70%);
 $color-black: $color-bunker;
 
 $super: green;
@@ -36,7 +36,8 @@ $epot-colors: (
     'dark': mix(black, $color-curious-blue, $color-mix-weight)
   ),
   'white': (
-    'base': $color-white
+    'base': $color-white,
+    'light': mix(white, $color-white, $color-mix-weight * 5)
   ),
   'black': (
     'base': $color-black

@@ -1,1 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather');
+@font-face {
+  font-family: 'Whitney';
+  src: url('~/assets/style/fonts/whitney/Whitney-Book.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Whitney';
+  src: url('~/assets/style/fonts/whitney/Whitney-Black.woff') format('woff');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Whitney';
+  src: url('~/assets/style/fonts/whitney/Whitney-Bold.woff') format('woff');
+  font-weight: 500;
+}
