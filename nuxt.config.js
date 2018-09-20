@@ -1,5 +1,4 @@
 const pkg = require('./package')
-const merge = require('webpack-merge')
 
 module.exports = {
   mode: 'universal',
