@@ -1,2 +1,75 @@
-$color-primary-a: #0094e0;
-$color-background: #eeeeee;
+// Common colors
+$color-bunker: #100f14;
+$color-steel-gray: #272432;
+$color-turbo: #f5c723;
+$color-curious-blue: #328ccd;
+$color-mongoose: #aa8570;
+$color-white: mix(white, $color-bunker, 70%);
+$color-black: $color-bunker;
+
+$super: green;
+
+$epot-color-key: 'base' !default;
+
+$color-mix-weight: 10% !global;
+$epot-colors: (
+  'background': (
+    'base': $color-bunker,
+    'light': mix(white, $color-bunker, $color-mix-weight),
+    'dark': mix(black, $color-bunker, $color-mix-weight),
+    'darker': mix(black, $color-bunker, $color-mix-weight * 2)
+  ),
+  'foreground': (
+    'base': $color-steel-gray,
+    'light': mix(white, $color-steel-gray, $color-mix-weight),
+    'dark': mix(black, $color-steel-gray, $color-mix-weight),
+    'darker': mix(black, $color-steel-gray, $color-mix-weight * 2)
+  ),
+  'primary': (
+    'base': $color-turbo,
+    'light': mix(white, $color-turbo, $color-mix-weight),
+    'dark': mix(black, $color-turbo, $color-mix-weight)
+  ),
+  'secondary': (
+    'base': $color-curious-blue,
+    'light': mix(white, $color-curious-blue, $color-mix-weight),
+    'dark': mix(black, $color-curious-blue, $color-mix-weight)
+  ),
+  'white': (
+    'base': $color-white
+  ),
+  'black': (
+    'base': $color-black
+  )
+);
+
+$epot-opacity: (
+  'light': 0.8,
+  'dark': 0.4
+);
+
+@function epot-color($name: 'primary', $variant: $epot-color-key, $opacity: 1) {
+  $color: null;
+
+  // Get the color spectrum
+  $color-spectrum: map-get($epot-colors, $name);
+
+  // Get the color variant
+  @if $color-spectrum {
+    $color: map-get($color-spectrum, $variant);
+  }
+
+  // Get the alpha setting
+  $alpha: if(
+    type-of($opacity) == 'number',
+    $opacity,
+    map-get($epot-opacity, $opacity)
+  );
+
+  // Set the alpha of the color
+  @if $alpha {
+    $color: rgba($color, $alpha);
+  }
+
+  @return $color;
+}

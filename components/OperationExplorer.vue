@@ -44,7 +44,7 @@ export default {
 <style lang="scss" scoped>
 .operation-explorer {
   .wrapper {
-    background-color: white;
+    background-color: epot-color('foreground');
     box-shadow: inset 0 0 0 1px rgba(black, 0.05),
       0 4px 4px -2px rgba(black, 0.2);
     border-radius: 6px;
@@ -72,7 +72,7 @@ export default {
 
       span.area {
         font-size: 0.8rem;
-        color: #148fe5;
+        color: epot-color('primary');
         font-weight: bold;
       }
     }

@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const merge = require('webpack-merge')
 
 module.exports = {
   mode: 'universal',
@@ -36,8 +37,10 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-sass-resources-loader'
   ],
+  sassResources: ['@/assets/style/colors.scss'],
   /*
   ** Axios module configuration
   */

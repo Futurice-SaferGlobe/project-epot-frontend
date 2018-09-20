@@ -22,7 +22,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: epot-color('foreground', 'darker');
   padding: 1rem 1.5rem;
   cursor: pointer;
 
@@ -31,7 +31,7 @@ export default {
     transform-origin: 50%;
 
     path {
-      fill: rgba(black, 0.7);
+      fill: epot-color('white');
     }
 
     &.arrow-right {
@@ -40,11 +40,11 @@ export default {
   }
 
   &:hover {
-    background-color: #148fe5;
+    background-color: epot-color('primary');
 
     .arrow {
       path {
-        fill: white;
+        fill: epot-color('black');
       }
 
       &.arrow-right {
@@ -58,7 +58,7 @@ export default {
   }
 
   &:active {
-    background-color: darken(#148fe5, 10%);
+    background-color: epot-color('primary');
   }
 }
 </style>
