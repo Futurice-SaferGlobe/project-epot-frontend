@@ -13,8 +13,13 @@ body {
   font-size: 1rem;
 }
 
+::selection {
+  background-color: epot-color('secondary');
+  color: white;
+}
+
 p {
-  line-height: 1.35;
+  line-height: 1.5;
   margin-block-end: 1rem;
   margin-block-start: 1rem;
 }
