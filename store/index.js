@@ -8,7 +8,8 @@ import { MutationTree, ActionTree, Mutation, GetterTree } from 'vuex'
 /** @type State */
 export const state = () => ({
   operationsCollection: [],
-  selectedOperationIndex: null
+  selectedOperationIndex: null,
+  test: null
 })
 
 /** @type GetterTree */
@@ -60,11 +61,19 @@ export const actions = {
   async fetchOperations({ commit, state }) {
     if (state.operationsCollection.length <= 0) {
       // @ts-ignore
-      const dummyOperations = await this.$axios.$get(
-        'http://localhost:3000/epon-dummy.json'
-      )
+      const dummyOperation0 = await this.$axios.$get('/operation', {
+        params: {
+          operationId: 'unamid'
+        }
+      })
+      // @ts-ignore
+      const dummyOperation1 = await this.$axios.$get('/operation', {
+        params: {
+          operationId: 'digitalents'
+        }
+      })
 
-      commit('createOperations', dummyOperations)
+      commit('createOperations', [dummyOperation0, dummyOperation1])
     }
   }
 }

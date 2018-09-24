@@ -1,13 +1,11 @@
 <template>
   <div class="content">
     <aside>
-      <div class="horizontal">
-        side
-      </div>
+      side
     </aside>
     <main>
       <section v-if="activeOperationData" class="scroller">
-        <contents-wrapper v-for="i in 2" :key="i">
+        <contents-wrapper v-for="i in 5" :key="i">
           <operation-contents :operation-data="activeOperationData"/>
         </contents-wrapper>
       </section>
@@ -21,6 +19,8 @@ import ContentsWrapper from '@/components/ContentsWrapper'
 import OperationContents from '@/components/OperationContents'
 
 export default {
+  middleware: 'operations',
+
   components: {
     ContentsWrapper,
     OperationContents
@@ -53,13 +53,6 @@ $side-width: 300px;
     position: sticky;
     top: 0;
     height: 100vh;
-
-    .horizontal {
-      // position: fixed;
-      // background-color: epot-color('background');
-      // width: $side-width;
-      // height: 100%;
-    }
   }
 
   main {
@@ -70,7 +63,7 @@ $side-width: 300px;
       overflow-x: auto;
       width: 100%;
       height: 100vh;
-      padding: 2rem 0;
+      padding: 1.2rem 0;
 
       &::-webkit-scrollbar {
         width: 4px;
@@ -82,13 +75,14 @@ $side-width: 300px;
         background-color: epot-color('foreground', 'light');
       }
 
-      :not(:last-of-type) {
+      > *:not(:last-of-type) {
         margin-right: 1rem;
       }
 
       > * {
-        width: 680px;
-        min-width: 680px;
+        $width: 630px;
+        width: $width;
+        min-width: $width;
         height: 3000px;
       }
     }

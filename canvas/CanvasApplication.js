@@ -142,7 +142,9 @@ export default class CanvasApplication extends Application {
     for (let operation of operations) {
       pad = pad + 10
       this.operations.push(
-        this.viewport.addChild(new Operation(operation, 50 * pad, 50 * pad, 80))
+        this.viewport.addChild(
+          new Operation(this, operation, 50 * pad, 50 * pad, 80)
+        )
       )
     }
   }
