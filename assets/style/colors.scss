@@ -1,13 +1,16 @@
-// Common colors
+// Common colors´
 $color-bunker: #100f14;
 $color-steel-gray: #272432;
 $color-turbo: #f5c723;
 $color-curious-blue: #328ccd;
 $color-mongoose: #aa8570;
-$color-white: mix(#e3ddff, $color-bunker, 70%);
+$color-white: mix(#e3ddff, $color-bunker, 80%);
 $color-black: $color-bunker;
 
 $super: green;
+
+$color-mix-light: white;
+$color-mix-dark: black;
 
 $epot-color-key: 'base' !default;
 
@@ -15,29 +18,29 @@ $color-mix-weight: 10% !global;
 $epot-colors: (
   'background': (
     'base': $color-bunker,
-    'light': mix(white, $color-bunker, $color-mix-weight),
-    'dark': mix(black, $color-bunker, $color-mix-weight),
-    'darker': mix(black, $color-bunker, $color-mix-weight * 2)
+    'light': mix($color-mix-light, $color-bunker, $color-mix-weight),
+    'dark': mix($color-mix-dark, $color-bunker, $color-mix-weight),
+    'darker': mix($color-mix-dark, $color-bunker, $color-mix-weight * 2)
   ),
   'foreground': (
     'base': $color-steel-gray,
-    'light': mix(white, $color-steel-gray, $color-mix-weight),
-    'dark': mix(black, $color-steel-gray, $color-mix-weight),
-    'darker': mix(black, $color-steel-gray, $color-mix-weight * 2)
+    'light': mix($color-mix-light, $color-steel-gray, $color-mix-weight),
+    'dark': mix($color-mix-dark, $color-steel-gray, $color-mix-weight),
+    'darker': mix($color-mix-dark, $color-steel-gray, $color-mix-weight * 2)
   ),
   'primary': (
     'base': $color-turbo,
-    'light': mix(white, $color-turbo, $color-mix-weight),
-    'dark': mix(black, $color-turbo, $color-mix-weight)
+    'light': mix($color-mix-light, $color-turbo, $color-mix-weight),
+    'dark': mix($color-mix-dark, $color-turbo, $color-mix-weight)
   ),
   'secondary': (
     'base': $color-curious-blue,
-    'light': mix(white, $color-curious-blue, $color-mix-weight),
-    'dark': mix(black, $color-curious-blue, $color-mix-weight)
+    'light': mix($color-mix-light, $color-curious-blue, $color-mix-weight),
+    'dark': mix($color-mix-dark, $color-curious-blue, $color-mix-weight)
   ),
   'white': (
     'base': $color-white,
-    'light': mix(white, $color-white, $color-mix-weight * 5)
+    'light': mix($color-mix-light, $color-white, $color-mix-weight * 5)
   ),
   'black': (
     'base': $color-black
