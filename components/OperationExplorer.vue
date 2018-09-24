@@ -68,6 +68,7 @@ export default {
       h1.operation-name {
         font-weight: bold;
         margin-bottom: 0.3rem;
+        color: epot-color('white', 'light');
       }
 
       span.area {
