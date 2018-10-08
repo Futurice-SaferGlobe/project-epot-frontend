@@ -19,8 +19,10 @@
     ]
   },
   "dependencies": {
+    "@nuxtjs/apollo": "^4.0.0-rc2.2",
     "@nuxtjs/axios": "^5.0.0",
     "animejs": "^2.2.0",
+    "graphql-tag": "^2.10.0",
     "nanoreset": "^3.0.1",
     "nuxt": "^1.0.0",
     "pixi-viewport": "^3.2.1",

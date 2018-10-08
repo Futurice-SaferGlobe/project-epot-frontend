@@ -7,17 +7,41 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 import LoadingComponent from '@/components/LoadingComponent'
 import CanvasContainer from '@/components/CanvasContainer'
 import OperationExplorer from '@/components/OperationExplorer'
 
 export default {
+  apollo: {
+    operations: {
+      query: gql`
+        query GetOperations {
+          operations {
+            name
+            area
+            internalId
+            headers {
+              index
+              labels
+              subheaders {
+                index
+                title
+              }
+            }
+          }
+        }
+      `
+    }
+  },
+
   data: () => ({
     canvasApplicationLoaded: false,
     provider: {
       canvas: null
-    }
+    },
+    operations: null
   }),
 
   provide() {

@@ -37,7 +37,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    'nuxt-sass-resources-loader'
+    'nuxt-sass-resources-loader',
+    '@nuxtjs/apollo'
   ],
   sassResources: ['@/assets/style/colors.scss'],
   /*
@@ -48,6 +49,17 @@ module.exports = {
       process.env.NODE_ENV === 'production'
         ? 'http://somehost.com'
         : 'http://localhost:8080'
+  },
+
+  /**
+   * Apollo config
+   */
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:8080/graphql'
+      }
+    }
   },
 
   /*
