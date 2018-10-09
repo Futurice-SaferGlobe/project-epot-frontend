@@ -37,7 +37,8 @@ $epot-colors: (
   ),
   'white': (
     'base': $color-white,
-    'light': mix($color-mix-light, $color-white, $color-mix-weight * 5)
+    'light': mix($color-mix-light, $color-white, $color-mix-weight * 5),
+    'lighter': mix($color-mix-light, $color-white, $color-mix-weight * 8)
   ),
   'black': (
     'base': $color-black
