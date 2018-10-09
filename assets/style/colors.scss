@@ -2,7 +2,7 @@
 $prussian-blue: #033057;
 $midnight-blue: #204b6f;
 $tomato: #fc5c44;
-$color-curious-blue: #328ccd;
+$roti: #ba9b47;
 $color-white: #c8dde5;
 $color-black: mix(black, #033057, 10%);
 
@@ -31,9 +31,9 @@ $epot-colors: (
     'dark': mix($color-mix-dark, $tomato, $color-mix-weight)
   ),
   'secondary': (
-    'base': $color-curious-blue,
-    'light': mix($color-mix-light, $color-curious-blue, $color-mix-weight),
-    'dark': mix($color-mix-dark, $color-curious-blue, $color-mix-weight)
+    'base': $roti,
+    'light': mix($color-mix-light, $roti, $color-mix-weight),
+    'dark': mix($color-mix-dark, $roti, $color-mix-weight)
   ),
   'white': (
     'base': $color-white,
