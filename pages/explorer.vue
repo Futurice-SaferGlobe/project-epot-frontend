@@ -15,7 +15,7 @@ import { queries } from '@/graphql/'
 export default {
   data() {
     return {
-      operationIds: ['unamid'],
+      operationIds: ['unamid', 'digitalents'],
       operations: null
     }
   },
@@ -27,9 +27,6 @@ export default {
   apollo: {
     operations: {
       query: queries.getOperations,
-      variables: () => ({
-        ids: this.operationIds
-      }),
       update(data) {
         return data.operations
       }
