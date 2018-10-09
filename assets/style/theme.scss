@@ -2,7 +2,7 @@
 @import './colors.scss';
 
 html {
-  font-size: 18px;
+  font-size: 16px;
   overflow-y: auto;
 }
 
@@ -22,4 +22,28 @@ p {
   line-height: 1.5;
   margin-block-end: 1rem;
   margin-block-start: 1rem;
+}
+
+button {
+  &.enhance-hover {
+    position: relative;
+    overflow: hidden;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: rgba(white, 0.15);
+      opacity: 0;
+    }
+    &:not(:disabled) {
+      &:hover {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
