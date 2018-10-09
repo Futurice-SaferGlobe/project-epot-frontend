@@ -1,36 +1,76 @@
 <template>
   <div class="selector" :class="isDropdownVisible ? 'focus' : ''">
-    <button @click="toggleDropdown" ref="button" class="op-button">Operations</button>
+    <button @click="toggleDropdown" ref="button" class="op-button">
+      Operations <span>({{checkedOperations.length}} selected)</span>
+    </button>
     <ul v-show="isDropdownVisible" ref="dropdown" class="dropdown">
       <li v-for="op in operationsMetadata" :key="op.internalId">
-        <input type="checkbox" :id="op.internalId" :name="op.name" :value="op.name"/>
+        <input 
+          type="checkbox" 
+          :id="op.internalId" 
+          :name="op.name" 
+          :value="op.internalId"
+          v-model="checkedOperations"
+        />
         <label :for="op.internalId">{{op.name}}</label>
+      </li>
+      <li>
+        <button 
+          class="enhance-hover"
+          @click="applyActiveOperations"
+          :disabled="!isSelectionValid"
+        >
+          Apply
+        </button>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data() {
     return {
-      isDropdownVisible: false
+      isDropdownVisible: false,
+      checkedOperations: []
     }
+  },
+
+  computed: {
+    isSelectionValid: state =>
+      state.checkedOperations.length >= 1 && state.checkedOperations.length <= 2
   },
 
   props: {
     operationsMetadata: Array
   },
-  methods: {
-    initSelector() {
-      const button = this.$refs.button
-      const dropdown = this.$refs.dropdown
 
-      console.log(button)
+  methods: {
+    ...mapMutations(['changeSelectedOperations']),
+
+    initSelector() {
+      this.checkedOperations = this.operationsMetadata.map(
+        ({ internalId }) => internalId
+      )
     },
 
     toggleDropdown() {
       this.isDropdownVisible = !this.isDropdownVisible
+
+      if (this.isDropdownVisible) {
+        // opening dropdown logic
+      } else {
+        if (!this.isSelectionValid) {
+          this.checkedOperations = lastCheckedOperations
+        }
+        // closing dropdown logic
+      }
+    },
+
+    applyActiveOperations() {
+      this.changeSelectedOperations(this.checkedOperations)
     }
   },
 
@@ -43,6 +83,7 @@ export default {
 <style lang="scss" scoped>
 $border-radius: 3px;
 .selector {
+  user-select: none;
   border-radius: $border-radius;
   background-color: epot-color('background');
   box-shadow: inset 0 0 0 1px epot-color('white', 'base', 'dark');
@@ -55,18 +96,28 @@ $border-radius: 3px;
     }
   }
 
+  &.focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   > * {
-    width: 180px;
+    width: 230px;
   }
   .op-button {
     position: relative;
     padding: 0.5rem 0.8rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: left;
     background-color: transparent;
     outline: none;
-    z-index: 2;
+
     color: epot-color('white');
+
+    span {
+      opacity: 0.6;
+      font-variant-numeric: tabular-nums;
+    }
   }
 
   .dropdown {
@@ -76,21 +127,38 @@ $border-radius: 3px;
     background-color: epot-color('white', 'light');
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding-top: 0.35rem;
     padding-bottom: 0.35rem;
     z-index: 1;
 
     li {
-      padding: 0.7rem 0.8rem;
+      padding: 0.5rem 0.8rem;
       user-select: none;
-      box-shadow: 0 -8px epot-color('white', 'light');
       input {
         margin-right: 2ex;
         margin-bottom: 1px;
       }
       > * {
         color: epot-color('black');
+      }
+      &:last-child {
+        padding-top: 0.3rem;
+      }
+
+      button {
+        background-color: epot-color('secondary');
+        color: epot-color('white', 'lighter');
+        font-size: 1rem;
+        padding: 0.5rem 0.8rem;
+        outline: none;
+        width: 100%;
+        border-radius: 3px;
+
+        &:disabled {
+          background-color: epot-color('white');
+          color: epot-color('black', 'base', 'dark');
+        }
       }
     }
   }

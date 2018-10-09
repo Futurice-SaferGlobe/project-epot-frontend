@@ -21,6 +21,13 @@ module.exports = {
   */
   loading: { color: '#FFFFFF' },
 
+  /**
+   * Router
+   */
+  router: {
+    middleware: ['operations']
+  },
+
   /*
   ** Global CSS
   */

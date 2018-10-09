@@ -7,11 +7,13 @@ import { MutationTree, ActionTree, GetterTree } from 'vuex'
 
 /** @type State */
 export const state = () => ({
+  availableOperations: ['unamid', 'digitalents'],
   selectedOperations: ['unamid', 'digitalents']
 })
 
 /** @type GetterTree */
 export const getters = {
+  availableOperations: state => state.availableOperations,
   selectedOperations: state => state.selectedOperations
 }
 

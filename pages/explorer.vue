@@ -28,7 +28,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['selectedOperations'])
+    ...mapGetters(['selectedOperations', 'availableOperations'])
   },
 
   components: {
@@ -46,7 +46,6 @@ export default {
         }
       },
       update(data) {
-        console.log()
         return data.operations
       }
     }
