@@ -1,18 +1,11 @@
 <template>
   <div>
-    <epot-header/>
     <nuxt/>
   </div>
 </template>
 
 <script>
-import EpotHeader from '@/components/EpotHeader'
-
-export default {
-  components: {
-    EpotHeader
-  }
-}
+export default {}
 </script>
 
 
