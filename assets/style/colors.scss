@@ -1,13 +1,10 @@
 // Common colors´
-$color-bunker: #100f14;
-$color-steel-gray: #272432;
-$color-turbo: #f5c723;
+$prussian-blue: #033057;
+$midnight-blue: #204b6f;
+$tomato: #fc5c44;
 $color-curious-blue: #328ccd;
-$color-mongoose: #aa8570;
-$color-white: mix(#e3ddff, $color-bunker, 80%);
-$color-black: $color-bunker;
-
-$super: green;
+$color-white: #c8dde5;
+$color-black: mix(black, #033057, 10%);
 
 $color-mix-light: white;
 $color-mix-dark: black;
@@ -17,21 +14,21 @@ $epot-color-key: 'base' !default;
 $color-mix-weight: 10% !global;
 $epot-colors: (
   'background': (
-    'base': $color-bunker,
-    'light': mix($color-mix-light, $color-bunker, $color-mix-weight),
-    'dark': mix($color-mix-dark, $color-bunker, $color-mix-weight),
-    'darker': mix($color-mix-dark, $color-bunker, $color-mix-weight * 2)
+    'base': $prussian-blue,
+    'light': mix($color-mix-light, $prussian-blue, $color-mix-weight),
+    'dark': mix($color-mix-dark, $prussian-blue, $color-mix-weight),
+    'darker': mix($color-mix-dark, $prussian-blue, $color-mix-weight * 2)
   ),
   'foreground': (
-    'base': $color-steel-gray,
-    'light': mix($color-mix-light, $color-steel-gray, $color-mix-weight),
-    'dark': mix($color-mix-dark, $color-steel-gray, $color-mix-weight),
-    'darker': mix($color-mix-dark, $color-steel-gray, $color-mix-weight * 2)
+    'base': $midnight-blue,
+    'light': mix($color-mix-light, $midnight-blue, $color-mix-weight),
+    'dark': mix($color-mix-dark, $midnight-blue, $color-mix-weight),
+    'darker': mix($color-mix-dark, $midnight-blue, $color-mix-weight * 2)
   ),
   'primary': (
-    'base': $color-turbo,
-    'light': mix($color-mix-light, $color-turbo, $color-mix-weight),
-    'dark': mix($color-mix-dark, $color-turbo, $color-mix-weight)
+    'base': $tomato,
+    'light': mix($color-mix-light, $tomato, $color-mix-weight),
+    'dark': mix($color-mix-dark, $tomato, $color-mix-weight)
   ),
   'secondary': (
     'base': $color-curious-blue,
