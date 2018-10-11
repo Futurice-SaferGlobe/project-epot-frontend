@@ -1,8 +1,8 @@
 <template>
   <div v-if="!$apollo.queries.operationSectionContent.loading" class="operation-contents">
     <div class="operation-heading">
-      <h1 class="operation-title">{{operationSectionContent.header.title}}</h1>
-      <span class="operation-area">werwerwerwerwerwer</span>
+      <h1 class="operation-title">{{operationMetadata.name}}</h1>
+      <span class="operation-area">{{operationMetadata.area}}</span>
     </div>
     <div class="padder">
       <div class="text">
@@ -26,11 +26,9 @@ import { queries } from '@/graphql'
 
 export default {
   props: {
-    operationId: {
-      operationId: {
-        type: String,
-        required: true
-      }
+    operationMetadata: {
+      type: Object,
+      required: true
     }
   },
 
@@ -43,16 +41,15 @@ export default {
       query: queries.getOperationContent,
       variables() {
         return {
-          id: this.operationId,
+          id: this.operationMetadata.internalId,
           headerIndex: this.activeHeaderIndices[0],
           subheaderIndex: this.activeHeaderIndices[1]
         }
       },
       update: ({ operation: { headers } }) => ({
-        header: headers.map(h => ({
-          title: h.title,
-          content: h.content,
-          subheader: h.subheaders[0]
+        header: headers.map(({ subheaders, ...rest }) => ({
+          ...rest,
+          subheader: subheaders[0]
         }))[0]
       })
     }
@@ -68,7 +65,7 @@ export default {
   .operation-heading {
     height: 120px;
     padding: 1rem 1.4rem;
-    background-color: epot-color('foreground', 'darker');
+    background-color: epot-color('background', 'dark');
     display: flex;
     flex-direction: column;
     justify-content: center;

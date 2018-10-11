@@ -10,12 +10,10 @@
     </epot-header>
     <div class="relative-wrapper">
       <loading-component :loadingState="$apollo.queries.operations.loading">
-        <pre>
-          {{operations}}
-        </pre>
+        <pre>{{operations}}</pre>
       </loading-component>
       <div ref="floating" class="floating">
-        <operation-section-content v-if="!$apollo.queries.operations.loading" :operationId="operations[0].internalId" />
+        <operation-section-content v-if="!$apollo.queries.operations.loading" :operationMetadata="operationMetadata" />
       </div>
     </div>
   </div>
@@ -43,7 +41,14 @@ export default {
       'selectedOperations',
       'availableOperations',
       'isLayoutComparison'
-    ])
+    ]),
+    operationMetadata() {
+      return {
+        name: this.operations[0].name,
+        internalId: this.operations[0].internalId,
+        area: this.operations[0].area
+      }
+    }
   },
 
   components: {
