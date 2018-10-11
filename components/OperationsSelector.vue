@@ -81,16 +81,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$border-radius: 3px;
+$border-radius: 6px;
 .selector {
   user-select: none;
   border-radius: $border-radius;
   background-color: epot-color('background');
-  box-shadow: inset 0 0 0 1px epot-color('white', 'base', 'dark');
 
   &:hover,
   &.focus {
-    background-color: epot-color('white');
+    background-color: epot-color('foreground', 'dark');
     .op-button {
       color: epot-color('black');
     }
@@ -101,9 +100,6 @@ $border-radius: 3px;
     border-bottom-right-radius: 0;
   }
 
-  > * {
-    width: 230px;
-  }
   .op-button {
     position: relative;
     padding: 0.5rem 0.8rem;
@@ -121,10 +117,11 @@ $border-radius: 3px;
   }
 
   .dropdown {
+    width: 198px;
     position: absolute;
     display: flex;
     flex-direction: column;
-    background-color: epot-color('white', 'light');
+    background-color: epot-color('foreground', 'light');
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     font-size: 1rem;
@@ -156,7 +153,7 @@ $border-radius: 3px;
         border-radius: 3px;
 
         &:disabled {
-          background-color: epot-color('white');
+          background-color: epot-color('foreground');
           color: epot-color('black', 'base', 'dark');
         }
       }

@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
 
-export const getOperationsContent = gql`
-  query getOperationsContent($ids: [ID]) {
-    operations(ids: $ids) {
-      headers {
+export const getOperationContent = gql`
+  query getOperationContent($id: ID!, $headerIndex: Int, $subheaderIndex: Int) {
+    operation(id: $id) {
+      headers(index: $headerIndex) {
+        title
         content
-        subheaders {
+        subheaders(index: $subheaderIndex) {
+          title
           content
         }
       }
