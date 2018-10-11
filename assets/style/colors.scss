@@ -1,9 +1,9 @@
 // Common colors´
-$prussian-blue: #033057;
-$midnight-blue: #204b6f;
-$tomato: #fc5c44;
+$prussian-blue: #003057;
+$midnight-blue: #c6dae7;
+$tomato: #ff5c39;
 $roti: #ba9b47;
-$color-white: #c8dde5;
+$color-white: #c6dae7;
 $color-black: mix(black, #033057, 10%);
 
 $color-mix-light: white;
@@ -11,7 +11,7 @@ $color-mix-dark: black;
 
 $epot-color-key: 'base' !default;
 
-$color-mix-weight: 10% !global;
+$color-mix-weight: 12% !global;
 $epot-colors: (
   'background': (
     'base': $prussian-blue,
