@@ -16,14 +16,14 @@
 <script>
 import { mapGetters, mapMutations, mapState, mapActions } from 'vuex'
 import ContentsWrapper from '@/components/ContentsWrapper'
-import OperationContents from '@/components/OperationContents'
+import OperationSectionContent from '@/components/OperationSectionContent'
 
 export default {
   middleware: 'operations',
 
   components: {
     ContentsWrapper,
-    OperationContents
+    OperationSectionContent
   },
   computed: {
     ...mapState(['selectedOperationIndex', 'operationsCollection']),

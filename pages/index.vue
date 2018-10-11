@@ -1,90 +1,30 @@
 <template>
-  <div v-if="operationsCollection.length >= 1" class="container">
-    <operation-explorer class="explorer" v-if="activeOperationData" :name="activeOperationData.operation" :area="activeOperationData.area"/>
-    <canvas-container class="canvas" v-if="provider.canvas && canvasApplicationLoaded" :data="{operationsCollection}"/>
-    <loading-component v-else/>
+  <div class="index">
+    <h1>Go to...</h1>
+    <nuxt-link to="/explorer">/explorer</nuxt-link>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
-import LoadingComponent from '@/components/LoadingComponent'
-import CanvasContainer from '@/components/CanvasContainer'
-import OperationExplorer from '@/components/OperationExplorer'
-
-export default {
-  data: () => ({
-    canvasApplicationLoaded: false,
-    provider: {
-      canvas: null
-    }
-  }),
-
-  provide() {
-    return {
-      provider: this.provider
-    }
-  },
-
-  components: {
-    LoadingComponent,
-    CanvasContainer,
-    OperationExplorer
-  },
-
-  computed: {
-    ...mapState(['operationsCollection', 'selectedOperationIndex']),
-    ...mapGetters(['activeOperationData'])
-  },
-
-  methods: {
-    ...mapMutations(['changeSelectedOperationIndex']),
-    ...mapActions(['fetchOperations']),
-
-    async initCanvas() {
-      const {
-        default: CanvasApplication
-      } = await import(/* webpackChunkName: "main-canvas" */ '@/canvas/CanvasApplication')
-
-      this.provider.canvas = new CanvasApplication()
-    }
-  },
-
-  mounted() {
-    this.fetchOperations()
-    this.changeSelectedOperationIndex(0)
-
-    this.initCanvas().then(() => {
-      this.canvasApplicationLoaded = true
-    })
-  }
-}
+export default {}
 </script>
 
 <style lang="scss">
-.container {
+.index {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
-  width: 100vw;
-}
 
-.explorer {
-  position: absolute;
-  width: 400px;
-  bottom: 6rem;
-  left: calc(50% - 400px / 2);
-  z-index: 2;
-}
+  h1 {
+    font-size: 1.2rem;
+    line-height: 2;
+    font-weight: bold;
+  }
 
-.canvas-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-}
-
-.canvas {
-  z-index: 1;
+  > * {
+    color: white;
+  }
 }
 </style>

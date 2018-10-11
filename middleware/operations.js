@@ -33,9 +33,6 @@ const operationsMiddleware = context => {
    */
   // @ts-ignore
   if (!context.isDev && process.server) return
-
-  console.log(context.query)
-  context.store.commit('testerdude')
 }
 
 export default operationsMiddleware

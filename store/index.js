@@ -1,5 +1,6 @@
 // @ts-check
-import { MutationTree, ActionTree, Mutation, GetterTree } from 'vuex'
+import { MutationTree, ActionTree, GetterTree } from 'vuex'
+import { layoutEnum } from '@/constants'
 
 /**
  * @typedef {Object.<string, any>} State
@@ -7,73 +8,47 @@ import { MutationTree, ActionTree, Mutation, GetterTree } from 'vuex'
 
 /** @type State */
 export const state = () => ({
-  operationsCollection: [],
-  selectedOperationIndex: null,
-  test: null
+  availableOperations: ['unamid', 'digitalents'],
+  selectedOperations: ['unamid', 'digitalents'],
+  activeHeaderIndices: [3, 4],
+  layout: layoutEnum.COMPARISON
 })
 
 /** @type GetterTree */
 export const getters = {
-  activeOperationData: state => {
-    if (state.operationsCollection.length <= 0) {
-      return null
-    }
-
-    return state.operationsCollection[state.selectedOperationIndex]
-  }
+  availableOperations: state => state.availableOperations,
+  selectedOperations: state => state.selectedOperations,
+  activeHeaderIndices: state => state.activeHeaderIndices,
+  layout: state => state.layout,
+  isLayoutComparison: state => state.layout === layoutEnum.COMPARISON,
+  isLayoutSingle: state => state.layout === layoutEnum.SINGLE
 }
 
 /** @type MutationTree */
 export const mutations = {
-  /**
-   * @type Mutation<State>
-   * @param {State} state
-   * @param {Array} operations
-   */
-  createOperations(state, operations) {
-    for (let operation of operations) {
-      state.operationsCollection.push(operation)
+  changeSelectedOperations(state, operations) {
+    const MAX_LEN = 2
+    if (Array.isArray(operations) && operations.length <= MAX_LEN) {
+      state.selectedOperations = operations
+    } else {
+      console.error(
+        `changeSelectedOperations: payload was not an array, or is longer than ${MAX_LEN}`
+      )
     }
   },
 
-  /**
-   * @type Mutation<State>
-   * @param {State} state
-   * @param {string|number} operationId
-   */
-  changeSelectedOperationIndex(state, operationId) {
-    if (typeof operationId === 'number') {
-      state.selectedOperationIndex = operationId
-    } else if (typeof operationId === 'string') {
-      const opIndexQuery = state.operationsCollection
-        .map(op => op.internalId)
-        .indexOf(operationId)
-
-      if (opIndexQuery >= 0) {
-        state.selectedOperationIndex = opIndexQuery
-      }
+  changeLayout(state, newLayout) {
+    const validLayoutNames = Object.entries(layoutEnum)
+    if (validLayoutNames.includes(newLayout)) {
+      state.layout = newLayout
+    } else {
+      throw new Error(`
+        changeLayout: '${newLayout}' is invalid layout name. 
+        Valid layout names: ${validLayoutNames.join(', ')}
+      `)
     }
   }
 }
 
 /** @type ActionTree */
-export const actions = {
-  async fetchOperations({ commit, state }) {
-    if (state.operationsCollection.length <= 0) {
-      // @ts-ignore
-      const dummyOperation0 = await this.$axios.$get('/operation', {
-        params: {
-          operationId: 'unamid'
-        }
-      })
-      // @ts-ignore
-      const dummyOperation1 = await this.$axios.$get('/operation', {
-        params: {
-          operationId: 'digitalents'
-        }
-      })
-
-      commit('createOperations', [dummyOperation0, dummyOperation1])
-    }
-  }
-}
+export const actions = {}

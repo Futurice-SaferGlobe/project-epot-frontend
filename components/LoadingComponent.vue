@@ -1,7 +1,8 @@
 <template>
-  <span>
-    <spinner :size="spinnerSize"/>
-  </span>
+  <div>
+    <spinner class="spinner" v-if="loadingState === true" :size="spinnerSize"/>
+    <slot v-else/>
+  </div>
 </template>
 
 <script>
@@ -13,10 +14,17 @@ export default {
   },
 
   props: {
+    loadingState: {
+      type: Boolean
+    },
     spinnerSize: {
       type: Number,
       default: 140
     }
+  },
+
+  mounted() {
+    console.log('loading', this.loadingState)
   }
 }
 </script>
