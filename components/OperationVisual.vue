@@ -36,12 +36,9 @@ export default {
   methods: {
     renderStuff() {
       const treeLayout = d3
-        .cluster()
-        .size([400, 400])
-        .separation((a, b) => {
-          return (a.parent == b.parent ? 1 : 2) / a.depth
-        })
-        .nodeSize([100, 100])
+        .tree()
+        .size([2 * Math.PI, 200])
+        .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
 
       const hierarchyPointNode = treeLayout(
         d3.hierarchy(this.transformedOperation)
@@ -77,6 +74,24 @@ export default {
           // }
         })
 
+      const link = svgNodesSelection
+        .append('g')
+        .attr('fill', 'none')
+        .attr('stroke', '#555')
+        .attr('stroke-opacity', 0.4)
+        .attr('stroke-width', 1.5)
+        .selectAll('path')
+        .data(hierarchyPointNode.links())
+        .enter()
+        .append('path')
+        .attr(
+          'd',
+          d3
+            .linkRadial()
+            .angle(d => d.x)
+            .radius(d => d.y)
+        )
+
       // Balls
       const circle = node
         .append('circle')
@@ -85,8 +100,15 @@ export default {
 
       const title = node
         .append('text')
+        .style('font-size', '9')
         .attr('dy', '0.31rem')
-        .text(({ data: { title } }) => title)
+        .text(d => {
+          console.log(d)
+          const hasParent = d.parent
+          return `${d.x}, ${d.y}${
+            hasParent ? ` : ${d.parent.x} ${d.parent.y}` : ''
+          }`
+        })
 
       this.calcSvgContainerViewBox()
     },
@@ -114,5 +136,8 @@ export default {
 <style lang="scss" scoped>
 svg {
   height: 1020px;
+}
+* text {
+  font-size: 10px !important;
 }
 </style>
