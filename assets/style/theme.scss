@@ -56,3 +56,12 @@ button {
     }
   }
 }
+
+body::-webkit-scrollbar {
+  background-color: epot-color('background');
+  width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: epot-color('background', 'light');
+}

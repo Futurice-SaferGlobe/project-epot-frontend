@@ -36,7 +36,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: ['~/plugins/eventBus.js'],
 
   /*
   ** Nuxt.js modules
@@ -55,7 +55,8 @@ module.exports = {
     baseURL:
       process.env.NODE_ENV === 'production'
         ? 'http://somehost.com'
-        : 'http://localhost:8080'
+        : 'http://localhost:8080',
+    errorHandler(error) {}
   },
 
   /**

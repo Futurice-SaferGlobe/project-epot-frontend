@@ -10,7 +10,7 @@
     </epot-header>
     <div class="relative-wrapper">
       <loading-component :loadingState="$apollo.queries.operations.loading">
-        <pre>{{operations}}</pre>
+        <operation-visual v-if="!$apollo.queries.operations.loading" :operation="operations[0]"/>
       </loading-component>
       <div ref="floating" class="floating">
         <operation-section-content v-if="!$apollo.queries.operations.loading" :operationMetadata="operationMetadata" />
@@ -23,11 +23,14 @@
 import { mapGetters, mapState } from 'vuex'
 import { queries } from '@/graphql/'
 
+import eventBus from '@/plugins/eventBus'
+
 import EpotHeader from '@/components/EpotHeader'
 import OperationsSelector from '@/components/OperationsSelector'
 import LabelHeroes from '@/components/LabelHeroes'
 import OperationSectionContent from '@/components/OperationSectionContent'
 import LoadingComponent from '@/components/LoadingComponent'
+import OperationVisual from '@/components/OperationVisual'
 
 export default {
   data() {
@@ -56,7 +59,8 @@ export default {
     OperationsSelector,
     LabelHeroes,
     OperationSectionContent,
-    LoadingComponent
+    LoadingComponent,
+    OperationVisual
   },
 
   methods: {
@@ -78,6 +82,9 @@ export default {
   },
 
   mounted() {
+    eventBus.$on('keke', () => {
+      console.log('hahaha')
+    })
     this.alignFloatingElement()
   }
 }
