@@ -15,6 +15,12 @@ import * as d3 from 'd3'
 export default {
   props: ['operation'],
 
+  data() {
+    return {
+      svgNodesSelection: null
+    }
+  },
+
   computed: {
     // D3 hierarchy nodes apparently requires the arrays to be named as `children`.
     transformedOperation() {
@@ -34,6 +40,9 @@ export default {
   },
 
   methods: {
+    /**
+     * Render visuals in D3. TODO: Break these up into separate methods.
+     */
     renderStuff() {
       const treeLayout = d3
         .tree()
@@ -43,54 +52,37 @@ export default {
       const hierarchyPointNode = treeLayout(
         d3.hierarchy(this.transformedOperation)
       )
-      const svgNodesSelection = d3.select(
+      this.svgNodesSelection = d3.select(
         `svg .${this.$refs.nodes.className.baseVal}`
       )
 
-      const node = svgNodesSelection
+      // Transform tree into circle
+      const node = this.svgNodesSelection
         .selectAll('circle.node')
         .data(hierarchyPointNode.descendants().reverse())
         .enter()
         .append('g')
         .classed('node', true)
         .attr('fill', 'white')
+        .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
         .attr('transform', (d, index) => {
-          return `
-            rotate(${(d.x * 180) / Math.PI - 90})
-            translate(${d.y}, 0)
-          `
-          // if (d.depth === 1) {
-          //   const { length } = this.operation.headers
-          //   const angle = (parseInt(index) / (length / 2)) * Math.PI
-          //   const radius = 100
-          //   const x = radius * Math.cos(angle)
-          //   const y = radius * Math.sin(angle)
-          //   return `translate(${x} ${y})`
-          // } else if (d.depth > 1) {
-          //   return `
-          //       rotate(${(d.x * 180) / Math.PI - 90})
-          //       translate(${d.y}, 0)
-          //     `
-          // }
-        })
+          if (d.depth <= 1) {
+            // Position headers separately from subheaders
+            const size = 120
+            const angle =
+              (parseInt(index) / (this.operation.headers.length / 2)) * Math.PI
 
-      const link = svgNodesSelection
-        .append('g')
-        .attr('fill', 'none')
-        .attr('stroke', '#555')
-        .attr('stroke-opacity', 0.4)
-        .attr('stroke-width', 1.5)
-        .selectAll('path')
-        .data(hierarchyPointNode.links())
-        .enter()
-        .append('path')
-        .attr(
-          'd',
-          d3
-            .linkRadial()
-            .angle(d => d.x)
-            .radius(d => d.y)
-        )
+            return `
+              translate(${size * Math.cos(angle)}, ${size * Math.sin(angle)})
+            `
+          } else {
+            // Rotate subheaders in a circular fashion.
+            return `
+              rotate(${(d.x * 180) / Math.PI - 90})
+              translate(${d.y}, 0)
+            `
+          }
+        })
 
       // Balls
       const circle = node
@@ -98,21 +90,62 @@ export default {
         .attr('fill', '#C6DAE6')
         .attr('r', 2.5)
 
+      // Render subheader titles
       const title = node
         .append('text')
         .style('font-size', '9')
+        .style('fill', '#6699CC')
         .attr('dy', '0.31rem')
-        .text(d => {
-          console.log(d)
-          const hasParent = d.parent
-          return `${d.x}, ${d.y}${
-            hasParent ? ` : ${d.parent.x} ${d.parent.y}` : ''
-          }`
+        .attr('x', 10)
+        .text(({ children, depth, data: { title } }) => {
+          console.log(children)
+          if (depth === 2) {
+            return title
+          }
         })
+
+      // Render headers separately using spans (no text-wrapping in SVG 1.1)
+      const foreignObject = node.append('foreignObject')
+      const div = foreignObject
+        .append('xhtml:div')
+        .style('font-size', '0.6rem')
+        .style('line-height', '1')
+        .append('div')
+      // console.log(div)
+      const span = div
+        .append('span')
+        .style('display', 'inline-block')
+        .style('margin-left', '-2px')
+        .style('margin-top', '6px')
+        .style('color', '#6699CC')
+        .style('width', '80px')
+        .html(({ depth, data: { title } }) => (depth === 1 ? title : null))
+
+      // // Create parent/child relation links
+      // const link = this.svgNodesSelection
+      //   .append('g')
+      //   .attr('fill', 'none')
+      //   .attr('stroke', 'white')
+      //   .attr('stroke-opacity', 0.2)
+      //   .attr('stroke-width', 1.5)
+      //   .selectAll('path')
+      //   .data(hierarchyPointNode.links())
+      //   .enter()
+      //   .append('path')
+      //   .attr(
+      //     'd',
+      //     d3
+      //       .linkRadial()
+      //       .radius(d => d.y)
+      //       .angle(d => d.x)
+      //   )
 
       this.calcSvgContainerViewBox()
     },
 
+    /**
+     * Fit render into its parent container
+     */
     calcSvgContainerViewBox() {
       /** @type HTMLElement */
       const svgContainerEl = this.$refs.svgContainer
@@ -134,10 +167,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-svg {
-  height: 1020px;
-}
-* text {
-  font-size: 10px !important;
+.operation-visual {
+  svg {
+    height: 100vh;
+  }
 }
 </style>

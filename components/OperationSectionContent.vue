@@ -16,6 +16,7 @@
           {{operationSectionContent.header.subheader.content}}
         </p>
       </div>
+      <color-debug/>
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { queries } from '@/graphql'
+import ColorDebug from './ColorDebug'
 
 export default {
   props: {
@@ -30,6 +32,10 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  components: {
+    ColorDebug
   },
 
   computed: {
