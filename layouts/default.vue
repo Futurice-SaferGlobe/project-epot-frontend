@@ -4,6 +4,11 @@
   </div>
 </template>
 
+<script>
+export default {}
+</script>
+
+
 <!-- CSS RESET -->
 <style src="nanoreset"></style>
 

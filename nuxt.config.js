@@ -21,6 +21,13 @@ module.exports = {
   */
   loading: { color: '#FFFFFF' },
 
+  /**
+   * Router
+   */
+  router: {
+    middleware: ['operations']
+  },
+
   /*
   ** Global CSS
   */
@@ -29,7 +36,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: ['~/plugins/eventBus.js'],
 
   /*
   ** Nuxt.js modules
@@ -37,7 +44,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    'nuxt-sass-resources-loader'
+    'nuxt-sass-resources-loader',
+    '@nuxtjs/apollo'
   ],
   sassResources: ['@/assets/style/colors.scss'],
   /*
@@ -47,7 +55,19 @@ module.exports = {
     baseURL:
       process.env.NODE_ENV === 'production'
         ? 'http://somehost.com'
-        : 'http://localhost:8080'
+        : 'http://localhost:8080',
+    errorHandler(error) {}
+  },
+
+  /**
+   * Apollo config
+   */
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:8080/graphql'
+      }
+    }
   },
 
   /*

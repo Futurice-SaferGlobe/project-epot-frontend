@@ -2,7 +2,7 @@
 @import './colors.scss';
 
 html {
-  font-size: 18px;
+  font-size: 16px;
   overflow-y: auto;
 }
 
@@ -18,8 +18,50 @@ body {
   color: white;
 }
 
+pre {
+  line-height: 1.33;
+  font-family: 'Fira Code', monospace;
+}
+
 p {
   line-height: 1.5;
   margin-block-end: 1rem;
   margin-block-start: 1rem;
+}
+
+h1 {
+  font-size: 1.85rem;
+}
+
+button {
+  &.enhance-hover {
+    position: relative;
+    overflow: hidden;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: rgba(white, 0.15);
+      opacity: 0;
+    }
+    &:not(:disabled) {
+      &:hover {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+body::-webkit-scrollbar {
+  background-color: epot-color('background');
+  width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: epot-color('background', 'light');
 }
