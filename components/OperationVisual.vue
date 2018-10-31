@@ -11,12 +11,14 @@
 
 <script>
 import * as d3 from 'd3'
+import * as d3TextWrap from 'd3-textwrap'
 
 export default {
   props: ['operation'],
 
   data() {
     return {
+      hierarchyPointNode: null,
       svgNodesSelection: null
     }
   },
@@ -41,53 +43,50 @@ export default {
 
   methods: {
     /**
-     * Render visuals in D3. TODO: Break these up into separate methods.
+     * Initializes D3 Treelayout
      */
-    renderStuff() {
+    initD3View() {
       const treeLayout = d3
         .tree()
         .size([2 * Math.PI, 200])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
 
-      const hierarchyPointNode = treeLayout(
+      this.hierarchyPointNode = treeLayout(
         d3.hierarchy(this.transformedOperation)
       )
       this.svgNodesSelection = d3.select(
         `svg .${this.$refs.nodes.className.baseVal}`
       )
 
-      // Transform tree into circle
+      this.renderNodes()
+      // this.renderLinks()
+      this.calcSvgContainerViewBox()
+    },
+
+    /**
+     * Creates operation visuals
+     */
+    renderNodes() {
+      // Transform tree layout into circle
       const node = this.svgNodesSelection
         .selectAll('circle.node')
-        .data(hierarchyPointNode.descendants().reverse())
+        .data(this.hierarchyPointNode.descendants().reverse())
         .enter()
         .append('g')
         .classed('node', true)
         .attr('fill', 'white')
         .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
         .attr('transform', (d, index) => {
-          if (d.depth <= 1) {
-            // Position headers separately from subheaders
-            const size = 120
-            const angle =
-              (parseInt(index) / (this.operation.headers.length / 2)) * Math.PI
-
-            return `
-              translate(${size * Math.cos(angle)}, ${size * Math.sin(angle)})
-            `
-          } else {
-            // Rotate subheaders in a circular fashion.
-            return `
-              rotate(${(d.x * 180) / Math.PI - 90})
-              translate(${d.y}, 0)
-            `
-          }
+          return `
+            rotate(${(d.x * 180) / Math.PI - 90})
+            translate(${d.y}, 0)
+          `
         })
 
-      // Balls
+      // Render Circles
       const circle = node
         .append('circle')
-        .attr('fill', '#C6DAE6')
+        .attr('fill', ({ depth }) => (depth >= 1 ? '#C6DAE6' : 'transparent'))
         .attr('r', 2.5)
 
       // Render subheader titles
@@ -95,52 +94,77 @@ export default {
         .append('text')
         .style('font-size', '9')
         .style('fill', '#6699CC')
+        .style('font-family', 'sans-serif')
         .attr('dy', '0.31rem')
         .attr('x', 10)
         .text(({ children, depth, data: { title } }) => {
-          console.log(children)
           if (depth === 2) {
             return title
           }
         })
 
-      // Render headers separately using spans (no text-wrapping in SVG 1.1)
-      const foreignObject = node.append('foreignObject')
-      const div = foreignObject
-        .append('xhtml:div')
-        .style('font-size', '0.6rem')
-        .style('line-height', '1')
-        .append('div')
-      // console.log(div)
-      const span = div
-        .append('span')
-        .style('display', 'inline-block')
-        .style('margin-left', '-2px')
-        .style('margin-top', '6px')
+      const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 100 })
+      const textwrap = node
+        .append('g')
+        .attr(
+          'transform',
+          (d, index) =>
+            `rotate(${(d.x * -180) / Math.PI -
+              90}) scale(-1, -1) translate(-2, 5)`
+        )
         .style('color', '#6699CC')
-        .style('width', '80px')
-        .html(({ depth, data: { title } }) => (depth === 1 ? title : null))
+        .style('font-size', '9')
+        .style('font-family', 'sans-serif')
+        .append('text')
+        .text(({ depth, data: { title } }) => (depth === 1 ? title : null))
+        .call(wrap)
 
-      // // Create parent/child relation links
-      // const link = this.svgNodesSelection
-      //   .append('g')
-      //   .attr('fill', 'none')
-      //   .attr('stroke', 'white')
-      //   .attr('stroke-opacity', 0.2)
-      //   .attr('stroke-width', 1.5)
-      //   .selectAll('path')
-      //   .data(hierarchyPointNode.links())
-      //   .enter()
-      //   .append('path')
-      //   .attr(
-      //     'd',
-      //     d3
-      //       .linkRadial()
-      //       .radius(d => d.y)
-      //       .angle(d => d.x)
+      // // Render headers separately using spans (no text-wrapping in SVG 1.1)
+      // const foreignObject = node
+      //   .append('foreignObject')
+      //   .attr('x', 0)
+      //   .attr('y', 0)
+      //   .attr('width', 100)
+      //   .attr('height', 100)
+      // const div = foreignObject
+      //   .append('xhtml:div')
+      //   .style('font-size', '0.6rem')
+      //   .style('line-height', '1')
+      //   .style('position', 'fixed')
+      //   .style(
+      //     'transform',
+      //     (d, index) =>
+      //       `rotate(${(d.x * -180) / Math.PI - 90}deg) scale(-1, -1)`
       //   )
 
-      this.calcSvgContainerViewBox()
+      // const span = div
+      //   .append('p')
+      //   .style('margin-left', '-2px')
+      //   .style('margin-top', '6px')
+      //   .style('color', '#6699CC')
+      //   .style('width', '80px')
+      //   .text(({ depth, data: { title } }) => (depth === 1 ? title : null))
+    },
+
+    renderLinks() {
+      // Create parent/child relation links
+      const link = this.svgNodesSelection
+        .append('g')
+        .attr('fill', 'none')
+        .attr('stroke', 'white')
+        .attr('stroke-opacity', 0.2)
+        .attr('stroke-width', 1.5)
+        .selectAll('path')
+        .data(this.hierarchyPointNode.links())
+        .enter()
+        .append('path')
+        .attr(
+          'd',
+          d3
+            .linkRadial()
+            .radius(d => d.y)
+            .angle(d => d.x)
+        )
     },
 
     /**
@@ -161,7 +185,7 @@ export default {
   },
 
   mounted() {
-    this.renderStuff()
+    this.initD3View()
   }
 }
 </script>
