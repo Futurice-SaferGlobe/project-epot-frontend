@@ -21,7 +21,11 @@ export default {
       hierarchyPointNode: null,
       svgNodesSelection: null,
       style: {
-        fontSize: 11
+        size: 243,
+        fontSize: 11,
+        nodeColor: '#C6DAE6',
+        titleColor: '#6699CC',
+        circleSize: 3
       }
     }
   },
@@ -51,7 +55,7 @@ export default {
     initD3View() {
       const treeLayout = d3
         .tree()
-        .size([2 * Math.PI, 200])
+        .size([2 * Math.PI, this.style.size])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
 
       this.hierarchyPointNode = treeLayout(
@@ -63,6 +67,7 @@ export default {
 
       this.renderNodes()
       // this.renderLinks()
+
       this.calcSvgContainerViewBox()
     },
 
@@ -77,7 +82,6 @@ export default {
         .enter()
         .append('g')
         .classed('node', true)
-        .attr('fill', 'white')
         .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
         .attr('transform', (d, index) => {
           return `
@@ -89,69 +93,62 @@ export default {
       // Render Circles
       const circle = node
         .append('circle')
-        .attr('fill', ({ depth }) => (depth >= 1 ? '#C6DAE6' : 'transparent'))
-        .attr('r', 2.5)
+        .attr(
+          'fill',
+          ({ depth }) => (depth >= 1 ? this.style.nodeColor : 'transparent')
+        )
+        .attr('r', this.style.circleSize)
 
       // Render subheader titles
       const title = node
         .append('text')
-        .style('font-size', this.style.fontSize)
-        .style('fill', '#6699CC')
-        .style('font-family', 'sans-serif')
+        .call(this.styleText)
         .attr('dy', '0.31rem')
-        .attr('x', d => (d.x < Math.PI === !d.children ? 10 : -10))
+        .attr('x', d => {
+          const padding = this.style.circleSize + 10
+          return d.x < Math.PI === !d.children ? padding : -padding
+        })
         .attr(
           'text-anchor',
           d => (d.x < Math.PI === !d.children ? 'start' : 'end')
         )
         .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
-        .text(({ children, depth, data: { title } }) => {
-          if (depth === 2) {
-            return title
-          }
-        })
+        .call(this.createText, 2)
 
-      const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 100 })
+      // Render headers separately
+      const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 80 })
       const textwrap = node
         .append('g')
-        .attr(
-          'transform',
-          (d, index) =>
-            `rotate(${(d.x * -180) / Math.PI -
-              90}) scale(-1, -1) translate(-2, 5)`
-        )
-        .style('color', '#6699CC')
+        .attr('transform', (d, index) => {
+          const rotation = (d.x * -180) / Math.PI - 90
+          const translateX = -this.style.circleSize
+          const translateY = this.style.circleSize + 5
+
+          return `
+              rotate(${rotation}) scale(-1, -1) translate(${translateX}, ${translateY})
+            `
+        })
+        .call(this.styleText)
+        .append('text')
+        .call(this.createText, 1)
+        .call(wrap)
+    },
+
+    styleText(selection) {
+      console.log(selection)
+      selection
+        .style('color', this.style.titleColor)
+        .style('fill', this.style.titleColor)
         .style('font-size', this.style.fontSize)
         .style('font-family', 'sans-serif')
-        .append('text')
-        .text(({ depth, data: { title } }) => (depth === 1 ? title : null))
-        .call(wrap)
+    },
 
-      // // Render headers separately using spans (no text-wrapping in SVG 1.1)
-      // const foreignObject = node
-      //   .append('foreignObject')
-      //   .attr('x', 0)
-      //   .attr('y', 0)
-      //   .attr('width', 100)
-      //   .attr('height', 100)
-      // const div = foreignObject
-      //   .append('xhtml:div')
-      //   .style('font-size', '0.6rem')
-      //   .style('line-height', '1')
-      //   .style('position', 'fixed')
-      //   .style(
-      //     'transform',
-      //     (d, index) =>
-      //       `rotate(${(d.x * -180) / Math.PI - 90}deg) scale(-1, -1)`
-      //   )
-
-      // const span = div
-      //   .append('p')
-      //   .style('margin-left', '-2px')
-      //   .style('margin-top', '6px')
-      //   .style('color', '#6699CC')
-      //   .style('width', '80px')
-      //   .text(({ depth, data: { title } }) => (depth === 1 ? title : null))
+    createText(selection, desiredDepth) {
+      selection.text(({ children, depth, data: { title } }) => {
+        if (depth === desiredDepth) {
+          return title
+        }
+      })
     },
 
     renderLinks() {
