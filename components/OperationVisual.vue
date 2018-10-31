@@ -201,6 +201,7 @@ export default {
 <style lang="scss" scoped>
 .operation-visual {
   svg {
+    width: 50vw;
     height: 100vh;
   }
 }
