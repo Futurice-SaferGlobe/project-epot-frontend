@@ -25,7 +25,7 @@ export default {
         fontSize: 11,
         nodeColor: '#C6DAE6',
         titleColor: '#6699CC',
-        circleSize: 3
+        nodeSize: 2.5
       }
     }
   },
@@ -97,15 +97,16 @@ export default {
           'fill',
           ({ depth }) => (depth >= 1 ? this.style.nodeColor : 'transparent')
         )
-        .attr('r', this.style.circleSize)
+        .attr('r', this.style.nodeSize)
 
       // Render subheader titles
       const title = node
         .append('text')
+        .filter(({ depth }) => depth === 2)
         .call(this.styleText)
         .attr('dy', '0.31rem')
         .attr('x', d => {
-          const padding = this.style.circleSize + 10
+          const padding = this.style.nodeSize + 10
           return d.x < Math.PI === !d.children ? padding : -padding
         })
         .attr(
@@ -113,7 +114,8 @@ export default {
           d => (d.x < Math.PI === !d.children ? 'start' : 'end')
         )
         .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
-        .call(this.createText, 2)
+        .text(({ data: { title } }) => title)
+        .on('mouseover', () => console.log('hei'))
 
       // Render headers separately
       const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 80 })
@@ -121,21 +123,25 @@ export default {
         .append('g')
         .attr('transform', (d, index) => {
           const rotation = (d.x * -180) / Math.PI - 90
-          const translateX = -this.style.circleSize
-          const translateY = this.style.circleSize + 5
+          const translateX = -this.style.nodeSize
+          const translateY = this.style.nodeSize + 5
 
           return `
               rotate(${rotation}) scale(-1, -1) translate(${translateX}, ${translateY})
             `
         })
+        .filter(({ depth }) => depth === 1)
         .call(this.styleText)
         .append('text')
-        .call(this.createText, 1)
+        .text(({ data: { title } }) => title)
         .call(wrap)
+
+      function mouseOverListener() {
+        console.log(this)
+      }
     },
 
     styleText(selection) {
-      console.log(selection)
       selection
         .style('color', this.style.titleColor)
         .style('fill', this.style.titleColor)
@@ -170,6 +176,11 @@ export default {
             .radius(d => d.y)
             .angle(d => d.x)
         )
+    },
+
+    mouseOverListener(selection) {
+      console.log('this')
+      // d3.select(this).style('color', 'red')
     },
 
     /**
