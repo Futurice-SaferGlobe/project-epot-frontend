@@ -19,7 +19,10 @@ export default {
   data() {
     return {
       hierarchyPointNode: null,
-      svgNodesSelection: null
+      svgNodesSelection: null,
+      style: {
+        fontSize: 11
+      }
     }
   },
 
@@ -92,11 +95,16 @@ export default {
       // Render subheader titles
       const title = node
         .append('text')
-        .style('font-size', '9')
+        .style('font-size', this.style.fontSize)
         .style('fill', '#6699CC')
         .style('font-family', 'sans-serif')
         .attr('dy', '0.31rem')
-        .attr('x', 10)
+        .attr('x', d => (d.x < Math.PI === !d.children ? 10 : -10))
+        .attr(
+          'text-anchor',
+          d => (d.x < Math.PI === !d.children ? 'start' : 'end')
+        )
+        .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
         .text(({ children, depth, data: { title } }) => {
           if (depth === 2) {
             return title
@@ -113,7 +121,7 @@ export default {
               90}) scale(-1, -1) translate(-2, 5)`
         )
         .style('color', '#6699CC')
-        .style('font-size', '9')
+        .style('font-size', this.style.fontSize)
         .style('font-family', 'sans-serif')
         .append('text')
         .text(({ depth, data: { title } }) => (depth === 1 ? title : null))
