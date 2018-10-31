@@ -1,13 +1,13 @@
 <template>
   <div class="explorer">
-    <epot-header ref="header" title="Effectiveness of Peace Operations">
+    <!-- <epot-header ref="header" title="Effectiveness of Peace Operations">
       <template slot="first" v-if="isLayoutComparison">
         <operations-selector v-if="!$apollo.queries.operations.loading" :operationsMetadata="operations"/>
       </template>
       <template slot="second">
         <label-heroes/>
       </template>
-    </epot-header>
+    </epot-header> -->
     <div class="relative-wrapper">
       <loading-component :loadingState="$apollo.queries.operations.loading">
         <operation-visual v-if="!$apollo.queries.operations.loading" :operation="operations[0]"/>
