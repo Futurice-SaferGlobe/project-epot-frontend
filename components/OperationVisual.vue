@@ -12,6 +12,11 @@
 <script>
 import * as d3 from 'd3'
 import * as d3TextWrap from 'd3-textwrap'
+import eventBus from '@/plugins/eventBus'
+
+import { styleText, style } from './OperationVisual/index'
+
+console.log(styleText)
 
 export default {
   props: ['operation'],
@@ -19,14 +24,7 @@ export default {
   data() {
     return {
       hierarchyPointNode: null,
-      svgNodesSelection: null,
-      style: {
-        size: 243,
-        fontSize: 11,
-        nodeColor: '#C6DAE6',
-        titleColor: '#6699CC',
-        nodeSize: 2.5
-      }
+      svgNodesSelection: null
     }
   },
 
@@ -55,7 +53,7 @@ export default {
     initD3View() {
       const treeLayout = d3
         .tree()
-        .size([2 * Math.PI, this.style.size])
+        .size([2 * Math.PI, style.size])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
 
       this.hierarchyPointNode = treeLayout(
@@ -95,18 +93,18 @@ export default {
         .append('circle')
         .attr(
           'fill',
-          ({ depth }) => (depth >= 1 ? this.style.nodeColor : 'transparent')
+          ({ depth }) => (depth >= 1 ? style.nodeColor : 'transparent')
         )
-        .attr('r', this.style.nodeSize)
+        .attr('r', style.nodeSize)
 
       // Render subheader titles
       const title = node
         .append('text')
         .filter(({ depth }) => depth === 2)
-        .call(this.styleText)
+        .call(styleText)
         .attr('dy', '0.31rem')
         .attr('x', d => {
-          const padding = this.style.nodeSize + 10
+          const padding = style.nodeSize + 10
           return d.x < Math.PI === !d.children ? padding : -padding
         })
         .attr(
@@ -115,46 +113,61 @@ export default {
         )
         .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
         .text(({ data: { title } }) => title)
-        .on('mouseover', () => console.log('hei'))
+        .attr('class', 'subheader-title')
+        .call(this.mouseEvent)
 
       // Render headers separately
       const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 80 })
       const textwrap = node
         .append('g')
+        .attr('class', 'header-title')
+        .call(this.mouseEvent)
         .attr('transform', (d, index) => {
           const rotation = (d.x * -180) / Math.PI - 90
-          const translateX = -this.style.nodeSize
-          const translateY = this.style.nodeSize + 5
+          const translateX = -style.nodeSize
+          const translateY = style.nodeSize + 5
 
           return `
               rotate(${rotation}) scale(-1, -1) translate(${translateX}, ${translateY})
             `
         })
         .filter(({ depth }) => depth === 1)
-        .call(this.styleText)
+        .call(styleText)
         .append('text')
         .text(({ data: { title } }) => title)
         .call(wrap)
-
-      function mouseOverListener() {
-        console.log(this)
-      }
     },
 
-    styleText(selection) {
-      selection
-        .style('color', this.style.titleColor)
-        .style('fill', this.style.titleColor)
-        .style('font-size', this.style.fontSize)
-        .style('font-family', 'sans-serif')
-    },
+    mouseEvent(targetSelection) {
+      const { hover, normal } = style.titleColor
 
-    createText(selection, desiredDepth) {
-      selection.text(({ children, depth, data: { title } }) => {
-        if (depth === desiredDepth) {
-          return title
-        }
-      })
+      targetSelection
+        .on('mouseover', function mouseoverListener() {
+          const selection = d3.select(this)
+
+          selection
+            .style('fill', hover)
+            .style('color', hover)
+            .style('font-weight', 'bold')
+        })
+        .on('mouseout', function mouseoutListener() {
+          const selection = d3.select(this)
+
+          selection
+            .style('fill', normal)
+            .style('color', normal)
+            .style('font-weight', 'normal')
+        })
+        .on('click', function mouseclickListener(node) {
+          const selection = d3.select(this)
+
+          eventBus.$emit(
+            'operationClick',
+            !node.parent
+              ? [node.data.index, 1]
+              : [node.parent.data.index, node.data.index]
+          )
+        })
     },
 
     renderLinks() {
@@ -176,11 +189,6 @@ export default {
             .radius(d => d.y)
             .angle(d => d.x)
         )
-    },
-
-    mouseOverListener(selection) {
-      console.log('this')
-      // d3.select(this).style('color', 'red')
     },
 
     /**
@@ -211,6 +219,9 @@ export default {
   svg {
     width: 50vw;
     height: 100vh;
+    * {
+      cursor: default;
+    }
   }
 }
 </style>

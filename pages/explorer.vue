@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapMutations } from 'vuex'
 import { queries } from '@/graphql/'
 
 import eventBus from '@/plugins/eventBus'
@@ -64,7 +64,7 @@ export default {
   },
 
   methods: {
-    alignFloatingElement() {}
+    ...mapMutations(['changeActiveHeaderIndices'])
   },
 
   apollo: {
@@ -82,10 +82,10 @@ export default {
   },
 
   mounted() {
-    eventBus.$on('keke', () => {
-      console.log('hahaha')
+    eventBus.$on('operationClick', newIndices => {
+      console.log('moi')
+      this.changeActiveHeaderIndices(newIndices)
     })
-    this.alignFloatingElement()
   }
 }
 </script>

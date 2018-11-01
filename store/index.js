@@ -37,6 +37,16 @@ export const mutations = {
     }
   },
 
+  changeActiveHeaderIndices(state, indices) {
+    if (!Array.isArray(indices) && indices.length !== 2) {
+      return console.error(
+        'changeActiveHeaderIndices: provided indices are invalid'
+      )
+    }
+
+    state.activeHeaderIndices = indices
+  },
+
   changeLayout(state, newLayout) {
     const validLayoutNames = Object.entries(layoutEnum)
     if (validLayoutNames.includes(newLayout)) {
