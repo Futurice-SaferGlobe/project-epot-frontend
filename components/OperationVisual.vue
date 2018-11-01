@@ -41,6 +41,14 @@ export default {
       }
     },
 
+    transformedConnection() {
+      const { connections } = this.operation
+      return connections.map(conn => ({
+        source: conn.from,
+        target: conn.to
+      }))
+    },
+
     svgContainerStructure() {
       return {}
     }
@@ -64,7 +72,7 @@ export default {
       )
 
       this.renderNodes()
-      // this.renderLinks()
+      this.renderLinks()
 
       this.calcSvgContainerViewBox()
     },
@@ -170,16 +178,41 @@ export default {
         })
     },
 
+    generateLinks() {
+      const children = this.hierarchyPointNode.children
+      const leaves = this.hierarchyPointNode.leaves()
+      console.log('leaves', children)
+
+      const nodeMap = new Map(
+        [...leaves, ...children].map(leaf => [leaf.data.uid, leaf])
+      )
+
+      return this.transformedConnection.map(conn => {
+        return {
+          source: {
+            x: nodeMap.get(conn.source).x,
+            y: nodeMap.get(conn.source).y
+          },
+          target: {
+            x: nodeMap.get(conn.target).x,
+            y: nodeMap.get(conn.target).y
+          }
+        }
+      })
+    },
+
     renderLinks() {
+      const connectionLinks = this.generateLinks()
+
       // Create parent/child relation links
       const link = this.svgNodesSelection
         .append('g')
         .attr('fill', 'none')
-        .attr('stroke', 'white')
-        .attr('stroke-opacity', 0.2)
+        .attr('stroke', 'red')
+        .attr('stroke-opacity', 1)
         .attr('stroke-width', 1.5)
         .selectAll('path')
-        .data(this.hierarchyPointNode.links())
+        .data(connectionLinks)
         .enter()
         .append('path')
         .attr(

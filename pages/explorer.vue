@@ -9,11 +9,11 @@
       </template>
     </epot-header> -->
     <div class="relative-wrapper">
-      <loading-component :loadingState="$apollo.queries.operations.loading">
-        <operation-visual v-if="!$apollo.queries.operations.loading" :operation="operations[0]"/>
+      <loading-component :loadingState="$apollo.queries.operationsWithConn.loading">
+        <operation-visual v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"/>
       </loading-component>
       <div ref="floating" class="floating">
-        <operation-section-content v-if="!$apollo.queries.operations.loading" :operationMetadata="operationMetadata" />
+        <operation-section-content v-if="!$apollo.queries.operationsWithConn.loading" :operationMetadata="operationMetadata" />
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@ import OperationVisual from '@/components/OperationVisual'
 export default {
   data() {
     return {
-      operations: null
+      operationsWithConn: null
     }
   },
 
@@ -47,9 +47,9 @@ export default {
     ]),
     operationMetadata() {
       return {
-        name: this.operations[0].name,
-        internalId: this.operations[0].internalId,
-        area: this.operations[0].area
+        name: this.operationsWithConn[0].name,
+        internalId: this.operationsWithConn[0].internalId,
+        area: this.operationsWithConn[0].area
       }
     }
   },
@@ -68,15 +68,18 @@ export default {
   },
 
   apollo: {
-    operations: {
-      query: queries.getOperations,
+    operationsWithConn: {
+      query: queries.getOperationsWithConn,
       variables() {
         return {
           ids: this.selectedOperations
         }
       },
-      update(data) {
-        return data.operations
+      update({ operations, operationConnections }) {
+        return operations.map((op, index) => ({
+          ...op,
+          connections: operationConnections[index].connections
+        }))
       }
     }
   },
