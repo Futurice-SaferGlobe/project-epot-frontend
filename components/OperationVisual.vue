@@ -11,20 +11,29 @@
 
 <script>
 import * as d3 from 'd3'
+import { line, linkRadial } from 'd3-shape'
 import * as d3TextWrap from 'd3-textwrap'
 import eventBus from '@/plugins/eventBus'
 
-import { styleText, style } from './OperationVisual/index'
+import { styleText, style, radialPoint } from './OperationVisual/index'
 
-console.log(styleText)
+function curveRadial(context, x0, y0, x1, y1) {
+  var p0 = pointRadial(x0, y0),
+    p1 = pointRadial(x0, (y0 = (y0 + y1) / 2)),
+    p2 = pointRadial(x1, y0),
+    p3 = pointRadial(x1, y1)
+  context.moveTo(p0[0], p0[1])
+  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1])
+}
 
 export default {
   props: ['operation'],
 
   data() {
     return {
-      hierarchyPointNode: null,
-      svgNodesSelection: null
+      hierarchy: null,
+      svgNodesSelection: null,
+      svgLinksSelection: null
     }
   },
 
@@ -39,14 +48,6 @@ export default {
           children: subheaders
         }))
       }
-    },
-
-    transformedConnection() {
-      const { connections } = this.operation
-      return connections.map(conn => ({
-        source: conn.from,
-        target: conn.to
-      }))
     },
 
     svgContainerStructure() {
@@ -64,11 +65,12 @@ export default {
         .size([2 * Math.PI, style.size])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
 
-      this.hierarchyPointNode = treeLayout(
-        d3.hierarchy(this.transformedOperation)
-      )
+      this.hierarchy = treeLayout(d3.hierarchy(this.transformedOperation))
       this.svgNodesSelection = d3.select(
         `svg .${this.$refs.nodes.className.baseVal}`
+      )
+      this.svgLinksSelection = d3.select(
+        `svg .${this.$refs.links.className.baseVal}`
       )
 
       this.renderNodes()
@@ -84,7 +86,7 @@ export default {
       // Transform tree layout into circle
       const node = this.svgNodesSelection
         .selectAll('circle.node')
-        .data(this.hierarchyPointNode.descendants().reverse())
+        .data(this.hierarchy.descendants().reverse())
         .enter()
         .append('g')
         .classed('node', true)
@@ -99,6 +101,7 @@ export default {
       // Render Circles
       const circle = node
         .append('circle')
+        .filter(({ depth }) => depth > 0)
         .attr(
           'fill',
           ({ depth }) => (depth >= 1 ? style.nodeColor : 'transparent')
@@ -179,23 +182,22 @@ export default {
     },
 
     generateLinks() {
-      const children = this.hierarchyPointNode.children
-      const leaves = this.hierarchyPointNode.leaves()
-      console.log('leaves', children)
+      const children = this.hierarchy.children
+      const leaves = this.hierarchy.leaves()
 
       const nodeMap = new Map(
         [...leaves, ...children].map(leaf => [leaf.data.uid, leaf])
       )
 
-      return this.transformedConnection.map(conn => {
+      return this.operation.connections.map(conn => {
         return {
           source: {
-            x: nodeMap.get(conn.source).x,
-            y: nodeMap.get(conn.source).y
+            x: nodeMap.get(conn.from).x,
+            y: nodeMap.get(conn.from).y
           },
           target: {
-            x: nodeMap.get(conn.target).x,
-            y: nodeMap.get(conn.target).y
+            x: nodeMap.get(conn.to).x,
+            y: nodeMap.get(conn.to).y
           }
         }
       })
@@ -205,23 +207,46 @@ export default {
       const connectionLinks = this.generateLinks()
 
       // Create parent/child relation links
-      const link = this.svgNodesSelection
-        .append('g')
-        .attr('fill', 'none')
-        .attr('stroke', 'red')
-        .attr('stroke-opacity', 1)
-        .attr('stroke-width', 1.5)
-        .selectAll('path')
+      const link = this.svgLinksSelection
+        .selectAll('g.link')
         .data(connectionLinks)
         .enter()
         .append('path')
-        .attr(
-          'd',
-          d3
-            .linkRadial()
-            .radius(d => d.y)
-            .angle(d => d.x)
-        )
+        .attr('class', 'link')
+        .attr('stroke', style.titleColor.hover)
+        .attr('stroke-width', '1')
+        .attr('fill', 'none')
+        .attr('d', ({ source, target }, i) => {
+          const d = {
+            M1: {
+              x: radialPoint(source.x, source.y)[0],
+              y: radialPoint(source.x, source.y)[1]
+            },
+            C1: {
+              p1: {
+                x: radialPoint(source.x, source.y)[0] / 2,
+                y: radialPoint(source.x, source.y)[1]
+              },
+              p2: {
+                x: radialPoint(target.x, target.y)[0] / 2,
+                y: radialPoint(target.x, target.y)[1]
+              },
+              x: radialPoint(target.x, target.y)[0],
+              y: radialPoint(target.x, target.y)[1]
+            },
+            L1: {
+              x: radialPoint(target.x, target.y)[0],
+              y: radialPoint(target.x, target.y)[1]
+            }
+          }
+
+          return (
+            `M${d.M1.x} ${d.M1.y},` + // starting x/y
+            `C${d.C1.p1.x} ${d.C1.p1.y},` + // bezier point x/y #1
+            `${d.C1.p2.x} ${d.C1.p2.y},` + // bezier point x/y #2
+            `${d.C1.x} ${d.C1.y}` // final x/y
+          )
+        })
     },
 
     /**
@@ -237,7 +262,10 @@ export default {
         y
       } = this.$refs.visualGroup.getBoundingClientRect()
 
-      svgContainerEl.setAttribute('viewBox', `${x} ${y} ${width} ${height}`)
+      svgContainerEl.setAttribute(
+        'viewBox',
+        `${x + 10} ${y + -10} ${width + 20} ${height + 20}`
+      )
     }
   },
 
