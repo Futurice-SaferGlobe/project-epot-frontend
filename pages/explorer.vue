@@ -13,7 +13,7 @@
         <operation-visual v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"/>
       </loading-component>
       <div ref="floating" class="floating">
-        <operation-section-content v-if="!$apollo.queries.operationsWithConn.loading" :operationMetadata="operationMetadata" />
+        <!-- <operation-section-content v-if="!$apollo.queries.operationsWithConn.loading" :operationMetadata="operationMetadata" /> -->
       </div>
     </div>
   </div>

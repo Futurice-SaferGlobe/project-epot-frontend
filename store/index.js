@@ -8,8 +8,8 @@ import { layoutEnum } from '@/constants'
 
 /** @type State */
 export const state = () => ({
-  availableOperations: ['unamid'],
-  selectedOperations: ['unamid'],
+  availableOperations: ['fututest'],
+  selectedOperations: ['fututest'],
   activeHeaderIndices: [3, 4],
   layout: layoutEnum.COMPARISON
 })

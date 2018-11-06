@@ -15,16 +15,13 @@ import { line, linkRadial } from 'd3-shape'
 import * as d3TextWrap from 'd3-textwrap'
 import eventBus from '@/plugins/eventBus'
 
-import { styleText, style, radialPoint } from './OperationVisual/index'
-
-function curveRadial(context, x0, y0, x1, y1) {
-  var p0 = pointRadial(x0, y0),
-    p1 = pointRadial(x0, (y0 = (y0 + y1) / 2)),
-    p2 = pointRadial(x1, y0),
-    p3 = pointRadial(x1, y1)
-  context.moveTo(p0[0], p0[1])
-  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1])
-}
+import {
+  styleText,
+  style,
+  getRadialPoint,
+  generatePathCurve,
+  generateLinks
+} from './OperationVisual/index'
 
 export default {
   props: ['operation'],
@@ -48,10 +45,6 @@ export default {
           children: subheaders
         }))
       }
-    },
-
-    svgContainerStructure() {
-      return {}
     }
   },
 
@@ -91,10 +84,10 @@ export default {
         .append('g')
         .classed('node', true)
         .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
-        .attr('transform', (d, index) => {
+        .attr('transform', ({ x, y }, index) => {
           return `
-            rotate(${(d.x * 180) / Math.PI - 90})
-            translate(${d.y}, 0)
+            rotate(${(x * 180) / Math.PI - 90})
+            translate(${y}, 0)
           `
         })
 
@@ -124,14 +117,14 @@ export default {
         )
         .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
         .text(({ data: { title } }) => title)
-        .attr('class', 'subheader-title')
+        .attr('class', ({ data: { uid } }) => `${uid}`)
         .call(this.mouseEvent)
 
       // Render headers separately
-      const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 80 })
+      const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 100 })
       const textwrap = node
         .append('g')
-        .attr('class', 'header-title')
+        .attr('class', ({ data: { uid } }) => `${uid}`)
         .call(this.mouseEvent)
         .attr('transform', (d, index) => {
           const rotation = (d.x * -180) / Math.PI - 90
@@ -147,27 +140,29 @@ export default {
         .append('text')
         .text(({ data: { title } }) => title)
         .call(wrap)
+
+      // create background color for text divs
+      Array.from(document.querySelectorAll('foreignObject div')).forEach(
+        div => {
+          div.style.backgroundColor = style.titleBg
+        }
+      )
     },
 
     mouseEvent(targetSelection) {
       const { hover, normal } = style.titleColor
+      const { links } = this.$refs
 
       targetSelection
         .on('mouseover', function mouseoverListener() {
           const selection = d3.select(this)
 
-          selection
-            .style('fill', hover)
-            .style('color', hover)
-            .style('font-weight', 'bold')
+          selection.style('fill', hover).style('color', hover)
         })
         .on('mouseout', function mouseoutListener() {
           const selection = d3.select(this)
 
-          selection
-            .style('fill', normal)
-            .style('color', normal)
-            .style('font-weight', 'normal')
+          selection.style('fill', normal).style('color', normal)
         })
         .on('click', function mouseclickListener(node) {
           const selection = d3.select(this)
@@ -181,30 +176,11 @@ export default {
         })
     },
 
-    generateLinks() {
-      const children = this.hierarchy.children
-      const leaves = this.hierarchy.leaves()
-
-      const nodeMap = new Map(
-        [...leaves, ...children].map(leaf => [leaf.data.uid, leaf])
-      )
-
-      return this.operation.connections.map(conn => {
-        return {
-          source: {
-            x: nodeMap.get(conn.from).x,
-            y: nodeMap.get(conn.from).y
-          },
-          target: {
-            x: nodeMap.get(conn.to).x,
-            y: nodeMap.get(conn.to).y
-          }
-        }
-      })
-    },
-
     renderLinks() {
-      const connectionLinks = this.generateLinks()
+      const connectionLinks = generateLinks(
+        [...this.hierarchy.children, ...this.hierarchy.leaves()],
+        this.operation.connections
+      )
 
       // Create parent/child relation links
       const link = this.svgLinksSelection
@@ -213,40 +189,69 @@ export default {
         .enter()
         .append('path')
         .attr('class', 'link')
-        .attr('stroke', style.titleColor.hover)
+        .attr('data-source-uid', ({ source }) => source.uid)
+        .attr('data-target-uid', ({ target }) => target.uid)
+        .attr('stroke', style.lineColor.normal)
         .attr('stroke-width', '1')
         .attr('fill', 'none')
-        .attr('d', ({ source, target }, i) => {
-          const d = {
-            M1: {
-              x: radialPoint(source.x, source.y)[0],
-              y: radialPoint(source.x, source.y)[1]
-            },
-            C1: {
-              p1: {
-                x: radialPoint(source.x, source.y)[0] / 2,
-                y: radialPoint(source.x, source.y)[1]
-              },
-              p2: {
-                x: radialPoint(target.x, target.y)[0] / 2,
-                y: radialPoint(target.x, target.y)[1]
-              },
-              x: radialPoint(target.x, target.y)[0],
-              y: radialPoint(target.x, target.y)[1]
-            },
-            L1: {
-              x: radialPoint(target.x, target.y)[0],
-              y: radialPoint(target.x, target.y)[1]
-            }
-          }
+        .attr('d', ({ source, target, isInnerConnection }, i) => {
+          if (isInnerConnection) {
+            // Make a linear path to header/subheader connections
+            // return generatePathCurve({ source, target })
+          } else {
+            // Create bezier curve for subheader/subheader connections
+            const d = generatePathCurve({ source, target })
 
-          return (
-            `M${d.M1.x} ${d.M1.y},` + // starting x/y
-            `C${d.C1.p1.x} ${d.C1.p1.y},` + // bezier point x/y #1
-            `${d.C1.p2.x} ${d.C1.p2.y},` + // bezier point x/y #2
-            `${d.C1.x} ${d.C1.y}` // final x/y
-          )
+            return (
+              `M${d.start.x} ${d.start.y},` + // starting x/y
+              `C${d.curve.x} ${d.curve.y},` + // bezier point x/y #1
+              `${d.end.x} ${d.end.y},` + // bezier point x/y #2
+              `${d.end.x} ${d.end.y}` // final x/y
+            )
+          }
         })
+
+      // // Helper for bezier curve points
+      // const bezierHelper = this.svgLinksSelection
+      //   .selectAll('g.link')
+      //   .data(connectionLinks)
+      //   .enter()
+      //   .append('circle')
+      //   .attr('fill', 'orangered')
+      //   .attr('cx', ({ source, target }) => {
+      //     const { curve } = generatePathCurve({ source, target })
+      //     return curve.x
+      //   })
+      //   .attr('cy', ({ source, target }) => {
+      //     const { curve } = generatePathCurve({ source, target })
+      //     return curve.y
+      //   })
+      //   .attr('r', 6)
+
+      // const bezierhlpr = this.svgLinksSelection
+      //   .selectAll('g.link')
+      //   .data(connectionLinks)
+      //   .enter()
+      //   .append('path')
+      //   .attr('class', 'link')
+      //   .attr('stroke', 'red')
+      //   .attr('stroke-width', '1')
+      //   .attr('fill', 'none')
+      //   .attr('d', ({ source, target, isInnerConnection }, i) => {
+      //     if (isInnerConnection) {
+      //       // Make a linear path to header/subheader connections
+      //       // return generatePathCurve({ source, target })
+      //     } else {
+      //       // Create bezier curve for subheader/subheader connections
+      //       const d = generatePathCurve({ source, target })
+
+      //       return (
+      //         `M${d.start.x} ${d.start.y},` +
+      //         `L${d.curve.x} ${d.curve.y},` +
+      //         `L${d.end.x} ${d.end.y}` // bezier point x/y #1
+      //       )
+      //     }
+      //   })
     },
 
     /**
@@ -278,11 +283,17 @@ export default {
 <style lang="scss" scoped>
 .operation-visual {
   svg {
-    width: 50vw;
+    width: 100vw;
     height: 100vh;
     * {
       cursor: default;
     }
+  }
+}
+
+foreignObject {
+  div {
+    background-color: green;
   }
 }
 </style>
