@@ -8,14 +8,12 @@
         <label-heroes/>
       </template>
     </epot-header> -->
-    <div class="relative-wrapper">
+    <main>
       <loading-component :loadingState="$apollo.queries.operationsWithConn.loading">
         <operation-visual v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"/>
       </loading-component>
-      <div ref="floating" class="floating">
-        <!-- <operation-section-content v-if="!$apollo.queries.operationsWithConn.loading" :operationMetadata="operationMetadata" /> -->
-      </div>
-    </div>
+      <operation-section-content v-if="!$apollo.queries.operationsWithConn.loading" :operationMetadata="operationMetadata" />
+    </main>
   </div>
 </template>
 
@@ -95,18 +93,11 @@ export default {
 
 <style lang="scss">
 .explorer {
-  .relative-wrapper {
-    position: relative;
-  }
-
-  .floating {
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 468px;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    position: absolute;
+  main {
+    display: flex;
+    flex-direction: row;
+    > * {
+    }
   }
 }
 </style>
