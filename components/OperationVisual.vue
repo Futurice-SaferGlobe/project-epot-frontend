@@ -20,7 +20,8 @@ import {
   style,
   getRadialPoint,
   generatePathCurve,
-  generateLinks
+  generateLinks,
+  addMouseEvents
 } from './OperationVisual/index'
 
 export default {
@@ -103,6 +104,8 @@ export default {
 
       // Render subheader titles
       const title = node
+        .append('g')
+        .call(this.addTitleGroupDataAttributes)
         .append('text')
         .filter(({ depth }) => depth === 2)
         .call(styleText)
@@ -118,14 +121,11 @@ export default {
         .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
         .text(({ data: { title } }) => title)
         .attr('class', ({ data: { uid } }) => `${uid}`)
-        .call(this.mouseEvent)
 
       // Render headers separately
       const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 100 })
       const textwrap = node
         .append('g')
-        .attr('class', ({ data: { uid } }) => `${uid}`)
-        .call(this.mouseEvent)
         .attr('transform', (d, index) => {
           const rotation = (d.x * -180) / Math.PI - 90
           const translateX = -style.nodeSize
@@ -135,11 +135,22 @@ export default {
               rotate(${rotation}) scale(-1, -1) translate(${translateX}, ${translateY})
             `
         })
+        .append('g')
+        .call(this.addTitleGroupDataAttributes)
         .filter(({ depth }) => depth === 1)
         .call(styleText)
         .append('text')
         .text(({ data: { title } }) => title)
         .call(wrap)
+
+      Array.from(this.$el.querySelectorAll('.title-group')).forEach(
+        titleGroup =>
+          addMouseEvents(titleGroup, {
+            onMouseClick: ({ indices }) => {
+              eventBus.$emit('operationClick', indices)
+            }
+          })
+      )
 
       // create background color for text divs
       Array.from(document.querySelectorAll('foreignObject div')).forEach(
@@ -149,31 +160,19 @@ export default {
       )
     },
 
-    mouseEvent(targetSelection) {
-      const { hover, normal } = style.titleColor
-      const { links } = this.$refs
-
-      targetSelection
-        .on('mouseover', function mouseoverListener() {
-          const selection = d3.select(this)
-
-          selection.style('fill', hover).style('color', hover)
-        })
-        .on('mouseout', function mouseoutListener() {
-          const selection = d3.select(this)
-
-          selection.style('fill', normal).style('color', normal)
-        })
-        .on('click', function mouseclickListener(node) {
-          const selection = d3.select(this)
-
-          eventBus.$emit(
-            'operationClick',
-            !node.parent
-              ? [node.data.index, 1]
-              : [node.parent.data.index, node.data.index]
-          )
-        })
+    addTitleGroupDataAttributes(target) {
+      console.log(target.data())
+      target.attr('class', 'title-group')
+      target.attr('data-type-name', ({ data: { __typename } }) => __typename)
+      target.attr('data-uid', ({ data: { uid } }) => uid)
+      target.attr('data-index', ({ data: { index } }) => index)
+      target.attr('data-berse', d => {
+        console.log(d)
+      })
+      target.attr(
+        'data-parent-header',
+        ({ parent }) => (parent ? parent.data.index : null)
+      )
     },
 
     renderLinks() {
@@ -211,47 +210,46 @@ export default {
           }
         })
 
-      // // Helper for bezier curve points
-      // const bezierHelper = this.svgLinksSelection
-      //   .selectAll('g.link')
-      //   .data(connectionLinks)
-      //   .enter()
-      //   .append('circle')
-      //   .attr('fill', 'orangered')
-      //   .attr('cx', ({ source, target }) => {
-      //     const { curve } = generatePathCurve({ source, target })
-      //     return curve.x
-      //   })
-      //   .attr('cy', ({ source, target }) => {
-      //     const { curve } = generatePathCurve({ source, target })
-      //     return curve.y
-      //   })
-      //   .attr('r', 6)
+      if (connectionLinks.length <= 5) {
+        // Helper for bezier curve points
+        const bezierHelperGroup = this.svgLinksSelection
+          .selectAll('g.link')
+          .data(connectionLinks)
+          .enter()
+          .append('g')
 
-      // const bezierhlpr = this.svgLinksSelection
-      //   .selectAll('g.link')
-      //   .data(connectionLinks)
-      //   .enter()
-      //   .append('path')
-      //   .attr('class', 'link')
-      //   .attr('stroke', 'red')
-      //   .attr('stroke-width', '1')
-      //   .attr('fill', 'none')
-      //   .attr('d', ({ source, target, isInnerConnection }, i) => {
-      //     if (isInnerConnection) {
-      //       // Make a linear path to header/subheader connections
-      //       // return generatePathCurve({ source, target })
-      //     } else {
-      //       // Create bezier curve for subheader/subheader connections
-      //       const d = generatePathCurve({ source, target })
-
-      //       return (
-      //         `M${d.start.x} ${d.start.y},` +
-      //         `L${d.curve.x} ${d.curve.y},` +
-      //         `L${d.end.x} ${d.end.y}` // bezier point x/y #1
-      //       )
-      //     }
-      //   })
+        const bezierHelperPoint = bezierHelperGroup
+          .append('rect')
+          .attr('fill', 'orangered')
+          .attr('x', ({ source, target }) => {
+            const { curve } = generatePathCurve({ source, target })
+            return curve.x - 5
+          })
+          .attr('y', ({ source, target }) => {
+            const { curve } = generatePathCurve({ source, target })
+            return curve.y - 5
+          })
+          .attr('width', 10)
+          .attr('height', 10)
+        const bezierHelperPath = bezierHelperGroup
+          .append('path')
+          .attr('class', 'link')
+          .attr('stroke', 'gray')
+          .attr('stroke-dasharray', '4')
+          .attr('stroke-width', '1')
+          .attr('fill', 'none')
+          .attr('d', ({ source, target, isInnerConnection }, i) => {
+            if (isInnerConnection) {
+            } else {
+              const d = generatePathCurve({ source, target })
+              return (
+                `M${d.start.x} ${d.start.y},` +
+                `L${d.curve.x} ${d.curve.y},` +
+                `L${d.end.x} ${d.end.y}`
+              )
+            }
+          })
+      }
     },
 
     /**
@@ -283,7 +281,7 @@ export default {
 <style lang="scss" scoped>
 .operation-visual {
   svg {
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
     * {
       cursor: default;
