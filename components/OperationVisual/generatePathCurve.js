@@ -19,14 +19,32 @@ export const generatePathCurve = ({ source, target, linear }) => {
     return `M${d.start.x} ${d.start.y}` + `L${d.end.x} ${d.end.y}`
   }
 
-  const getPathAbsoluteDistance = per => source.x + (target.x - source.x) * per
-  const distance = Math.abs(
-    Math.max(source.x, target.x) - Math.min(source.x, target.x)
-  )
+  const getPathAbsoluteDistance = per => {
+    const x1 = Math.min(target.x, source.x)
+    const x2 = Math.max(target.x, source.x)
+    const delta = x2 - x1
+
+    if (delta < Math.PI) return x1 + delta * per
+    else return x2 + (2 * Math.PI - delta) * per
+  }
+
+  const getRadiusScale = () => {
+    let delta = Math.abs(source.x - target.x)
+    if (delta > Math.PI) {
+      delta = 2 * Math.PI - delta
+    }
+    return (0.2 / Math.PI) * delta + 1
+  }
 
   d.curve = {
-    x: getRadialPoint(Math.abs(getPathAbsoluteDistance(0.5)), source.y).x,
-    y: getRadialPoint(Math.abs(getPathAbsoluteDistance(0.5)), source.y).y
+    x: getRadialPoint(
+      Math.abs(getPathAbsoluteDistance(0.5)),
+      getRadiusScale() * source.y
+    ).x,
+    y: getRadialPoint(
+      Math.abs(getPathAbsoluteDistance(0.5)),
+      getRadiusScale() * source.y
+    ).y
   }
 
   return d
