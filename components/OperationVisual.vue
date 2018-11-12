@@ -11,13 +11,27 @@
 
 <script>
 import * as d3 from 'd3'
+import { line, linkRadial } from 'd3-shape'
+import * as d3TextWrap from 'd3-textwrap'
+import eventBus from '@/plugins/eventBus'
+
+import {
+  styleText,
+  style,
+  getRadialPoint,
+  generatePathCurve,
+  generateLinks,
+  addMouseEvents
+} from './OperationVisual/index'
 
 export default {
   props: ['operation'],
 
   data() {
     return {
-      svgNodesSelection: null
+      hierarchy: null,
+      svgNodesSelection: null,
+      svgLinksSelection: null
     }
   },
 
@@ -32,115 +46,210 @@ export default {
           children: subheaders
         }))
       }
-    },
-
-    svgContainerStructure() {
-      return {}
     }
   },
 
   methods: {
     /**
-     * Render visuals in D3. TODO: Break these up into separate methods.
+     * Initializes D3 Treelayout
      */
-    renderStuff() {
+    initD3View() {
       const treeLayout = d3
         .tree()
-        .size([2 * Math.PI, 200])
+        .size([2 * Math.PI, style.size])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
 
-      const hierarchyPointNode = treeLayout(
-        d3.hierarchy(this.transformedOperation)
-      )
+      this.hierarchy = treeLayout(d3.hierarchy(this.transformedOperation))
       this.svgNodesSelection = d3.select(
         `svg .${this.$refs.nodes.className.baseVal}`
       )
+      this.svgLinksSelection = d3.select(
+        `svg .${this.$refs.links.className.baseVal}`
+      )
 
-      // Transform tree into circle
+      this.renderNodes()
+      this.renderLinks()
+
+      this.calcSvgContainerViewBox()
+    },
+
+    /**
+     * Creates operation visuals
+     */
+    renderNodes() {
+      // Transform tree layout into circle
       const node = this.svgNodesSelection
         .selectAll('circle.node')
-        .data(hierarchyPointNode.descendants().reverse())
+        .data(this.hierarchy.descendants().reverse())
         .enter()
         .append('g')
         .classed('node', true)
-        .attr('fill', 'white')
         .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
-        .attr('transform', (d, index) => {
-          if (d.depth <= 1) {
-            // Position headers separately from subheaders
-            const size = 120
-            const angle =
-              (parseInt(index) / (this.operation.headers.length / 2)) * Math.PI
-
-            return `
-              translate(${size * Math.cos(angle)}, ${size * Math.sin(angle)})
-            `
-          } else {
-            // Rotate subheaders in a circular fashion.
-            return `
-              rotate(${(d.x * 180) / Math.PI - 90})
-              translate(${d.y}, 0)
-            `
-          }
+        .attr('transform', ({ x, y }, index) => {
+          return `
+            rotate(${(x * 180) / Math.PI - 90})
+            translate(${y}, 0)
+          `
         })
 
-      // Balls
+      // Render Circles
       const circle = node
         .append('circle')
-        .attr('fill', '#C6DAE6')
-        .attr('r', 2.5)
+        .filter(({ depth }) => depth > 0)
+        .attr(
+          'fill',
+          ({ depth }) => (depth >= 1 ? style.nodeColor : 'transparent')
+        )
+        .attr('r', style.nodeSize)
 
       // Render subheader titles
       const title = node
+        .append('g')
+        .call(this.addTitleGroupDataAttributes)
         .append('text')
-        .style('font-size', '9')
-        .style('fill', '#6699CC')
+        .filter(({ depth }) => depth === 2)
+        .call(styleText)
         .attr('dy', '0.31rem')
-        .attr('x', 10)
-        .text(({ children, depth, data: { title } }) => {
-          console.log(children)
-          if (depth === 2) {
-            return title
+        .attr('x', d => {
+          const padding = style.nodeSize + 10
+          return d.x < Math.PI === !d.children ? padding : -padding
+        })
+        .attr(
+          'text-anchor',
+          d => (d.x < Math.PI === !d.children ? 'start' : 'end')
+        )
+        .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
+        .text(({ data: { title } }) => title)
+        .attr('class', ({ data: { uid } }) => `${uid}`)
+
+      // Render headers separately
+      const wrap = d3TextWrap.textwrap().bounds({ height: 100, width: 100 })
+      const textwrap = node
+        .append('g')
+        .attr('transform', (d, index) => {
+          const rotation = (d.x * -180) / Math.PI - 90
+          const translateX = -style.nodeSize
+          const translateY = style.nodeSize + 5
+
+          return `
+              rotate(${rotation}) scale(-1, -1) translate(${translateX}, ${translateY})
+            `
+        })
+        .append('g')
+        .call(this.addTitleGroupDataAttributes)
+        .filter(({ depth }) => depth === 1)
+        .call(styleText)
+        .append('text')
+        .text(({ data: { title } }) => title)
+        .call(wrap)
+
+      Array.from(this.$el.querySelectorAll('.title-group')).forEach(
+        titleGroup =>
+          addMouseEvents(titleGroup, {
+            onMouseClick: ({ indices }) => {
+              eventBus.$emit('operationClick', indices)
+            }
+          })
+      )
+
+      // create background color for text divs
+      Array.from(document.querySelectorAll('foreignObject div')).forEach(
+        div => {
+          div.style.backgroundColor = style.titleBg
+        }
+      )
+    },
+
+    addTitleGroupDataAttributes(target) {
+      console.log(target.data())
+      target.attr('class', 'title-group')
+      target.attr('data-type-name', ({ data: { __typename } }) => __typename)
+      target.attr('data-uid', ({ data: { uid } }) => uid)
+      target.attr('data-index', ({ data: { index } }) => index)
+      target.attr('data-berse', d => {
+        console.log(d)
+      })
+      target.attr(
+        'data-parent-header',
+        ({ parent }) => (parent ? parent.data.index : null)
+      )
+    },
+
+    renderLinks() {
+      const connectionLinks = generateLinks(
+        [...this.hierarchy.children, ...this.hierarchy.leaves()],
+        this.operation.connections
+      )
+
+      // Create parent/child relation links
+      const link = this.svgLinksSelection
+        .selectAll('g.link')
+        .data(connectionLinks)
+        .enter()
+        .append('path')
+        .attr('class', 'link')
+        .attr('data-source-uid', ({ source }) => source.uid)
+        .attr('data-target-uid', ({ target }) => target.uid)
+        .attr('stroke', style.lineColor.normal)
+        .attr('stroke-width', '1')
+        .attr('fill', 'none')
+        .attr('d', ({ source, target, isInnerConnection }, i) => {
+          if (isInnerConnection) {
+            // Make a linear path to header/subheader connections
+            // return generatePathCurve({ source, target })
+          } else {
+            // Create bezier curve for subheader/subheader connections
+            const d = generatePathCurve({ source, target })
+
+            return (
+              `M${d.start.x} ${d.start.y},` + // starting x/y
+              `C${d.curve.x} ${d.curve.y},` + // bezier point x/y #1
+              `${d.end.x} ${d.end.y},` + // bezier point x/y #2
+              `${d.end.x} ${d.end.y}` // final x/y
+            )
           }
         })
 
-      // Render headers separately using spans (no text-wrapping in SVG 1.1)
-      const foreignObject = node.append('foreignObject')
-      const div = foreignObject
-        .append('xhtml:div')
-        .style('font-size', '0.6rem')
-        .style('line-height', '1')
-        .append('div')
-      // console.log(div)
-      const span = div
-        .append('span')
-        .style('display', 'inline-block')
-        .style('margin-left', '-2px')
-        .style('margin-top', '6px')
-        .style('color', '#6699CC')
-        .style('width', '80px')
-        .html(({ depth, data: { title } }) => (depth === 1 ? title : null))
+      if (connectionLinks.length <= 5) {
+        // Helper for bezier curve points
+        const bezierHelperGroup = this.svgLinksSelection
+          .selectAll('g.link')
+          .data(connectionLinks)
+          .enter()
+          .append('g')
 
-      // // Create parent/child relation links
-      // const link = this.svgNodesSelection
-      //   .append('g')
-      //   .attr('fill', 'none')
-      //   .attr('stroke', 'white')
-      //   .attr('stroke-opacity', 0.2)
-      //   .attr('stroke-width', 1.5)
-      //   .selectAll('path')
-      //   .data(hierarchyPointNode.links())
-      //   .enter()
-      //   .append('path')
-      //   .attr(
-      //     'd',
-      //     d3
-      //       .linkRadial()
-      //       .radius(d => d.y)
-      //       .angle(d => d.x)
-      //   )
-
-      this.calcSvgContainerViewBox()
+        const bezierHelperPoint = bezierHelperGroup
+          .append('rect')
+          .attr('fill', 'orangered')
+          .attr('x', ({ source, target }) => {
+            const { curve } = generatePathCurve({ source, target })
+            return curve.x - 5
+          })
+          .attr('y', ({ source, target }) => {
+            const { curve } = generatePathCurve({ source, target })
+            return curve.y - 5
+          })
+          .attr('width', 10)
+          .attr('height', 10)
+        const bezierHelperPath = bezierHelperGroup
+          .append('path')
+          .attr('class', 'link')
+          .attr('stroke', 'gray')
+          .attr('stroke-dasharray', '4')
+          .attr('stroke-width', '1')
+          .attr('fill', 'none')
+          .attr('d', ({ source, target, isInnerConnection }, i) => {
+            if (isInnerConnection) {
+            } else {
+              const d = generatePathCurve({ source, target })
+              return (
+                `M${d.start.x} ${d.start.y},` +
+                `L${d.curve.x} ${d.curve.y},` +
+                `L${d.end.x} ${d.end.y}`
+              )
+            }
+          })
+      }
     },
 
     /**
@@ -156,12 +265,15 @@ export default {
         y
       } = this.$refs.visualGroup.getBoundingClientRect()
 
-      svgContainerEl.setAttribute('viewBox', `${x} ${y} ${width} ${height}`)
+      svgContainerEl.setAttribute(
+        'viewBox',
+        `${x + 10} ${y + -10} ${width + 20} ${height + 20}`
+      )
     }
   },
 
   mounted() {
-    this.renderStuff()
+    this.initD3View()
   }
 }
 </script>
@@ -169,7 +281,17 @@ export default {
 <style lang="scss" scoped>
 .operation-visual {
   svg {
+    width: 50vw;
     height: 100vh;
+    * {
+      cursor: default;
+    }
+  }
+}
+
+foreignObject {
+  div {
+    background-color: green;
   }
 }
 </style>

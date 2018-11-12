@@ -8,8 +8,8 @@ import { layoutEnum } from '@/constants'
 
 /** @type State */
 export const state = () => ({
-  availableOperations: ['unamid', 'digitalents'],
-  selectedOperations: ['unamid', 'digitalents'],
+  availableOperations: ['fututest'],
+  selectedOperations: ['fututest'],
   activeHeaderIndices: [3, 4],
   layout: layoutEnum.COMPARISON
 })
@@ -35,6 +35,16 @@ export const mutations = {
         `changeSelectedOperations: payload was not an array, or is longer than ${MAX_LEN}`
       )
     }
+  },
+
+  changeActiveHeaderIndices(state, indices) {
+    if (!Array.isArray(indices) && indices.length !== 2) {
+      return console.error(
+        'changeActiveHeaderIndices: provided indices are invalid'
+      )
+    }
+
+    state.activeHeaderIndices = indices
   },
 
   changeLayout(state, newLayout) {

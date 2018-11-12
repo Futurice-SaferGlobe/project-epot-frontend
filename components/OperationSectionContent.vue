@@ -46,6 +46,10 @@ export default {
     operationSectionContent: {
       query: queries.getOperationContent,
       variables() {
+        console.log(this.operationMetadata, [
+          this.activeHeaderIndices[0],
+          this.activeHeaderIndices[1]
+        ])
         return {
           id: this.operationMetadata.internalId,
           headerIndex: this.activeHeaderIndices[0],
@@ -65,13 +69,11 @@ export default {
 
 <style lang="scss" scoped>
 .operation-contents {
-  background-color: epot-color('background', 'dark');
   border-radius: 3px;
   overflow: hidden;
   .operation-heading {
     height: 120px;
-    padding: 1rem 1.4rem;
-    background-color: epot-color('background', 'dark');
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,7 +92,6 @@ export default {
     }
   }
   .padder {
-    padding: 0 1.4rem;
     .text {
       h2 {
         font-weight: 500;

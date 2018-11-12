@@ -1,6 +1,8 @@
-# Project EPON
+# Project EPOT
 
-> Project EPON front-end
+> Project EPOT front-end
+
+**NOTICE:** You need to set up the backend enviroment before the frontend works. See [project-epot-backend](https://github.com/Futurice-SaferGlobe/project-epot-backend)
 
 ## Build Setup
 
