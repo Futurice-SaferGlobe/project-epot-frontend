@@ -208,19 +208,26 @@ export default {
         .attr('stroke', style.lineColor.normal)
         .attr('stroke-width', '1')
         .attr('fill', 'none')
-        .attr('d', ({ source, target, isInnerConnection }, i) => {
-          // Create bezier curve for subheader/subheader connections
-          const d = generatePathCurve({ source, target })
+        .attr('d', ({ source, target, isInnerConnection, innerToInner }, i) => {
+          if (innerToInner) {
+            const d = generatePathCurve({ source, target, linear: true })
 
-          return (
-            `M${d.start.x} ${d.start.y},` + // starting x/y
-            `C${d.curve.x} ${d.curve.y},` + // bezier point x/y #1
-            `${d.end.x} ${d.end.y},` + // bezier point x/y #2
-            `${d.end.x} ${d.end.y}` // final x/y
-          )
+            return (
+              `M${d.start.x} ${d.start.y},` + `${d.end.x // starting x/y
+              } ${d.end.y}` // final x/y
+            )
+          } else {
+            const d = generatePathCurve({ source, target })
+            return (
+              `M${d.start.x} ${d.start.y},` + // starting x/y
+              `C${d.curve.p1.x} ${d.curve.p1.y},` + // bezier point x/y #1
+              `${d.end.x} ${d.end.y},` + // bezier point x/y #2
+              `${d.end.x} ${d.end.y}` // final x/y
+            )
+          }
         })
 
-      if (this.connectionLinks.length <= 20) {
+      if (this.connectionLinks.length <= 1) {
         // Helper for bezier curve points
         const bezierHelperGroup = this.svgLinksSelection
           .selectAll('g.link')
@@ -231,11 +238,13 @@ export default {
         const bezierHelperPoint = bezierHelperGroup
           .append('rect')
           .attr('fill', 'orangered')
-          .attr('x', ({ source, target }) => {
+          .attr('x', ({ source, target, innerToInner }) => {
+            if (!innerToInner) return
             const { curve } = generatePathCurve({ source, target })
             return curve.x - 5
           })
-          .attr('y', ({ source, target }) => {
+          .attr('y', ({ source, target, innerToInner }) => {
+            if (!innerToInner) return
             const { curve } = generatePathCurve({ source, target })
             return curve.y - 5
           })
@@ -248,14 +257,19 @@ export default {
           .attr('stroke-dasharray', '4')
           .attr('stroke-width', '1')
           .attr('fill', 'none')
-          .attr('d', ({ source, target, isInnerConnection }, i) => {
-            const d = generatePathCurve({ source, target })
-            return (
-              `M${d.start.x} ${d.start.y},` +
-              `L${d.curve.x} ${d.curve.y},` +
-              `L${d.end.x} ${d.end.y}`
-            )
-          })
+          .attr(
+            'd',
+            ({ source, target, isInnerConnection, innerToInner }, i) => {
+              if (!innerToInner) return
+              const d = generatePathCurve({ source, target })
+              return (
+                `M${d.start.x} ${d.start.y},` +
+                `L${d.curve.p1.x} ${d.curve.p1.y},` +
+                `L${d.curve.p2.x} ${d.curve.p2.y}` +
+                `L${d.end.x} ${d.end.y}`
+              )
+            }
+          )
       }
     },
 

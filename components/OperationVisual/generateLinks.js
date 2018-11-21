@@ -8,19 +8,26 @@ export const generateLinks = (nodes, connections) => {
       nodeMap.get(conn.from).depth === 1 || nodeMap.get(conn.to).depth === 1
         ? true
         : false
+    const innerToInner = [
+      nodeMap.get(conn.from).depth,
+      nodeMap.get(conn.to).depth
+    ].every(depth => depth === 1)
 
     return {
       source: {
         x: nodeMap.get(conn.from).x,
         y: nodeMap.get(conn.from).y,
-        uid: nodeMap.get(conn.from).data.uid
+        uid: nodeMap.get(conn.from).data.uid,
+        depth: nodeMap.get(conn.from).depth
       },
       target: {
         x: nodeMap.get(conn.to).x,
         y: nodeMap.get(conn.to).y,
-        uid: nodeMap.get(conn.to).data.uid
+        uid: nodeMap.get(conn.to).data.uid,
+        depth: nodeMap.get(conn.to).depth
       },
-      isInnerConnection
+      isInnerConnection,
+      innerToInner
     }
   })
   // .slice(20, 30)
