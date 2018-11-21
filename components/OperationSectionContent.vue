@@ -46,10 +46,6 @@ export default {
     operationSectionContent: {
       query: queries.getOperationContent,
       variables() {
-        console.log(this.operationMetadata, [
-          this.activeHeaderIndices[0],
-          this.activeHeaderIndices[1]
-        ])
         return {
           id: this.operationMetadata.internalId,
           headerIndex: this.activeHeaderIndices[0],

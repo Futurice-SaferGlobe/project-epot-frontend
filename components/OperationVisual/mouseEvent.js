@@ -1,14 +1,15 @@
 // @ts-check
 import { style } from './style'
 
-const enhanceTargetClickEvent = (event, { dataset }) => {
+const enhanceMouseEvent = (event, { dataset }) => {
   return {
     ...event,
     indices:
       dataset.typeName === 'OperationHeader' // target is top header, not sub header
         ? [parseInt(dataset.index), 1]
         : [parseInt(dataset.parentHeader), parseInt(dataset.index)],
-    uid: dataset.uid
+    uid: dataset.uid,
+    links: dataset.links.split(',')
   }
 }
 
@@ -17,20 +18,29 @@ const enhanceTargetClickEvent = (event, { dataset }) => {
  * @param {HTMLElement} target
  * @param {*} param1
  */
-export function addMouseEvents(target, { onMouseClick }) {
-  const { style } = target
-
+export function addMouseEvents(
+  target,
+  { onMouseClick, onMouseOver, onMouseOut }
+) {
   target.addEventListener('mouseover', e => {
-    style.transform = 'scale(1.1)'
+    target.style.transform = 'scale(1.1)'
+
+    if (typeof onMouseOver === 'function') {
+      onMouseOver(enhanceMouseEvent(e, target))
+    }
   })
 
   target.addEventListener('mouseout', e => {
-    style.transform = 'scale(1)'
+    target.style.transform = 'scale(1)'
+
+    if (typeof onMouseOut === 'function') {
+      onMouseOut(enhanceMouseEvent(e, target))
+    }
   })
 
   target.addEventListener('click', e => {
     if (typeof onMouseClick === 'function') {
-      return onMouseClick(enhanceTargetClickEvent(e, target))
+      return onMouseClick(enhanceMouseEvent(e, target))
     }
 
     console.error('`onMouseClick` is not a function')

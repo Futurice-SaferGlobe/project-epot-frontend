@@ -46,6 +46,12 @@ export default {
           children: subheaders
         }))
       }
+    },
+    connectionLinks() {
+      return generateLinks(
+        [...this.hierarchy.children, ...this.hierarchy.leaves()],
+        this.operation.connections
+      )
     }
   },
 
@@ -69,6 +75,7 @@ export default {
 
       this.renderNodes()
       this.renderLinks()
+      this.createMouseEvents()
 
       this.calcSvgContainerViewBox()
     },
@@ -84,6 +91,9 @@ export default {
         .enter()
         .append('g')
         .classed('node', true)
+        .attr('class', ({ x, y }) => {
+          console.log(x, y)
+        })
         .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
         .attr('transform', ({ x, y }, index) => {
           return `
@@ -96,9 +106,8 @@ export default {
       const circle = node
         .append('circle')
         .filter(({ depth }) => depth > 0)
-        .attr(
-          'fill',
-          ({ depth }) => (depth >= 1 ? style.nodeColor : 'transparent')
+        .attr('fill', ({ depth }) =>
+          depth >= 1 ? style.nodeColor : 'transparent'
         )
         .attr('r', style.nodeSize)
 
@@ -114,9 +123,8 @@ export default {
           const padding = style.nodeSize + 10
           return d.x < Math.PI === !d.children ? padding : -padding
         })
-        .attr(
-          'text-anchor',
-          d => (d.x < Math.PI === !d.children ? 'start' : 'end')
+        .attr('text-anchor', d =>
+          d.x < Math.PI === !d.children ? 'start' : 'end'
         )
         .attr('transform', d => (d.x >= Math.PI ? 'rotate(180)' : null))
         .text(({ data: { title } }) => title)
@@ -143,15 +151,6 @@ export default {
         .text(({ data: { title } }) => title)
         .call(wrap)
 
-      Array.from(this.$el.querySelectorAll('.title-group')).forEach(
-        titleGroup =>
-          addMouseEvents(titleGroup, {
-            onMouseClick: ({ indices }) => {
-              eventBus.$emit('operationClick', indices)
-            }
-          })
-      )
-
       // create background color for text divs
       Array.from(document.querySelectorAll('foreignObject div')).forEach(
         div => {
@@ -160,31 +159,47 @@ export default {
       )
     },
 
+    createMouseEvents() {
+      Array.from(this.$el.querySelectorAll('.title-group')).forEach(
+        titleGroup =>
+          addMouseEvents(titleGroup, {
+            onMouseClick: ({ indices }) => {
+              eventBus.$emit('operationClick', indices)
+            },
+            onMouseOver: ({ links }) => {
+              links.forEach(link => {
+                this.$refs.nodes.querySelector(`.${link}`).style.fill =
+                  style.titleColor.hover
+              })
+            },
+            onMouseOut: ({ links }) => {
+              links.forEach(link => {
+                this.$refs.nodes.querySelector(`.${link}`).style.fill =
+                  style.titleColor.normal
+              })
+            }
+          })
+      )
+    },
+
     addTitleGroupDataAttributes(target) {
-      console.log(target.data())
+      const { links } = this.$refs
+      console.log(this.$refs.links.querySelectorAll(`.link`))
       target.attr('class', 'title-group')
       target.attr('data-type-name', ({ data: { __typename } }) => __typename)
       target.attr('data-uid', ({ data: { uid } }) => uid)
       target.attr('data-index', ({ data: { index } }) => index)
-      target.attr('data-berse', d => {
-        console.log(d)
-      })
-      target.attr(
-        'data-parent-header',
-        ({ parent }) => (parent ? parent.data.index : null)
+      target.attr('data-links', ({ data: { links } }) => links)
+      target.attr('data-parent-header', ({ parent }) =>
+        parent ? parent.data.index : null
       )
     },
 
     renderLinks() {
-      const connectionLinks = generateLinks(
-        [...this.hierarchy.children, ...this.hierarchy.leaves()],
-        this.operation.connections
-      )
-
       // Create parent/child relation links
       const link = this.svgLinksSelection
         .selectAll('g.link')
-        .data(connectionLinks)
+        .data(this.connectionLinks)
         .enter()
         .append('path')
         .attr('class', 'link')
@@ -194,27 +209,22 @@ export default {
         .attr('stroke-width', '1')
         .attr('fill', 'none')
         .attr('d', ({ source, target, isInnerConnection }, i) => {
-          if (isInnerConnection) {
-            // Make a linear path to header/subheader connections
-            // return generatePathCurve({ source, target })
-          } else {
-            // Create bezier curve for subheader/subheader connections
-            const d = generatePathCurve({ source, target })
+          // Create bezier curve for subheader/subheader connections
+          const d = generatePathCurve({ source, target })
 
-            return (
-              `M${d.start.x} ${d.start.y},` + // starting x/y
-              `C${d.curve.x} ${d.curve.y},` + // bezier point x/y #1
-              `${d.end.x} ${d.end.y},` + // bezier point x/y #2
-              `${d.end.x} ${d.end.y}` // final x/y
-            )
-          }
+          return (
+            `M${d.start.x} ${d.start.y},` + // starting x/y
+            `C${d.curve.x} ${d.curve.y},` + // bezier point x/y #1
+            `${d.end.x} ${d.end.y},` + // bezier point x/y #2
+            `${d.end.x} ${d.end.y}` // final x/y
+          )
         })
 
-      if (connectionLinks.length <= 5) {
+      if (this.connectionLinks.length <= 20) {
         // Helper for bezier curve points
         const bezierHelperGroup = this.svgLinksSelection
           .selectAll('g.link')
-          .data(connectionLinks)
+          .data(this.connectionLinks)
           .enter()
           .append('g')
 
@@ -239,15 +249,12 @@ export default {
           .attr('stroke-width', '1')
           .attr('fill', 'none')
           .attr('d', ({ source, target, isInnerConnection }, i) => {
-            if (isInnerConnection) {
-            } else {
-              const d = generatePathCurve({ source, target })
-              return (
-                `M${d.start.x} ${d.start.y},` +
-                `L${d.curve.x} ${d.curve.y},` +
-                `L${d.end.x} ${d.end.y}`
-              )
-            }
+            const d = generatePathCurve({ source, target })
+            return (
+              `M${d.start.x} ${d.start.y},` +
+              `L${d.curve.x} ${d.curve.y},` +
+              `L${d.end.x} ${d.end.y}`
+            )
           })
       }
     },

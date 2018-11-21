@@ -23,5 +23,5 @@ export const generateLinks = (nodes, connections) => {
       isInnerConnection
     }
   })
-  // .slice(2, 6)
+  // .slice(20, 30)
 }

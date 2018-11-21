@@ -74,8 +74,25 @@ export default {
         }
       },
       update({ operations, operationConnections }) {
+        const getLink = (index, uid) =>
+          operationConnections[index].connections
+            .map(({ from, to }) => ({ from, to }))
+            .filter(({ from, to }) => {
+              return from === uid || to === uid
+            })
+            .map(conn => Object.values(conn).filter(val => val !== uid)[0])
         return operations.map((op, index) => ({
           ...op,
+          headers: op.headers.map(({ subheaders, uid, ...rest }) => ({
+            ...rest,
+            uid,
+            links: getLink(index, uid),
+            subheaders: subheaders.map(({ uid, ...rest }) => ({
+              ...rest,
+              uid,
+              links: getLink(index, uid)
+            }))
+          })),
           connections: operationConnections[index].connections
         }))
       }

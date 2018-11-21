@@ -29,12 +29,16 @@ export const generatePathCurve = ({ source, target, linear }) => {
   }
 
   const getRadiusScale = () => {
+    let maxvariation = source.y < 200 || target.y < 200 ? 1.5 : 0.2
+    let offset = source.y < 200 || target.y < 200 ? 1.5 : 1
     let delta = Math.abs(source.x - target.x)
     if (delta > Math.PI) {
       delta = 2 * Math.PI - delta
     }
-    return (0.2 / Math.PI) * delta + 1
+    return (maxvariation / Math.PI) * delta + offset
   }
+
+  // TODO: If both target.y and source.y < 200 then build two curve points
 
   d.curve = {
     x: getRadialPoint(
