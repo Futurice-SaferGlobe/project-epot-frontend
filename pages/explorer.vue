@@ -10,9 +10,17 @@
     </epot-header> -->
     <main>
       <loading-component :loadingState="$apollo.queries.operationsWithConn.loading">
-        <operation-visual v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"/>
+        <operation-visual 
+          class="operation-visual" 
+          v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"
+        />
       </loading-component>
-      <operation-section-content v-if="!$apollo.queries.operationsWithConn.loading" :operationMetadata="operationMetadata" />
+      <div class="left-section-container">
+        <operation-section-content
+          v-if="!$apollo.queries.operationsWithConn.loading" 
+          :operationMetadata="operationMetadata" 
+        />
+      </div>
     </main>
   </div>
 </template>
@@ -113,7 +121,12 @@ export default {
   main {
     display: flex;
     flex-direction: row;
-    > * {
+    .left-section-container  {
+      display: none !important;
+      background-color: green;
+    }
+    .operation-visual {
+      width: 58vw;
     }
   }
 }

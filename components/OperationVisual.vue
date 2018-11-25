@@ -55,6 +55,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.initD3View()
+  },
+
   methods: {
     /**
      * Initializes D3 Treelayout
@@ -76,7 +80,6 @@ export default {
       this.renderNodes()
       this.renderLinks()
       this.createMouseEvents()
-
       this.calcSvgContainerViewBox()
     },
 
@@ -213,15 +216,17 @@ export default {
             const d = generatePathCurve({ source, target, linear: true })
 
             return (
-              `M${d.start.x} ${d.start.y},` + `${d.end.x // starting x/y
-              } ${d.end.y}` // final x/y
+              `M${d.start.x} ${d.start.y},` +
+              `${
+                d.end.x // starting x/y
+              }, ${d.end.y}` // final x/y
             )
           } else {
             const d = generatePathCurve({ source, target })
             return (
-              `M${d.start.x} ${d.start.y},` + // starting x/y
-              `C${d.curve.p1.x} ${d.curve.p1.y},` + // bezier point x/y #1
-              `${d.end.x} ${d.end.y},` + // bezier point x/y #2
+              `M${d.start.x}, ${d.start.y} ` + // starting x/y
+              `C${d.curve.p1.x}, ${d.curve.p1.y} ` + // bezier point x/y #1
+              `${d.end.x}, ${d.end.y} ` + // bezier point x/y #2
               `${d.end.x} ${d.end.y}` // final x/y
             )
           }
@@ -263,8 +268,8 @@ export default {
               if (!innerToInner) return
               const d = generatePathCurve({ source, target })
               return (
-                `M${d.start.x} ${d.start.y},` +
-                `L${d.curve.p1.x} ${d.curve.p1.y},` +
+                `M${d.start.x} ${d.start.y}` +
+                `L${d.curve.p1.x} ${d.curve.p1.y}` +
                 `L${d.curve.p2.x} ${d.curve.p2.y}` +
                 `L${d.end.x} ${d.end.y}`
               )
@@ -291,18 +296,15 @@ export default {
         `${x + 10} ${y + -10} ${width + 20} ${height + 20}`
       )
     }
-  },
-
-  mounted() {
-    this.initD3View()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .operation-visual {
+  width: 100%;
   svg {
-    width: 50vw;
+    width: 100%;
     height: 100vh;
     * {
       cursor: default;
