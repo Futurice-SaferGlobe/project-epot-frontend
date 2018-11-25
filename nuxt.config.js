@@ -26,7 +26,7 @@ module.exports = {
    */
   router: {
     base:
-      process.env.DEPLOY_ENV === 'gh-pages' ? '/project-epot-backend/' : '/',
+      process.env.DEPLOY_ENV === 'gh-pages' ? '/project-epot-frontend/' : '/',
     middleware: ['operations']
   },
 
