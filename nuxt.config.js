@@ -55,8 +55,9 @@ module.exports = {
    */
   axios: {
     baseURL:
-      process.env.NODE_ENV === 'production'
-        ? 'http://somehost.com'
+      process.env.NODE_ENV === 'production' ||
+      process.env.DEPLOY_ENV === 'gh-pages'
+        ? 'http://46.101.183.17:8080'
         : 'http://localhost:8080',
     errorHandler(error) {}
   },
@@ -68,7 +69,8 @@ module.exports = {
     clientConfigs: {
       default: {
         httpEndpoint:
-          process.env === 'production'
+          process.env.NODE_ENV === 'production' ||
+          process.env.DEPLOY_ENV === 'gh-pages'
             ? 'http://46.101.183.17:8080'
             : 'http://localhost:8080/graphql'
       }
