@@ -10,9 +10,7 @@
           <span class="index">{{activeHeaderIndices[0]}}.{{activeHeaderIndices[1]}}</span> 
           {{operationSectionContent.header.subheader.title}}
         </h2>
-        <pre>{{operationSectionContent}}</pre>
         <p>
-          subheader content
           {{operationSectionContent.header.subheader.content}}
         </p>
       </div>
@@ -65,8 +63,7 @@ export default {
 
 <style lang="scss" scoped>
 .operation-contents {
-  border-radius: 3px;
-  overflow: hidden;
+  padding: 0 3rem 0 0;
   .operation-heading {
     height: 120px;
 
