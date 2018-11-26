@@ -71,7 +71,7 @@ module.exports = {
         httpEndpoint:
           process.env.NODE_ENV === 'production' ||
           process.env.DEPLOY_ENV === 'gh-pages'
-            ? 'http://46.101.183.17:8080'
+            ? 'http://46.101.183.17:8080/graphql'
             : 'http://localhost:8080/graphql'
       }
     }
