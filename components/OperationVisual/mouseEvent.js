@@ -6,7 +6,7 @@ const enhanceMouseEvent = (event, { dataset }) => {
     ...event,
     indices:
       dataset.typeName === 'OperationHeader' // target is top header, not sub header
-        ? [parseInt(dataset.index), 1]
+        ? [parseInt(dataset.index), 0]
         : [parseInt(dataset.parentHeader), parseInt(dataset.index)],
     uid: dataset.uid,
     links: dataset.links.split(',')

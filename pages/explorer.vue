@@ -10,15 +10,15 @@
     </epot-header> -->
     <main>
       <loading-component :loadingState="$apollo.queries.operationsWithConn.loading">
-        <operation-visual 
-          class="operation-visual" 
+        <operation-visual
+          class="operation-visual"
           v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"
         />
       </loading-component>
       <div class="left-section-container">
         <operation-section-content
-          v-if="!$apollo.queries.operationsWithConn.loading" 
-          :operationMetadata="operationMetadata" 
+          v-if="!$apollo.queries.operationsWithConn.loading"
+          :operationMetadata="operationMetadata"
         />
       </div>
     </main>
@@ -109,7 +109,7 @@ export default {
 
   mounted() {
     eventBus.$on('operationClick', newIndices => {
-      console.log('moi')
+      console.log(newIndices)
       this.changeActiveHeaderIndices(newIndices)
     })
   }

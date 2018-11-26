@@ -7,11 +7,12 @@
     <div class="padder">
       <div class="text">
         <h2>
-          <span class="index">{{activeHeaderIndices[0]}}.{{activeHeaderIndices[1]}}</span> 
-          {{operationSectionContent.header.subheader.title}}
+          <span v-if="activeHeaderIndices[1]">{{operationSectionContent.header.subheader.title}}</span>
+          <span v-else>{{operationSectionContent.header.title}}</span>
         </h2>
         <p>
-          {{operationSectionContent.header.subheader.content}}
+          <span v-if="activeHeaderIndices[1]">{{operationSectionContent.header.subheader.content}}</span>
+          <span v-else>{{operationSectionContent.header.content}}</span>
         </p>
       </div>
       <color-debug/>
