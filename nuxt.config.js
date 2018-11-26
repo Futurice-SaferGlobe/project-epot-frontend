@@ -57,7 +57,7 @@ module.exports = {
     baseURL:
       process.env.NODE_ENV === 'production' ||
       process.env.DEPLOY_ENV === 'gh-pages'
-        ? 'https://cors-anywhere.herokuapp.com/http://46.101.183.17:8080'
+        ? 'http://46.101.183.17:8080'
         : 'http://localhost:8080',
     errorHandler(error) {}
   },
@@ -71,7 +71,7 @@ module.exports = {
         httpEndpoint:
           process.env.NODE_ENV === 'production' ||
           process.env.DEPLOY_ENV === 'gh-pages'
-            ? 'https://cors-anywhere.herokuapp.com/http://46.101.183.17:8080'
+            ? 'http://46.101.183.17:8080'
             : 'http://localhost:8080/graphql'
       }
     }
