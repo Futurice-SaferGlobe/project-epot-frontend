@@ -122,8 +122,6 @@ export default {
     display: flex;
     flex-direction: row;
     .left-section-container  {
-      display: none !important;
-      background-color: green;
     }
     .operation-visual {
       width: 58vw;
