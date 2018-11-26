@@ -64,34 +64,39 @@ export default {
 
 <style lang="scss" scoped>
 .operation-contents {
-  padding: 0 3rem 0 0;
-  .operation-heading {
-    height: 120px;
+  height: 95%;
+  margin: 1rem 0 1rem;
+  border-left: 3px solid epot-color('foreground', 'base');
+  padding: 0.5rem 3rem 0 1rem;
 
+  font-family: Arial, sans-serif;
+
+  .operation-heading {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 1.4rem;
     .operation-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: epot-color('primary');
+      color: epot-color('foreground', 'base');
       line-height: 1.2;
     }
     .operation-area {
       display: block;
-      color: epot-color('white', 'light');
+      color: epot-color('foreground', 'dark');
       font-weight: 500;
       font-size: 0.9rem;
     }
   }
   .padder {
     .text {
+      color: epot-color('foreground', 'dark');
       h2 {
+        color: epot-color('foreground', 'base');
         font-weight: 500;
         font-size: 1.2rem;
         margin-top: 1rem;
-        color: epot-color('white', 'light');
         .index {
           font-size: 0.95em;
           color: epot-color('primary');
