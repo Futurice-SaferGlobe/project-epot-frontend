@@ -4,6 +4,10 @@
 
 **NOTICE:** You need to set up the backend enviroment before the frontend works. See [project-epot-backend](https://github.com/Futurice-SaferGlobe/project-epot-backend)
 
+## Deploy to Github Pages
+
+To deploy a static copy of the app to Github Pages, run `yarn run publish`.
+
 ## Build Setup
 
 ```bash
