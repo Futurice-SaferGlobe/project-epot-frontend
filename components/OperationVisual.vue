@@ -148,6 +148,7 @@ export default {
         })
         .append('g')
         .call(this.addTitleGroupDataAttributes)
+        .attr('class', ({ data: { uid } }) => `title-group ${uid}`)
         .filter(({ depth }) => depth === 1)
         .call(styleText)
         .append('text')
@@ -171,14 +172,26 @@ export default {
             },
             onMouseOver: ({ links }) => {
               links.forEach(link => {
-                this.$refs.nodes.querySelector(`.${link}`).style.fill =
-                  style.titleColor.hover
+                if (link !== '') {
+                  const e = this.$refs.nodes.querySelector(`.${link}`)
+                  if (e.nodeName === 'g') {
+                    e.querySelector('div').style.color = style.titleColor.hover
+                  } else {
+                    e.style.fill = style.titleColor.hover
+                  }
+                }
               })
             },
             onMouseOut: ({ links }) => {
               links.forEach(link => {
-                this.$refs.nodes.querySelector(`.${link}`).style.fill =
-                  style.titleColor.normal
+                if (link !== '') {
+                  const e = this.$refs.nodes.querySelector(`.${link}`)
+                  if (e.nodeName === 'g') {
+                    e.querySelector('div').style.color = style.titleColor.normal
+                  } else {
+                    e.style.fill = style.titleColor.normal
+                  }
+                }
               })
             }
           })
