@@ -1,13 +1,8 @@
 <template>
   <div class="explorer">
-    <!-- <epot-header ref="header" title="Effectiveness of Peace Operations">
-      <template slot="first" v-if="isLayoutComparison">
-        <operations-selector v-if="!$apollo.queries.operations.loading" :operationsMetadata="operations"/>
-      </template>
-      <template slot="second">
-        <label-heroes/>
-      </template>
-    </epot-header> -->
+    <header>
+      <h1>Effectiveness of peace operations</h1>
+    </header>
     <main>
       <loading-component :loadingState="$apollo.queries.operationsWithConn.loading">
         <operation-visual
@@ -118,6 +113,19 @@ export default {
 
 <style lang="scss">
 .explorer {
+  header {
+    border-bottom: 1px solid epot-color('foreground', 'base');
+    margin: 0 2rem;
+    h1 {
+      font-family: Arial, sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: epot-color('foreground', 'base');
+      text-transform: uppercase;
+      padding: 1rem;
+    }
+  }
+
   main {
     display: flex;
     flex-direction: row;

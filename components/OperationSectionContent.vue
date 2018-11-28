@@ -77,7 +77,7 @@ export default {
     justify-content: center;
     margin-bottom: 1.4rem;
     .operation-title {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: bold;
       color: epot-color('foreground', 'base');
       line-height: 1.2;

@@ -305,7 +305,7 @@ export default {
   width: 100%;
   svg {
     width: 100%;
-    height: 100vh;
+    height: 98vh;
     * {
       cursor: default;
     }
