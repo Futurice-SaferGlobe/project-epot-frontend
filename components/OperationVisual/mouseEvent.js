@@ -1,16 +1,20 @@
 // @ts-check
 import { style } from './style'
 
-const enhanceMouseEvent = (event, { dataset }) => {
+const enhanceMouseEvent = (event, target) => {
   return {
     ...event,
     indices:
-      dataset.typeName === 'OperationHeader' // target is top header, not sub header
-        ? [parseInt(dataset.index), 0]
-        : [parseInt(dataset.parentHeader), parseInt(dataset.index)],
-    uid: dataset.uid,
-    depth: dataset.typeName === 'OperationHeader' ? 0 : 1,
-    links: dataset.links.split(',')
+      target.dataset.typeName === 'OperationHeader' // target is top header, not sub header
+        ? [parseInt(target.dataset.index), 0]
+        : [
+            parseInt(target.dataset.parentHeader),
+            parseInt(target.dataset.index)
+          ],
+    uid: target.dataset.uid,
+    depth: target.dataset.typeName === 'OperationHeader' ? 0 : 1,
+    links: target.dataset.links.split(','),
+    target
   }
 }
 

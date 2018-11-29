@@ -164,10 +164,24 @@ export default {
       Array.from(this.$el.querySelectorAll('.title-group')).forEach(
         titleGroup =>
           addMouseEvents(titleGroup, {
-            onMouseClick: ({ uid, depth }) => {
+            onMouseClick: ({ uid, depth, target }) => {
+              try {
+                target.firstChild.style.fill = style.titleColor.hover
+                target.firstChild.firstChild.style.color =
+                  style.titleColor.hover
+              } catch (o_O) {}
               eventBus.$emit('operationClick', { uid, depth })
             },
-            onMouseOver: ({ links }) => {
+            onMouseOver: ({ links, target }) => {
+              console.log(target.firstChild)
+              // style hovered element
+              try {
+                target.firstChild.style.fill = style.titleColor.hover
+                target.firstChild.firstChild.style.color =
+                  style.titleColor.hover
+              } catch (o_O) {}
+
+              // style connection elements
               links.forEach(link => {
                 if (link !== '') {
                   const e = this.$refs.nodes.querySelector(`.${link}`)
@@ -179,7 +193,15 @@ export default {
                 }
               })
             },
-            onMouseOut: ({ links }) => {
+            onMouseOut: ({ links, target }) => {
+              // style hovered element
+              try {
+                target.firstChild.style.fill = style.titleColor.normal
+                target.firstChild.firstChild.style.color =
+                  style.titleColor.normal
+              } catch (o_O) {}
+
+              // style connection elements
               links.forEach(link => {
                 if (link !== '') {
                   const e = this.$refs.nodes.querySelector(`.${link}`)
@@ -203,6 +225,7 @@ export default {
       target.attr('data-uid', ({ data: { uid } }) => uid)
       target.attr('data-index', ({ data: { index } }) => index)
       target.attr('data-links', ({ data: { links } }) => links)
+      target.attr('focus', false)
       target.attr('data-parent-header', ({ parent }) =>
         parent ? parent.data.index : null
       )
