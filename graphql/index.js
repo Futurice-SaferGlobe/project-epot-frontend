@@ -1,11 +1,11 @@
 import { getOperations } from './queries/getOperations'
 import { getOperationsWithConn } from './queries/getOperationsWithConn'
-import { getOperationContent } from './queries/getOperationContent'
+import { getOperationHeader } from './queries/getOperationHeader'
 
 export const queries = {
   getOperations,
   getOperationsWithConn,
-  getOperationContent
+  getOperationHeader
 }
 
 export const mutations = {}

@@ -44,8 +44,6 @@ export const generatePathCurve = ({ source, target, linear }) => {
     return (0.3 / Math.PI) * delta + offset
   }
 
-  console.log(target, source)
-
   // TODO: If both target.y and source.y < 200 then build two curve points
 
   d.curve = {

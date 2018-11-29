@@ -9,6 +9,7 @@ const enhanceMouseEvent = (event, { dataset }) => {
         ? [parseInt(dataset.index), 0]
         : [parseInt(dataset.parentHeader), parseInt(dataset.index)],
     uid: dataset.uid,
+    depth: dataset.typeName === 'OperationHeader' ? 0 : 1,
     links: dataset.links.split(',')
   }
 }

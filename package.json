@@ -27,6 +27,7 @@
     "d3": "^5.7.0",
     "d3-textwrap": "^2.0.2",
     "graphql-tag": "^2.10.0",
+    "lodash.flatten": "^4.4.0",
     "nanoreset": "^3.0.1",
     "pixi-viewport": "^3.2.1",
     "pixi.js": "^4.8.1"

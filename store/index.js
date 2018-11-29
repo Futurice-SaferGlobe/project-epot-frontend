@@ -10,7 +10,8 @@ import { layoutEnum } from '@/constants'
 export const state = () => ({
   availableOperations: ['fututest'],
   selectedOperations: ['fututest'],
-  activeHeaderIndices: [3, 4],
+  activeHeader: { depth: 1, uid: 'PROSTA_SUB_RULLAW' },
+  operationTitles: null,
   layout: layoutEnum.COMPARISON
 })
 
@@ -18,14 +19,18 @@ export const state = () => ({
 export const getters = {
   availableOperations: state => state.availableOperations,
   selectedOperations: state => state.selectedOperations,
-  activeHeaderIndices: state => state.activeHeaderIndices,
   layout: state => state.layout,
   isLayoutComparison: state => state.layout === layoutEnum.COMPARISON,
-  isLayoutSingle: state => state.layout === layoutEnum.SINGLE
+  isLayoutSingle: state => state.layout === layoutEnum.SINGLE,
+  activeHeader: state => state.activeHeader
 }
 
 /** @type MutationTree */
 export const mutations = {
+  changeOperationTitles(state, titles) {
+    state.operationTitles = titles
+  },
+
   changeSelectedOperations(state, operations) {
     const MAX_LEN = 2
     if (Array.isArray(operations) && operations.length <= MAX_LEN) {
@@ -37,14 +42,8 @@ export const mutations = {
     }
   },
 
-  changeActiveHeaderIndices(state, indices) {
-    if (!Array.isArray(indices) && indices.length !== 2) {
-      return console.error(
-        'changeActiveHeaderIndices: provided indices are invalid'
-      )
-    }
-
-    state.activeHeaderIndices = indices
+  changeActiveHeader(state, activeHeaderObject) {
+    state.activeHeader = activeHeaderObject
   },
 
   changeLayout(state, newLayout) {

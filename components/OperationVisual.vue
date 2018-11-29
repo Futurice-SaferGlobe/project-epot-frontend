@@ -94,9 +94,6 @@ export default {
         .enter()
         .append('g')
         .classed('node', true)
-        .attr('class', ({ x, y }) => {
-          console.log(x, y)
-        })
         .attr('class', d => (d.depth === 1 ? 'node header' : 'node subheader'))
         .attr('transform', ({ x, y }, index) => {
           return `
@@ -167,8 +164,8 @@ export default {
       Array.from(this.$el.querySelectorAll('.title-group')).forEach(
         titleGroup =>
           addMouseEvents(titleGroup, {
-            onMouseClick: ({ indices }) => {
-              eventBus.$emit('operationClick', indices)
+            onMouseClick: ({ uid, depth }) => {
+              eventBus.$emit('operationClick', { uid, depth })
             },
             onMouseOver: ({ links }) => {
               links.forEach(link => {
@@ -200,7 +197,7 @@ export default {
 
     addTitleGroupDataAttributes(target) {
       const { links } = this.$refs
-      console.log(this.$refs.links.querySelectorAll(`.link`))
+
       target.attr('class', 'title-group')
       target.attr('data-type-name', ({ data: { __typename } }) => __typename)
       target.attr('data-uid', ({ data: { uid } }) => uid)

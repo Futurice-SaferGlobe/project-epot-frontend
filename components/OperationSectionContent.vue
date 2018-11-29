@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$apollo.queries.operationSectionContent.loading" class="operation-contents">
+  <div v-if="!$apollo.queries.header.loading" class="operation-contents">
     <div class="operation-heading">
       <h1 class="operation-title">{{operationMetadata.name}}</h1>
       <span class="operation-area">{{operationMetadata.area}}</span>
@@ -7,13 +7,20 @@
     <div class="padder">
       <div class="text">
         <h2>
-          <span v-if="activeHeaderIndices[1]">{{operationSectionContent.header.subheader.title}}</span>
-          <span v-else>{{operationSectionContent.header.title}}</span>
+          {{header.title}}
         </h2>
         <p>
-          <span v-if="activeHeaderIndices[1]">{{operationSectionContent.header.subheader.content}}</span>
-          <span v-else>{{operationSectionContent.header.content}}</span>
+          {{header.content}}
         </p>
+      </div>
+      <div class="connections-container">
+        <ul v-if="headerConnections.length >= 1">
+          <h3>Connections</h3>
+          <li v-for="connection in headerConnections" :key="connection.uid">
+            <button @click="connectionClick(connection.uid)">{{connection.title}}</button>
+          </li>
+        </ul>
+        <span v-else class="no-connections">No Connections...</span>
       </div>
       <color-debug/>
     </div>
@@ -21,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { queries } from '@/graphql'
 import ColorDebug from './ColorDebug'
 
@@ -38,25 +45,35 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['activeHeaderIndices'])
+    ...mapGetters(['activeHeader']),
+    headerConnections() {
+      return this.header.connections.map(({ from, to }) =>
+        this.operationMetadata.operationTitles
+          .filter(
+            ({ uid }) => (uid === from || uid === to) && uid !== this.header.uid
+          )
+          .reduce((prev, next) => [...prev, next])
+      )
+    }
+  },
+
+  methods: {
+    ...mapMutations(['changeActiveHeader']),
+    connectionClick(uid) {
+      this.changeActiveHeader({ uid })
+    }
   },
 
   apollo: {
-    operationSectionContent: {
-      query: queries.getOperationContent,
+    header: {
+      query: queries.getOperationHeader,
       variables() {
         return {
           id: this.operationMetadata.internalId,
-          headerIndex: this.activeHeaderIndices[0],
-          subheaderIndex: this.activeHeaderIndices[1]
+          uid: this.activeHeader.uid
         }
       },
-      update: ({ operation: { headers } }) => ({
-        header: headers.map(({ subheaders, ...rest }) => ({
-          ...rest,
-          subheader: subheaders[0]
-        }))[0]
-      })
+      update: ({ operationHeader }) => operationHeader
     }
   }
 }
@@ -101,6 +118,37 @@ export default {
           font-size: 0.95em;
           color: epot-color('primary');
         }
+      }
+    }
+
+    .connections-container {
+      box-shadow: 0 -1px epot-color('foreground', 'base');
+      padding-top: 2rem;
+      margin-top: 4rem;
+      color: epot-color('foreground', 'base');
+      h3 {
+        font-weight: bold;
+        font-size: 1.05rem;
+        margin-bottom: 1.2rem;
+        color: epot-color('foreground', 'base');
+      }
+      ul {
+        li {
+          &:not(:last-of-type) {
+            margin-bottom: 0.7rem;
+          }
+          button {
+            line-height: 1.5;
+            background-color: transparent;
+            color: epot-color('foreground', 'base');
+            font-size: 1rem;
+            padding: 0;
+            outline: none;
+          }
+        }
+      }
+      .no-connections {
+        color: epot-color('foreground', 'dark', 'dark');
       }
     }
   }

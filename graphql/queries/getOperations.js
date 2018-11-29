@@ -8,10 +8,12 @@ export const getOperations = gql`
       area
       headers {
         title
+        uid
         labels
         index
         subheaders {
           index
+          uid
           title
         }
       }

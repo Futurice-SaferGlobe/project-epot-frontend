@@ -33,10 +33,13 @@ import OperationSectionContent from '@/components/OperationSectionContent'
 import LoadingComponent from '@/components/LoadingComponent'
 import OperationVisual from '@/components/OperationVisual'
 
+import flatten from 'lodash.flatten'
+
 export default {
   data() {
     return {
-      operationsWithConn: null
+      operationsWithConn: null,
+      operationTitles: null
     }
   },
 
@@ -50,7 +53,8 @@ export default {
       return {
         name: this.operationsWithConn[0].name,
         internalId: this.operationsWithConn[0].internalId,
-        area: this.operationsWithConn[0].area
+        area: this.operationsWithConn[0].area,
+        operationTitles: this.operationTitles
       }
     }
   },
@@ -65,7 +69,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['changeActiveHeaderIndices'])
+    ...mapMutations(['changeActiveHeader', 'changeOperationTitles'])
   },
 
   apollo: {
@@ -84,7 +88,7 @@ export default {
               return from === uid || to === uid
             })
             .map(conn => Object.values(conn).filter(val => val !== uid)[0])
-        return operations.map((op, index) => ({
+        const update = operations.map((op, index) => ({
           ...op,
           headers: op.headers.map(({ subheaders, uid, ...rest }) => ({
             ...rest,
@@ -98,14 +102,21 @@ export default {
           })),
           connections: operationConnections[index].connections
         }))
+        this.operationTitles = flatten([
+          ...update[0].headers.map(({ title, uid }) => ({ title, uid })),
+          ...update[0].headers.map(({ subheaders }) =>
+            subheaders.map(({ title, uid }) => ({ title, uid }))
+          )
+        ])
+
+        return update
       }
     }
   },
 
   mounted() {
-    eventBus.$on('operationClick', newIndices => {
-      console.log(newIndices)
-      this.changeActiveHeaderIndices(newIndices)
+    eventBus.$on('operationClick', newHeader => {
+      this.changeActiveHeader(newHeader)
     })
   }
 }
