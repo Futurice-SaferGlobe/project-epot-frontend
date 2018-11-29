@@ -165,6 +165,14 @@ export default {
         titleGroup =>
           addMouseEvents(titleGroup, {
             onMouseClick: ({ uid, depth, target }) => {
+              this.$el
+                .querySelectorAll('.title-group')
+                .forEach(g =>
+                  g.firstChild
+                    ? g.firstChild.classList.remove('node-focus')
+                    : null
+                )
+              target.firstChild.classList.add('node-focus')
               try {
                 target.firstChild.style.fill = style.titleColor.hover
                 target.firstChild.firstChild.style.color =
@@ -173,7 +181,6 @@ export default {
               eventBus.$emit('operationClick', { uid, depth })
             },
             onMouseOver: ({ links, target }) => {
-              console.log(target.firstChild)
               // style hovered element
               try {
                 target.firstChild.style.fill = style.titleColor.hover
@@ -225,7 +232,7 @@ export default {
       target.attr('data-uid', ({ data: { uid } }) => uid)
       target.attr('data-index', ({ data: { index } }) => index)
       target.attr('data-links', ({ data: { links } }) => links)
-      target.attr('focus', false)
+
       target.attr('data-parent-header', ({ parent }) =>
         parent ? parent.data.index : null
       )
@@ -348,6 +355,16 @@ export default {
 foreignObject {
   div {
     background-color: green;
+  }
+}
+</style>
+<style lang="scss">
+.node-focus {
+  color: epot-color('primary', 'base') !important;
+  fill: epot-color('primary', 'base') !important;
+  * {
+    color: epot-color('primary', 'base') !important;
+    fill: epot-color('primary', 'base') !important;
   }
 }
 </style>
