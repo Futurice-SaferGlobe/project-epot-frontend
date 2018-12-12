@@ -4,18 +4,16 @@
       <h1>Effectiveness of peace operations</h1>
     </header>
     <main>
-      <loading-component :loadingState="$apollo.queries.operationsWithConn.loading">
-        <operation-visual
-          class="operation-visual"
-          v-if="!$apollo.queries.operationsWithConn.loading" :operation="operationsWithConn[0]"
-        />
-      </loading-component>
-      <div class="left-section-container">
-        <operation-section-content
-          v-if="!$apollo.queries.operationsWithConn.loading"
-          :operationMetadata="operationMetadata"
-        />
-      </div>
+      <loading-component class="loading-component" v-if="$apollo.queries.operationsWithConn.loading"/>
+      <operation-visual
+        class="operation-visual"
+        v-else :operation="operationsWithConn[0]"
+      />
+      <operation-section-content
+        class="operation-section-content"
+        v-if="!$apollo.queries.operationsWithConn.loading"
+        :operationMetadata="operationMetadata"
+      />
     </main>
   </div>
 </template>
@@ -124,6 +122,7 @@ export default {
 
 <style lang="scss">
 .explorer {
+  height: 100vh;
   header {
     border-bottom: 1px solid epot-color('foreground', 'base');
     margin: 0 2rem;
@@ -140,10 +139,19 @@ export default {
   main {
     display: flex;
     flex-direction: row;
-    .left-section-container  {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .loading-component {
     }
+
     .operation-visual {
-      width: 58vw;
+      flex: 1;
+      height: 100%;
+    }
+    .operation-section-content {
+      flex-basis: 720px;
+      height: 100%;
     }
   }
 }

@@ -1,28 +1,31 @@
 <template>
-  <div v-if="!$apollo.queries.header.loading" class="operation-contents">
-    <div class="operation-heading">
-      <h1 class="operation-title">{{operationMetadata.name}}</h1>
-      <span class="operation-area">{{operationMetadata.area}}</span>
-    </div>
-    <div class="padder">
-      <div class="text">
-        <h2>
-          {{header.title}}
-        </h2>
-        <p>
-          {{header.content}}
-        </p>
+  <div class="operation-contents">
+    <div v-if="!$apollo.queries.header.loading" class="loaded">
+      <div class="operation-heading">
+        <h1 class="operation-title">{{operationMetadata.name}}</h1>
+        <span class="operation-area">{{operationMetadata.area}}</span>
       </div>
-      <div class="connections-container">
-        <ul v-if="headerConnections.length >= 1">
-          <h3>Connections</h3>
-          <li v-for="connection in headerConnections" :key="connection.uid">
-            <button @click="connectionClick(connection.uid)">{{connection.title}}</button>
-          </li>
-        </ul>
-        <span v-else class="no-connections">No Connections...</span>
+      <div class="padder">
+        <div class="text">
+          <h2>
+            {{header.title}}
+          </h2>
+          <p>
+            {{header.content}}
+          </p>
+        </div>
+        <div class="connections-container">
+          <ul v-if="headerConnections.length >= 1">
+            <h3>Connections</h3>
+            <li v-for="connection in headerConnections" :key="connection.uid">
+              <button @click="connectionClick(connection.uid)">{{connection.title}}</button>
+            </li>
+          </ul>
+          <span v-else class="no-connections">No Connections...</span>
+        </div>
+        <color-debug/>
       </div>
-      <color-debug/>
+
     </div>
   </div>
 </template>
@@ -81,7 +84,6 @@ export default {
 
 <style lang="scss" scoped>
 .operation-contents {
-  height: 95%;
   margin: 1rem 0 1rem;
   border-left: 3px solid epot-color('foreground', 'base');
   padding: 0.5rem 3rem 0 1rem;

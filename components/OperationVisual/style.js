@@ -1,5 +1,5 @@
 export const style = {
-  size: 243,
+  size: 165,
   fontSize: 14,
   nodeColor: '#C6DAE6',
   lineColor: {
