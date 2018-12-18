@@ -6,13 +6,17 @@
       class="svg-container"
       focusable="true" 
       tabindex="0"
+      version="1.1" 
+      xmlns="http://www.w3.org/2000/svg" 
+      xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <g ref="visualGroup" class="visual-group">
         <g class="arcs">
           <svg-arc
             v-for="(connection, index) in connectionLinks" 
-            :key="index" 
+            :key="index"
             :connectionData="connection"
+            :elementId="index"
           />
         </g>
         <g class="nodes">
