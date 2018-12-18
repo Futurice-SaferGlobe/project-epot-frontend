@@ -4,7 +4,9 @@
     :class="nodeData.depth === 1 ? 'header' : 'subheader'" 
     :ref="nodeData.depth === 1 ? 'header' : 'subheader'"
     :transform="groupTranslatePosition"
-    @click="onNodeClick"
+    @click="onNodeMouseIntention"
+    @mouseover="onNodeMouseIntention"
+    @mouseleave="onNodeMouseIntention"
   >
     <a xlink:href="#" ref="pseudoAnchor" onclick="return false;">
       <circle  
@@ -16,7 +18,7 @@
       <g v-if="nodeData.depth === 1" class="header-text-group">
         <foreignObject
           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-          width="70"
+          width="50"
           height="30"
           class="foreignObject-header-text node-title"
           :class="{'style-connected': styleConnected}"
@@ -31,7 +33,7 @@
         class="subheader-text-group" 
         :style="setSubheaderTextRotation"
       >
-        <text 
+        <text  
           class="subheader-text node-title" 
           :class="{'style-connected': styleConnected}"
           :style="setSubheaderTextAlign"
@@ -58,15 +60,14 @@ export default {
 
   data() {
     return {
-      styleConnected: false
+      styleConnected: false,
+      oldMouseState: null,
+      lastClickedNode: null
     }
   },
 
   mounted() {
-    console.log(this.nodeData)
-    eventBus.$on('operationClick', ({ uid, links }) => {
-      console.log(links)
-      console.log(this.nodeData.data.uid === uid)
+    eventBus.$on('onNodeMouseIntention', ({ uid, links }) => {
       if (
         this.nodeData.data.uid === uid ||
         links.includes(this.nodeData.data.uid)
@@ -81,12 +82,16 @@ export default {
   methods: {
     preventAnchorDefault() {},
 
-    onNodeClick() {
-      eventBus.$emit('operationClick', {
-        uid: this.nodeData.data.uid,
-        depth: this.nodeData.depth,
-        links: this.nodeData.data.links
-      })
+    onNodeMouseIntention(e) {
+      const { type } = e
+
+      if (type === 'click') {
+        eventBus.$emit('onNodeMouseIntention', {
+          uid: this.nodeData.data.uid,
+          depth: this.nodeData.depth,
+          links: this.nodeData.data.links
+        })
+      }
     }
   },
 
@@ -141,5 +146,9 @@ circle {
 
 .foreignObject-header-text {
   transform: translate(-3px, 5px);
+
+  > div {
+    background-color: epot-color('background', 'base', 'dark');
+  }
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
   <g>
     <path
+      :id="elementId"
       class="arc"
       :class="{'style-connected': styleConnected}"
       :d="generatePath"
     />
+    <slot/>
   </g>
 </template>
 
@@ -15,6 +17,10 @@ import { generatePathCurve } from './generatePathCurve'
 export default {
   props: {
     connectionData: {
+      required: true
+    },
+    elementId: {
+      type: Number,
       required: true
     }
   },
@@ -32,7 +38,7 @@ export default {
 
   mounted() {
     const { source, target } = this.connectionData
-    eventBus.$on('operationClick', ({ uid }) => {
+    eventBus.$on('onNodeMouseIntention', ({ uid }) => {
       if ([source.uid, target.uid].includes(uid)) {
         this.styleConnected = true
       } else {
@@ -59,6 +65,8 @@ export default {
   stroke: rgb(102, 153, 204);
   stroke-width: 1;
   fill: transparent;
+  stroke-dasharray: 50%;
+  stroke-dashoffset: 100%;
 
   &.style-connected {
     stroke: epot-color('primary', 'base');

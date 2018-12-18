@@ -113,7 +113,7 @@ export default {
   },
 
   mounted() {
-    eventBus.$on('operationClick', newHeader => {
+    eventBus.$on('onNodeMouseIntention', newHeader => {
       this.changeActiveHeader(newHeader)
     })
   }
