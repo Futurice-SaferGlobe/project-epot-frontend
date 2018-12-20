@@ -18,7 +18,12 @@
           <ul v-if="headerConnections.length >= 1">
             <h3>Connections</h3>
             <li v-for="connection in headerConnections" :key="connection.uid">
-              <button @click="connectionClick(connection.uid)">{{connection.title}}</button>
+              <operation-header-connection
+                :id="operationMetadata.internalId"
+                :uid="connection.uid"
+              >
+                {{connection.title}}
+              </operation-header-connection>
             </li>
           </ul>
           <span v-else class="no-connections">No Connections...</span>
@@ -33,6 +38,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { queries } from '@/graphql'
+import OperationHeaderConnection from './OperationHeaderConnection'
 import ColorDebug from './ColorDebug'
 
 export default {
@@ -44,6 +50,7 @@ export default {
   },
 
   components: {
+    OperationHeaderConnection,
     ColorDebug
   },
 
@@ -73,7 +80,8 @@ export default {
       variables() {
         return {
           id: this.operationMetadata.internalId,
-          uid: this.activeHeader.uid
+          uid: this.activeHeader.uid,
+          withConn: true
         }
       },
       update: ({ operationHeader }) => operationHeader
@@ -138,16 +146,6 @@ export default {
         li {
           &:not(:last-of-type) {
             margin-bottom: 0.7rem;
-          }
-          button {
-            line-height: 1.5;
-            background-color: transparent;
-            color: epot-color('foreground', 'base');
-            font-size: 1rem;
-            padding: 0;
-            outline: none;
-            display: inline;
-            text-align: left;
           }
         }
       }

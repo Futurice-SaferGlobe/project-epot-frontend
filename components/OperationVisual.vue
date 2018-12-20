@@ -1,5 +1,10 @@
 <template>
-  <div class="operation-visual">
+  <div 
+    class="operation-visual"
+    @mousemove="translateView"
+    @mouseleave="translateView"
+    ref="visualWrapper" 
+  >
     <svg 
       v-if="hierarchy" 
       ref="svgContainer" 
@@ -59,13 +64,14 @@ export default {
       svgLinksSelection: null
     }
   },
+
   components: {
     SvgNode,
     SvgArc
   },
 
   computed: {
-    // D3 hierarchy nodes apparently requires the arrays to be named as `children`.
+    // D3 hierarchy nodes apparently require the arrays to be named as `children`.
     transformedOperation() {
       const { headers, ...rest } = this.operation
       return {
@@ -81,6 +87,10 @@ export default {
         [...this.hierarchy.children, ...this.hierarchy.leaves()],
         this.operation.connections
       )
+    },
+
+    visualWrapperRect() {
+      return this.$refs.visualWrapper.getBoundingClientRect()
     }
   },
 
@@ -120,6 +130,26 @@ export default {
         'viewBox',
         `${x} ${y - 50} ${width} ${height}`
       )
+    },
+
+    translateView({ x, y, type }) {
+      // if (type === 'mousemove') {
+      //   const relCenterX =
+      //     x - (this.visualWrapperRect.left + this.visualWrapperRect.width / 2)
+      //   const relCenterY =
+      //     y - (this.visualWrapperRect.top + this.visualWrapperRect.height / 2)
+      //   if (Math.abs(relCenterX) <= 10000 && Math.abs(relCenterY) <= 10000) {
+      //     this.$refs.visualWrapper.style.transform = `scale(1.0, 1.0) translate3D(${(parseInt(
+      //       relCenterX
+      //     ) /
+      //       5) *
+      //       -1}px, ${(parseInt(relCenterY) / 5) * -1}px, 0px`
+      //   } else {
+      //     this.$refs.visualWrapper.style.transform = `translate3D(0, 0, 0)`
+      //   }
+      // } else if (type === 'mouseleave') {
+      //   this.$refs.visualWrapper.style.transform = `translate3D(0, 0, 0)`
+      // }
     }
   }
 }
@@ -127,7 +157,9 @@ export default {
 
 <style lang="scss" scoped>
 .operation-visual {
+  -webkit-backface-visibility: hidden;
   width: 100%;
+  transition: transform 0.15s ease-out;
   svg {
     width: 100%;
     height: 98vh;

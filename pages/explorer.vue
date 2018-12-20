@@ -9,8 +9,8 @@
         class="operation-visual"
         v-else :operation="operationsWithConn[0]"
       />
-      <operation-section-content
-        class="operation-section-content"
+      <operation-header
+        class="operation-header"
         v-if="!$apollo.queries.operationsWithConn.loading"
         :operationMetadata="operationMetadata"
       />
@@ -24,10 +24,11 @@ import { queries } from '@/graphql/'
 
 import eventBus from '@/plugins/eventBus'
 
+import pageTransition from '@/mixins/pageTransition'
+
 import EpotHeader from '@/components/EpotHeader'
-import OperationsSelector from '@/components/OperationsSelector'
 import LabelHeroes from '@/components/LabelHeroes'
-import OperationSectionContent from '@/components/OperationSectionContent'
+import OperationHeader from '@/components/OperationHeader'
 import LoadingComponent from '@/components/LoadingComponent'
 import OperationVisual from '@/components/OperationVisual'
 
@@ -57,11 +58,12 @@ export default {
     }
   },
 
+  mixins: [pageTransition],
+
   components: {
     EpotHeader,
-    OperationsSelector,
     LabelHeroes,
-    OperationSectionContent,
+    OperationHeader,
     LoadingComponent,
     OperationVisual
   },
@@ -122,6 +124,7 @@ export default {
 
 <style lang="scss">
 .explorer {
+  background-color: epot-color('background');
   height: 100vh;
   header {
     border-bottom: 1px solid epot-color('foreground', 'base');
@@ -149,7 +152,7 @@ export default {
       flex: 1;
       height: 100%;
     }
-    .operation-section-content {
+    .operation-header {
       flex-basis: 720px;
       height: 100%;
     }

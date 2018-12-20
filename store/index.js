@@ -8,6 +8,11 @@ import { layoutEnum } from '@/constants'
 
 /** @type State */
 export const state = () => ({
+  pageMap: [
+    { name: 'explorer', active: true, background: 'dark' },
+    { name: 'about', active: false, background: 'light' }
+  ],
+  routerPushDirectionState: null,
   availableOperations: ['fututest'],
   selectedOperations: ['fututest'],
   activeHeader: { depth: 1, uid: 'PROSTA_SUB_RULLAW' },
@@ -27,6 +32,17 @@ export const getters = {
 
 /** @type MutationTree */
 export const mutations = {
+  changeActivePage(state, pageName) {
+    state.pageMap = state.pageMap.map(page => ({
+      ...page,
+      active: page.name === pageName ? true : false
+    }))
+  },
+
+  changeRouterPushDirectionState(state, dir) {
+    state.routerPushDirectionState = dir
+  },
+
   changeOperationTitles(state, titles) {
     state.operationTitles = titles
   },

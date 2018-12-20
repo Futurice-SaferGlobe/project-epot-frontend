@@ -5,12 +5,20 @@
       class="arc"
       :class="{'style-connected': styleConnected}"
       :d="generatePath"
+      ref="arc"
+    />
+    <path
+      class="active-arc-overlay"
+      ref="activeArcOverlay"
+      :class="{'style-connected': styleConnected}"
+      :d="generatePath"
     />
     <slot/>
   </g>
 </template>
 
 <script>
+import anime from 'animejs'
 import eventBus from '@/plugins/eventBus'
 import { generatePathCurve } from './generatePathCurve'
 
@@ -41,6 +49,7 @@ export default {
     eventBus.$on('onNodeMouseIntention', ({ uid }) => {
       if ([source.uid, target.uid].includes(uid)) {
         this.styleConnected = true
+        this.animateArc()
       } else {
         this.styleConnected = false
       }
@@ -52,22 +61,42 @@ export default {
       return (
         `M${this.d.start.x}, ${this.d.start.y} ` + // starting x/y
         `C${this.d.curve.p1.x}, ${this.d.curve.p1.y} ` + // bezier point x/y #1
-        `${this.d.end.x}, ${this.d.end.y} ` + // bezier point x/y #2
+        `${this.d.curve.p2.x}, ${this.d.curve.p2.y} ` + // bezier point x/y #2
         `${this.d.end.x}, ${this.d.end.y}` // final x/y
       )
+    }
+  },
+
+  methods: {
+    animateArc() {
+      /** @type anime.animeParams */
+      const animateArcId = anime({
+        targets: this.$refs.activeArcOverlay,
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeOutQuart',
+        duration: 1000
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.arc {
-  stroke: rgb(102, 153, 204);
+.arc,
+.active-arc-overlay {
   stroke-width: 1;
   fill: transparent;
-  stroke-dasharray: 50%;
-  stroke-dashoffset: 100%;
+}
 
+.arc {
+  stroke: rgb(102, 153, 204);
+
+  &.style-connected {
+    stroke: rgba(102, 153, 204, 0.5);
+  }
+}
+
+.active-arc-overlay {
   &.style-connected {
     stroke: epot-color('primary', 'base');
   }
