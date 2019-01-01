@@ -28,7 +28,6 @@
           </ul>
           <span v-else class="no-connections">No Connections...</span>
         </div>
-        <color-debug/>
       </div>
 
     </div>
@@ -39,7 +38,6 @@
 import { mapGetters, mapMutations } from 'vuex'
 import { queries } from '@/graphql'
 import OperationHeaderConnection from './OperationHeaderConnection'
-import ColorDebug from './ColorDebug'
 
 export default {
   props: {
@@ -50,8 +48,7 @@ export default {
   },
 
   components: {
-    OperationHeaderConnection,
-    ColorDebug
+    OperationHeaderConnection
   },
 
   computed: {
@@ -92,11 +89,24 @@ export default {
 
 <style lang="scss" scoped>
 .operation-contents {
-  margin: 1rem 0 1rem;
-  border-left: 3px solid epot-color('foreground', 'base');
+  margin: 1rem 1rem 1rem 0;
+  border-left: 2px solid epot-color('foreground', 'base');
   padding: 0.5rem 3rem 0 1rem;
-
+  overflow-y: scroll;
   font-family: Arial, sans-serif;
+  * {
+    color: epot-color('foreground');
+  }
+  &::-webkit-scrollbar {
+    background-color: epot-color('background');
+    width: 0.8ex;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: epot-color('foreground');
+    outline: 1px solid slategrey;
+    border-radius: 3px;
+  }
 
   .operation-heading {
     display: flex;
@@ -118,7 +128,7 @@ export default {
   }
   .padder {
     .text {
-      color: epot-color('foreground', 'dark');
+      color: epot-color('foreground');
       h2 {
         color: epot-color('foreground', 'base');
         font-weight: 500;
@@ -143,7 +153,15 @@ export default {
         color: epot-color('foreground', 'base');
       }
       ul {
+        display: flex;
+        align-items: stretch;
+        justify-items: stretch;
+        align-items: stretch;
+        justify-content: stretch;
+        flex-direction: column;
         li {
+          flex: 1;
+
           &:not(:last-of-type) {
             margin-bottom: 0.7rem;
           }

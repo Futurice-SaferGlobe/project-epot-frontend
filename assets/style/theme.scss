@@ -2,15 +2,16 @@
 @import './colors.scss';
 
 html {
-  font-size: 15px;
-  overflow-y: auto;
+  font-size: 14px;
+  overflow-y: hidden;
 }
 
 body {
   background-color: epot-color('background');
-  color: epot-color('white');
+  color: epot-color('foreground');
   font-family: 'Whitney' !important;
   font-size: 1rem;
+  overflow-y: hidden;
 }
 
 ::selection {
@@ -31,6 +32,16 @@ p {
 
 h1 {
   font-size: 1.85rem;
+}
+
+a {
+  color: epot-color('foreground');
+  text-decoration: none;
+  font-size: 1rem;
+
+  &:hover {
+    color: epot-color('primary');
+  }
 }
 
 button {

@@ -1,26 +1,28 @@
 <template>
   <header>
-    <div class="page-title-container">
-      <h1>{{title}}</h1>
+    <div class="site-title-container">
+      <h1>{{siteTitle}}</h1>
     </div>
-    <div class="subheader">
-      <div class="first slot-wrapper">
-        <slot name="first"/>
+    <ul class="nav">
+      <div class="link">
+        <nuxt-link to="/">Operations</nuxt-link>
+        <nuxt-link :to="{ path: '/about', query: { dir: 'next' } }">About</nuxt-link>
       </div>
-      <div class="second slot-wrapper centered">
-        <slot name="second"/>
-      </div>
-      <div class="third slot-wrapper">
-        <slot name="third"/> 
-      </div>
-    </div>
+      <some-buttons/>
+    </ul>
   </header>
 </template>
 
 <script>
+import SomeButtons from './SomeButtons'
+
 export default {
+  components: {
+    SomeButtons
+  },
+
   props: {
-    title: {
+    siteTitle: {
       type: String,
       default: 'Effectiveness of Peace Operations'
     }
@@ -31,40 +33,36 @@ export default {
 <style lang="scss" scoped>
 header {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  flex-direction: column;
-  background-color: epot-color('background');
-  padding: 1.5rem 1rem;
+  justify-content: space-between;
+  padding: 1.35rem 0.7rem 0.55rem 0.7rem;
+  border-bottom: 1px solid epot-color('foreground', 'base');
 
-  > * {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  .page-title-container {
-    margin-bottom: 1.5rem;
+  .site-title-container {
     h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.35rem;
       font-weight: bold;
     }
   }
 
-  .subheader {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 200px 1fr 200px;
-    box-shadow: 0 -1px epot-color('white', 'base', 'dark');
-    padding-top: 0.2rem;
-    grid-gap: 4ex;
-    .slot-wrapper {
-      overflow-x: auto;
-      overflow-y: hidden;
-      display: block;
+  ul {
+    a {
+      text-transform: uppercase;
+      padding: 0 0.9rem;
+
+      &:not(:last-of-type) {
+        border-right: 1px solid epot-color('foreground');
+      }
     }
-    .centered {
-      display: flex;
-      justify-content: center;
-    }
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>

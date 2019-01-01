@@ -13,7 +13,10 @@
         r="2" 
         stroke-width="0"
         class="circle"
-        :class="{'style-connected': styleConnected}"
+        :class="{
+          'style-connected': styleConnected,
+          'style-active-label': styleActiveLabel
+        }"
       />
       <g v-if="nodeData.depth === 1" class="header-text-group">
         <foreignObject
@@ -21,7 +24,10 @@
           width="50"
           height="30"
           class="foreignObject-header-text node-title"
-          :class="{'style-connected': styleConnected}"
+          :class="{
+            'style-connected': styleConnected,
+            'style-active-label': styleActiveLabel
+          }"
         >
           <div>
             {{nodeData.data.title}}
@@ -35,7 +41,10 @@
       >
         <text  
           class="subheader-text node-title" 
-          :class="{'style-connected': styleConnected}"
+          :class="{
+            'style-connected': styleConnected,
+            'style-active-label': styleActiveLabel
+          }"
           :style="setSubheaderTextAlign"
         >
           {{nodeData.data.title}}
@@ -47,6 +56,7 @@
 
 <script>
 import eventBus from '@/plugins/eventBus'
+import { mapState } from 'vuex'
 import * as d3 from 'd3'
 import * as d3TextWrap from 'd3-textwrap'
 import { getRadialPoint } from './getRadialPoint'
@@ -96,6 +106,13 @@ export default {
   },
 
   computed: {
+    ...mapState(['activeLabel']),
+    styleActiveLabel() {
+      return !!this.nodeData.data.labels.find(label => {
+        if (!this.activeLabel) return null
+        return label.toLowerCase() === this.activeLabel.title.toLowerCase()
+      })
+    },
     showConnected() {
       return false
     },
@@ -137,6 +154,11 @@ circle {
   font-size: 9px;
   font-weight: normal;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.style-active-label {
+  fill: epot-color('secondary');
+  color: epot-color('secondary');
 }
 
 .style-connected {

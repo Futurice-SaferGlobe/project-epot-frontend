@@ -14,6 +14,7 @@ export const getOperationsWithConn = gql`
         subheaders {
           uid
           index
+          labels
           title
         }
       }

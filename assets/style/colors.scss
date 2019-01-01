@@ -2,6 +2,7 @@
 $prussian-blue: #003057;
 $midnight-blue: #c6dae7;
 $seagull: #7bafd4;
+$blue-gray: #6699cc;
 $tomato: #ff5c39;
 $roti: #bc9a3c;
 $color-white: #c6dae7;
@@ -29,8 +30,8 @@ $epot-colors: (
   'foreground': (
     'base': $midnight-blue,
     'light': mix($color-mix-light, $midnight-blue, $color-mix-weight),
-    'dark': mix($color-mix-dark, $midnight-blue, $color-mix-weight),
-    'darker': mix($color-mix-dark, $midnight-blue, $color-mix-weight * 2)
+    'dark': $seagull,
+    'darker': darken($seagull, 30%)
   ),
   'primary': (
     'base': $tomato,

@@ -89,7 +89,7 @@ export default {
 }
 
 .arc {
-  stroke: rgb(102, 153, 204);
+  stroke: epot-color('foreground', 'darker');
 
   &.style-connected {
     stroke: rgba(102, 153, 204, 0.5);

@@ -45,10 +45,19 @@ export default {
       return this.pageMap.map(page => page.name).indexOf(this.$route.name) >= 1
     },
     lightButtons() {
-      return this.pageMap.find(page => page.name === this.$route.name)
-        .background === 'light'
-        ? false
-        : true
+      try {
+        const { background } = this.pageMap.find(
+          page => page.name === this.$route.name
+        )
+        return background === 'light' ? false : true
+      } catch (e) {
+        console.warn(
+          'The current route is not included in pageMap ' +
+            'of the application store. ' +
+            'Defaulting to light navigation buttons.'
+        )
+        return 'light'
+      }
     }
   },
 
@@ -66,12 +75,7 @@ export default {
           ? this.pageMap[prevActivePageIndex + arrDir]
           : this.pageMap[0]
 
-      this.$router.push(
-        { name: pushTo.name, query: { dir: e } },
-        /** on route change complete */ () => {
-          this.lightButtons = pushTo.background === 'light' ? false : true
-        }
-      )
+      this.$router.push({ name: pushTo.name, query: { dir: e } })
     }
   }
 }
@@ -90,12 +94,12 @@ export default {
 
   &.previous {
     top: 1rem;
-    left: 1rem;
+    left: 4.5rem;
     transform: rotate(180deg) translateY(2px);
   }
   &.next {
     bottom: 1rem;
-    left: 1rem;
+    left: 4.5rem;
   }
 }
 

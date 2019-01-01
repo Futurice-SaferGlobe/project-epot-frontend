@@ -9,12 +9,19 @@ import { layoutEnum } from '@/constants'
 /** @type State */
 export const state = () => ({
   pageMap: [
-    { name: 'explorer', active: true, background: 'dark' },
-    { name: 'about', active: false, background: 'light' }
+    { name: 'index', active: false, background: 'dark', hasVisited: false },
+    { name: 'about', active: false, background: 'light', hasVisited: false }
   ],
   routerPushDirectionState: null,
   availableOperations: ['fututest'],
   selectedOperations: ['fututest'],
+  labels: [
+    { id: 1, title: 'Recently Changed' },
+    { id: 2, title: 'Constantly Changing' },
+    { id: 3, title: 'Key Learning' },
+    { id: 4, title: 'Key Success' }
+  ],
+  activeLabel: null,
   activeHeader: { depth: 1, uid: 'PROSTA_SUB_RULLAW' },
   operationTitles: null,
   layout: layoutEnum.COMPARISON
@@ -35,8 +42,13 @@ export const mutations = {
   changeActivePage(state, pageName) {
     state.pageMap = state.pageMap.map(page => ({
       ...page,
+      hasVisited: page.active || page.hasVisited ? true : false,
       active: page.name === pageName ? true : false
     }))
+  },
+
+  changeActiveLabel(state, id) {
+    state.activeLabel = state.labels.find(label => label.id === id)
   },
 
   changeRouterPushDirectionState(state, dir) {
