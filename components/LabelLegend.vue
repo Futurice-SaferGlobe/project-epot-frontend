@@ -39,6 +39,7 @@ export default {
   computed: {
     ...mapState(['labels', 'activeLabel']),
     styleActiveLabel() {
+      if (!this.activeLabel) return label => false
       return label => label.id === this.activeLabel.id
     }
   },
