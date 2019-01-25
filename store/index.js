@@ -23,6 +23,7 @@ export const state = () => ({
   ],
   activeLabel: null,
   activeHeader: { depth: 1, uid: 'PROSTA_SUB_RULLAW' },
+  hoverHeader: null,
   operationTitles: null,
   layout: layoutEnum.COMPARISON
 })
@@ -72,6 +73,10 @@ export const mutations = {
 
   changeActiveHeader(state, activeHeaderObject) {
     state.activeHeader = activeHeaderObject
+  },
+
+  changeHoverHeader(state, hoverHeaderObject) {
+    state.hoverHeader = hoverHeaderObject
   },
 
   changeLayout(state, newLayout) {

@@ -4,6 +4,7 @@
       <div class="operation-heading">
         <h1 class="operation-title">{{operationMetadata.name}}</h1>
         <span class="operation-area">{{operationMetadata.area}}</span>
+        <div class="divider" :style="{marginTop: '1rem'}"/>
       </div>
       <div class="padder">
         <div class="text">
@@ -15,6 +16,7 @@
           </p>
         </div>
         <div class="connections-container">
+          <div class="divider" :style="{marginBottom: '1.5rem'}"/>
           <ul v-if="headerConnections.length >= 1">
             <h3>Connections</h3>
             <li v-for="connection in headerConnections" :key="connection.uid">
@@ -31,6 +33,9 @@
       </div>
 
     </div>
+    <div v-else class="loading-wrapper">
+      <loading-component spinner-size="100"/>
+    </div>
   </div>
 </template>
 
@@ -38,6 +43,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import { queries } from '@/graphql'
 import OperationHeaderConnection from './OperationHeaderConnection'
+import LoadingComponent from './LoadingComponent'
 
 export default {
   props: {
@@ -48,7 +54,8 @@ export default {
   },
 
   components: {
-    OperationHeaderConnection
+    OperationHeaderConnection,
+    LoadingComponent
   },
 
   computed: {
@@ -81,19 +88,26 @@ export default {
           withConn: true
         }
       },
-      update: ({ operationHeader }) => operationHeader
+      update: ({ operationHeader }) => operationHeader,
+      result: (_, key) => {
+        console.log('moi haha', _)
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.divider {
+  width: 4ex;
+  height: 1px;
+  background-color: epot-color('foreground', 'dark');
+}
 .operation-contents {
   margin: 1rem 1rem 1rem 0;
   border-left: 2px solid epot-color('foreground', 'base');
   padding: 0.5rem 3rem 0 1rem;
   overflow-y: scroll;
-  font-family: Arial, sans-serif;
   * {
     color: epot-color('foreground');
   }
@@ -115,15 +129,16 @@ export default {
     margin-bottom: 1.4rem;
     .operation-title {
       font-size: 1.2rem;
-      font-weight: bold;
+      font-weight: 700;
       color: epot-color('foreground', 'base');
       line-height: 1.2;
     }
     .operation-area {
       display: block;
       color: epot-color('foreground', 'dark');
-      font-weight: 500;
+      font-weight: 600;
       font-size: 0.9rem;
+      margin-top: 0.3rem;
     }
   }
   .padder {
@@ -131,25 +146,28 @@ export default {
       color: epot-color('foreground');
       h2 {
         color: epot-color('foreground', 'base');
-        font-weight: 500;
-        font-size: 1.2rem;
+        font-weight: 700;
+        font-size: 1.12rem;
         margin-top: 1rem;
+
         .index {
           font-size: 0.95em;
           color: epot-color('primary');
         }
       }
+      p {
+        margin-top: 0.4rem;
+      }
     }
 
     .connections-container {
-      box-shadow: 0 -1px epot-color('foreground', 'base');
       padding-top: 2rem;
       margin-top: 4rem;
       color: epot-color('foreground', 'base');
       h3 {
-        font-weight: bold;
-        font-size: 1.05rem;
-        margin-bottom: 1.2rem;
+        font-weight: 700;
+        font-size: 1.12rem;
+        margin-bottom: 1rem;
         color: epot-color('foreground', 'base');
       }
       ul {
@@ -172,5 +190,12 @@ export default {
       }
     }
   }
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 </style>

@@ -26,7 +26,7 @@ span {
     animation: spin 1s linear infinite;
 
     path {
-      fill: epot-color('secondary');
+      fill: epot-color('foreground', 'darker');
     }
   }
 }

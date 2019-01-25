@@ -41,7 +41,6 @@ header {
 
   .site-title-container {
     h1 {
-      font-family: Arial, Helvetica, sans-serif;
       font-size: 1.35rem;
       font-weight: bold;
     }
@@ -49,9 +48,11 @@ header {
 
   ul {
     a {
+      color: epot-color('foreground');
+      font-size: 0.9rem;
       text-transform: uppercase;
       padding: 0 0.9rem;
-
+      line-height: 0.5;
       &:not(:last-of-type) {
         border-right: 1px solid epot-color('foreground');
       }

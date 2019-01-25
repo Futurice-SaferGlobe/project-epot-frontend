@@ -49,6 +49,7 @@ export default {
       'availableOperations',
       'isLayoutComparison'
     ]),
+    ...mapState(['activeHeader']),
     operationMetadata() {
       return {
         name: this.operationsWithConn[0].name,
@@ -70,7 +71,11 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['changeActiveHeader', 'changeOperationTitles'])
+    ...mapMutations([
+      'changeActiveHeader',
+      'changeOperationTitles',
+      'changeHoverHeader'
+    ])
   },
 
   apollo: {
@@ -116,8 +121,11 @@ export default {
   },
 
   mounted() {
-    eventBus.$on('onNodeMouseIntention', newHeader => {
-      this.changeActiveHeader(newHeader)
+    eventBus.$on('onNodeMouseIntention', ({ type, ...newHeader }) => {
+      console.log(type)
+      if (type === 'click') {
+        this.changeActiveHeader(newHeader)
+      }
     })
   }
 }
@@ -155,7 +163,7 @@ export default {
     }
     .operation-header {
       margin-top: 4.5rem;
-      flex-basis: 720px;
+      flex-basis: 518px;
       height: calc(100% - 48px * 2);
     }
   }

@@ -2,15 +2,17 @@
 @import './colors.scss';
 
 html {
-  font-size: 14px;
+  font-size: 15px;
   overflow-y: hidden;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 body {
   background-color: epot-color('background');
   color: epot-color('foreground');
-  font-family: 'Whitney' !important;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 1rem;
+  font-weight: 600;
   overflow-y: hidden;
 }
 
@@ -25,26 +27,31 @@ pre {
 }
 
 p {
-  line-height: 1.7;
+  line-height: 1.6;
   margin-block-end: 1rem;
   margin-block-start: 1rem;
 }
 
 h1 {
   font-size: 1.85rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 700;
 }
 
 a {
   color: epot-color('foreground');
   text-decoration: none;
   font-size: 1rem;
-
   &:hover {
     color: epot-color('primary');
   }
 }
 
 button {
+  font-family: inherit;
   &.enhance-hover {
     position: relative;
     overflow: hidden;

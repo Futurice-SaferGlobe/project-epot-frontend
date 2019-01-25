@@ -15,7 +15,8 @@
         class="circle"
         :class="{
           'style-connected': styleConnected,
-          'style-active-label': styleActiveLabel
+          'style-active-label': styleActiveLabel,
+          'hovered': hovered
         }"
       />
       <g v-if="nodeData.depth === 1" class="header-text-group">
@@ -26,10 +27,11 @@
           class="foreignObject-header-text node-title"
           :class="{
             'style-connected': styleConnected,
-            'style-active-label': styleActiveLabel
+            'style-active-label': styleActiveLabel,
+            
           }"
         >
-          <div>
+          <div :class="{'hovered': hovered}">
             {{nodeData.data.title}}
           </div>
         </foreignObject>
@@ -43,7 +45,8 @@
           class="subheader-text node-title" 
           :class="{
             'style-connected': styleConnected,
-            'style-active-label': styleActiveLabel
+            'style-active-label': styleActiveLabel,
+            'hovered': hovered
           }"
           :style="setSubheaderTextAlign"
         >
@@ -72,15 +75,17 @@ export default {
     return {
       styleConnected: false,
       oldMouseState: null,
-      lastClickedNode: null
+      lastClickedNode: null,
+      hovered: false
     }
   },
 
   mounted() {
-    eventBus.$on('onNodeMouseIntention', ({ uid, links }) => {
+    eventBus.$on('onNodeMouseIntention', ({ type, uid, links }) => {
       if (
-        this.nodeData.data.uid === uid ||
-        links.includes(this.nodeData.data.uid)
+        (this.nodeData.data.uid === uid ||
+          links.includes(this.nodeData.data.uid)) &&
+        type !== 'mouseleave'
       ) {
         this.styleConnected = true
       } else {
@@ -94,19 +99,25 @@ export default {
 
     onNodeMouseIntention(e) {
       const { type } = e
+      const payload = {
+        uid: this.nodeData.data.uid,
+        depth: this.nodeData.depth,
+        links: this.nodeData.data.links,
+        type
+      }
 
       if (type === 'click') {
-        eventBus.$emit('onNodeMouseIntention', {
-          uid: this.nodeData.data.uid,
-          depth: this.nodeData.depth,
-          links: this.nodeData.data.links
-        })
+        eventBus.$emit('onNodeMouseIntention', payload)
+      } else if (type === 'mouseover') {
+        this.hovered = true
+      } else if (type === 'mouseleave') {
+        this.hovered = false
       }
     }
   },
 
   computed: {
-    ...mapState(['activeLabel']),
+    ...mapState(['activeLabel', 'activeHeader', 'hoverHeader']),
     styleActiveLabel() {
       return !!this.nodeData.data.labels.find(label => {
         if (!this.activeLabel) return null
@@ -153,7 +164,6 @@ circle {
   fill: rgb(102, 153, 204);
   font-size: 9px;
   font-weight: normal;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .style-active-label {
@@ -172,5 +182,12 @@ circle {
   > div {
     background-color: epot-color('background', 'base', 'dark');
   }
+}
+
+.hovered {
+  fill: epot-color('primary') !important;
+  color: epot-color('primary') !important;
+  font-size: 0.62rem;
+  transition: all 0.15s ease-out;
 }
 </style>

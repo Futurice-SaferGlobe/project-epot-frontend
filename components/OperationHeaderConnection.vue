@@ -70,7 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 button {
-  line-height: 1.5;
+  line-height: 1.3;
   background-color: transparent;
   color: epot-color('foreground', 'base');
   font-size: 1rem;

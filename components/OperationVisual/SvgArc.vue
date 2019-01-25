@@ -73,7 +73,7 @@ export default {
       const animateArcId = anime({
         targets: this.$refs.activeArcOverlay,
         strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'easeOutQuart',
+        easing: 'easeOutCubic',
         duration: 1000
       })
     }

@@ -5,5 +5,5 @@ export const styleText = selection => {
     .style('color', style.titleColor.normal)
     .style('fill', style.titleColor.normal)
     .style('font-size', style.fontSize)
-    .style('font-family', 'sans-serif')
+    .style('font-family', 'Nunito-sans')
 }
