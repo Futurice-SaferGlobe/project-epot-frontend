@@ -214,7 +214,8 @@ export default {
     updateIndexPos(e) {
       for(let i=0;i<this.elem_positions.length;i++){
         const indexelem = document.querySelector('[data-hl-id="'+i+'"]')
-        if(e.target.scrollTop + 200 > this.elem_positions[i]){
+        if(e.target.scrollTop + 700 > this.elem_positions[i] && 
+           this.elem_positions[i] - e.target.scrollTop > -50){
           indexelem.classList.add("about-index-hl")
         } else {
           indexelem.classList.remove("about-index-hl")
@@ -287,7 +288,7 @@ export default {
       }
 
       .about-content {
-        padding: 50px 10px 500px 30px;
+        padding: 50px 10px 100px 30px;
         max-width: 800px;
         margin: 0 auto;
 
