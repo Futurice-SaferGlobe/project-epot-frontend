@@ -3,29 +3,29 @@
     <main>
       <div class="about-index">
         <h3>Two core objectives of effectiveness</h3>
-        <h4>1. Preventing violent conflict, increasing stability and protecting civilians</h4>
+        <h4 data-hl-id="0" @click="scrollPage">1. Preventing violent conflict, increasing stability and protecting civilians</h4>
         <ul>
-          <li>Preventing Conflict</li>
-          <li>Building confidence</li>
-          <li>Stabilisation</li>
-          <li>Protecting civilians</li>
-          <li>Strengthening public safety</li>
-          <li>Promoting human rights</li>
-          <li>Preventing CRSV and SGBV</li>
+          <li data-hl-id="1" @click="scrollPage">Preventing Conflict</li>
+          <li data-hl-id="2" @click="scrollPage">Building confidence</li>
+          <li data-hl-id="3" @click="scrollPage">Stabilisation</li>
+          <li data-hl-id="4" @click="scrollPage">Protecting civilians</li>
+          <li data-hl-id="5" @click="scrollPage">Strengthening public safety</li>
+          <li data-hl-id="6" @click="scrollPage">Promoting human rights</li>
+          <li data-hl-id="7" @click="scrollPage">Preventing CRSV and SGBV</li>
         </ul>
-        <h4>2. Building and fostering sustainable peace</h4>
+        <h4 data-hl-id="8" @click="scrollPage">2. Building and fostering sustainable peace</h4>
         <ul>
-          <li>Promoting national reconciliation</li>
-          <li>Contributing to peace dividends</li>
-          <li>Extension of State Authority (ESA)</li>
-          <li>Supporting institution building and development</li>
-          <li>Reforming/developing the security sector</li>
-          <li>Promoting the rule of law</li>
-          <li>Supporting community policing</li>
-          <li>Supporting transitional justice</li>
+          <li data-hl-id="9" @click="scrollPage">Promoting national reconciliation</li>
+          <li data-hl-id="10" @click="scrollPage">Contributing to peace dividends</li>
+          <li data-hl-id="11" @click="scrollPage">Extension of State Authority (ESA)</li>
+          <li data-hl-id="12" @click="scrollPage">Supporting institution building and development</li>
+          <li data-hl-id="13" @click="scrollPage">Reforming/developing the security sector</li>
+          <li data-hl-id="14" @click="scrollPage">Promoting the rule of law</li>
+          <li data-hl-id="15" @click="scrollPage">Supporting community policing</li>
+          <li data-hl-id="16" @click="scrollPage">Supporting transitional justice</li>
         </ul>
       </div>
-      <div class="about-content-wrapper">
+      <div class="about-content-wrapper" @scroll="updateIndexPos">
         <div class="about-content">
           <h1>Two core objectives of effectiveness</h1>
           <p class="about-intro-text">The underlying two core objectives of a peace operation are preventing violent conflict,
@@ -34,10 +34,10 @@
             promote the two core objectives, many of which can be among the mandated tasks of a peace
             operation.
           </p>
-          <h2>1. Preventing violent conflict, increasing stability and protecting
+          <h2 class="about-getpos" data-nav-id="0">1. Preventing violent conflict, increasing stability and protecting
             civilians</h2>
           <ul>
-            <li>
+            <li class="about-getpos" data-nav-id="1">
               <b>Preventing Conflict:</b> 
               Prevention can take different forms, comprise a wide range of actions
               and address conflict at different stages:
@@ -60,7 +60,7 @@
                 </li>
               </ul>
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="2">
               <b>Building confidence:</b> 
               Most activities of peace operations serve the underlying purpose of
               building confidence, i.e. to contribute to an environment that is conducive to fostering and
@@ -70,7 +70,7 @@
               bonds after conflict and can be pursued through dialogue processes, capacity building or
               advocacy.
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="3">
               <b>Stabilisation:</b> 
               Enhancing stability is a core function of any peace operation, and includes how
               the presence and actions of a peace operation contribute to 
@@ -81,7 +81,7 @@
               cases, this may involve 
               actions to counter, disrupt or neutralise armed groups.
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="4">
               <b>Protecting civilians:</b> 
               PoC is a whole-of-mission endeavour 
               where all components – military,
@@ -96,7 +96,7 @@
               creating protective environments by maintaining law and order or strengthening host-state
               security services that respect human rights and the rule of law. 
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="5">
               <b>Strengthening public safety:</b> 
               Beyond protection from crime, strengthening public safety also
               refers to the welfare of the general public, including a range of issues such as traffic safety,
@@ -104,7 +104,7 @@
               mandated task is based on the rationale that people will be more willing to engage in a peace
               process if there is some guarantee of their safety.
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="6">
               <b>Promoting   human   rights:</b> 
               Conflicts   are   often   accompanied   by   serious   human   rights
               violations and impunity for the perpetrators. A whole range of activities from short-term to
@@ -112,7 +112,7 @@
               strengthening human rights laws, empowering populations to demand respect for their rights,
               and enabling government institutions to fulfil their human rights commitments.
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="7">
               <b>Preventing CRSV and SGBV:</b> 
               The protection of women and men from sexual and gender-
               based/conflict-related sexual violence (SGBV/CRSV) during and after the armed conflict is an
@@ -120,9 +120,9 @@
               integrated and prioritised element in a peace operation’s protection strategy.
             </li>
           </ul>
-          <h2>2. Building and fostering sustainable peace</h2>
+          <h2 class="about-getpos" data-nav-id="8">2. Building and fostering sustainable peace</h2>
           <ul>
-            <li>
+            <li class="about-getpos" data-nav-id="9">
               <b>Promoting national reconciliation:</b> 
               National reconciliation  creates a  foundation  for  the
               lasting settlement of conflicts and is often a key element of the political process. While peace
@@ -131,7 +131,7 @@
               structured to address concerns, fears, and grievances of the population (see also ‘people-
               centred approaches’). 
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="10">
               <b>Contributing to peace dividends:</b> 
               Peace dividends are the benefits accrued by the population
               from a peace process or peace operation. More immediate peace dividends can contribute to
@@ -140,7 +140,7 @@
               as well as
               delivering tangible improvements for the population. 
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="11">
               <b>Extension   of   State  Authority   (ESA):</b> 
               Extending   or   restoring   state   authority   means
               strengthening the state presence in more remote areas where the state has not been present or
@@ -149,7 +149,7 @@
               building host-state institutions, particularly in the security and justice sectors, strengthening
               the rule of law and supporting community policing.  
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="12">
               <b>Supporting institution building and development:</b> 
               Weak  institutions  and  poor   service
               delivery are both causes and consequences of conflict. Conflict aggravates the fragility of
@@ -159,7 +159,7 @@
               the rule of law, in the security sector or as part of the extension of state authority. The aim is to
               empower host-state authorities to be effective national owners and drivers of a peace process. 
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="13">
               <b>Reforming/developing the security sector:</b> 
               Sustainable peace requires a security sector that
               is effective and is based on the rule of law. The security sector not only comprises uniformed
@@ -168,7 +168,7 @@
               development to also assist in the formulation of national security strategies and other policy
               and planning documents.
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="14">
               <b>Promoting the rule of law:</b> 
               A key element of promoting the rule of law addresses local
               institutions in the areas of justice, police, and corrections. Rule of Law also entails supporting
@@ -177,13 +177,13 @@
               linked to the extension of state authority. A number of rule of law issues fuel conflict, such as
               disputed property and land rights or crime related to natural resources.
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="15">
               <b>Supporting community policing:</b> 
               Strengthening the relationship between host-state police
               and the communities they serve is central to fostering a protective environment that can ensure
               public safety in the long run. 
             </li>
-            <li>
+            <li class="about-getpos" data-nav-id="16">
               <b>Supporting transitional justice:</b> 
               Both judicial and non-judicial mechanisms are used to
               address grievances, human rights violations, abuses, and mass atrocities committed during a
@@ -204,6 +204,42 @@
 import pageTransition from '@/mixins/pageTransition'
 export default {
   mixins: [pageTransition],
+  data() {
+    return {
+      scroll_elem: null,
+      elem_positions: null
+    }
+  },
+  methods: {
+    updateIndexPos(e) {
+      for(let i=0;i<this.elem_positions.length;i++){
+        const indexelem = document.querySelector('[data-hl-id="'+i+'"]')
+        if(e.target.scrollTop + 200 > this.elem_positions[i]){
+          indexelem.classList.add("about-index-hl")
+        } else {
+          indexelem.classList.remove("about-index-hl")
+        }
+      }
+    },
+    scrollPage(e) {
+      const id = e.target.dataset.hlId
+      this.scroll_elem.scrollTo({
+        left: 0,
+        top: this.elem_positions[id] - 150,
+        behavior: 'smooth'
+      })
+    }
+
+    
+  },
+  mounted() {
+    this.scroll_elem = document.querySelector('.about-content-wrapper')
+    const elems = Array.from(document.querySelectorAll('.about-getpos'))
+    this.elem_positions = elems.map(e => {
+      return e.offsetTop
+    })
+    
+  }
 }
 </script>
 
@@ -251,7 +287,7 @@ export default {
       }
 
       .about-content {
-        padding: 70px 10px 0 30px;
+        padding: 70px 10px 500px 30px;
         max-width: 800px;
         margin: 0 auto;
 
@@ -291,6 +327,11 @@ export default {
       border-right: 2px solid epot-color('background');
       padding: 20px;
 
+      .about-index-hl {
+        text-decoration: underline;
+        font-weight: bolder;
+      }
+
       h3 {
         font-size: 24px;
         margin-bottom: 1em;
@@ -299,6 +340,11 @@ export default {
       h4 {
         font-size: 18px;
         margin: 2em 0 0.5em 1em;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       ul {
@@ -307,6 +353,11 @@ export default {
         li {
           font-size: 14px;
           padding: 0.2em;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
