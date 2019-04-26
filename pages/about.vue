@@ -287,7 +287,7 @@ export default {
       }
 
       .about-content {
-        padding: 70px 10px 500px 30px;
+        padding: 50px 10px 500px 30px;
         max-width: 800px;
         margin: 0 auto;
 
@@ -325,7 +325,7 @@ export default {
       flex-basis: 600px;
       height: calc(100% - 48px * 2);
       border-right: 2px solid epot-color('background');
-      padding: 20px;
+      padding: 60px 20px 20px 20px;
 
       .about-index-hl {
         text-decoration: underline;
