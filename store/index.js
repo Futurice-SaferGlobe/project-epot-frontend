@@ -22,7 +22,7 @@ export const state = () => ({
     { id: 4, title: 'Key Success' }
   ],
   activeLabel: null,
-  activeHeader: { depth: 1, uid: 'PROSTA_SUB_RULLAW' },
+  activeHeader: { depth: 1, uid: 'REALMAN_SUB_CONGRU' },
   hoverHeader: null,
   operationTitles: null,
   layout: layoutEnum.COMPARISON
