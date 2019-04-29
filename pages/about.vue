@@ -206,40 +206,51 @@ export default {
   mixins: [pageTransition],
   data() {
     return {
+      elems: null,
       scroll_elem: null,
       elem_positions: null
     }
   },
   methods: {
-    updateIndexPos(e) {
-      for(let i=0;i<this.elem_positions.length;i++){
+    calcPositions() {
+      const elems = Array.from(document.querySelectorAll('.about-getpos'))
+      this.elem_positions = elems.map(e => {
+        return e.offsetTop
+      })
+    },
+    updateIndexPos() {
+      for(let e of this.elems) {
+        const i = e.dataset.navId
         const indexelem = document.querySelector('[data-hl-id="'+i+'"]')
-        if(e.target.scrollTop + 700 > this.elem_positions[i] && 
-           this.elem_positions[i] - e.target.scrollTop > -50){
+        if(this.isWithinScroller(e)) {
           indexelem.classList.add("about-index-hl")
         } else {
           indexelem.classList.remove("about-index-hl")
         }
       }
     },
+    isWithinScroller(elem) {
+      const scrollerBottom = this.scroll_elem.offsetTop + this.scroll_elem.clientHeight
+      const elemTop = elem.offsetTop - this.scroll_elem.scrollTop
+      const elemBottom = elemTop + elem.clientHeight
+      return elemTop < scrollerBottom && elemBottom > this.scroll_elem.offsetTop
+    },
     scrollPage(e) {
       const id = e.target.dataset.hlId
       this.scroll_elem.scrollTo({
         left: 0,
-        top: this.elem_positions[id] - 150,
+        top: document.querySelector('[data-nav-id="'+id+'"]').offsetTop - this.scroll_elem.offsetTop,
         behavior: 'smooth'
       })
-    }
-
-    
+    }    
   },
   mounted() {
+    this.elems = Array.from(document.querySelectorAll('.about-getpos'))
     this.scroll_elem = document.querySelector('.about-content-wrapper')
-    const elems = Array.from(document.querySelectorAll('.about-getpos'))
-    this.elem_positions = elems.map(e => {
-      return e.offsetTop
-    })
-    
+    window.addEventListener("resize", this.updateIndexPos)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.updateIndexPos)
   }
 }
 </script>
