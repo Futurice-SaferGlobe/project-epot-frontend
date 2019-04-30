@@ -22,7 +22,7 @@
       <g v-if="nodeData.depth === 1" class="header-text-group">
         <foreignObject
           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-          width="50"
+          width="40"
           height="30"
           class="foreignObject-header-text node-title"
           :class="{
@@ -178,6 +178,7 @@ circle {
 
 .foreignObject-header-text {
   transform: translate(-3px, 5px);
+  overflow: visible;
 
   > div {
     background-color: epot-color('background', 'base', 'dark');
