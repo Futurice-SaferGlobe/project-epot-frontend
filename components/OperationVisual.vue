@@ -146,6 +146,9 @@ export default {
         ? originalY + document.body.getBoundingClientRect().height - 68
         : originalY - 68
 
+      console.log(originalY+document.body.getBoundingClientRect().height-68)
+      console.log(originalY-68)
+
       svgContainerEl.setAttribute(
         'viewBox',
         `${x} ${y} ${width} ${height + 68}`
