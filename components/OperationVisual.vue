@@ -112,11 +112,10 @@ export default {
 
       this.hierarchy = treeLayout(d3.hierarchy(this.transformedOperation))
 
+      let hasVisited = this.pageMap.find(page => page.name === this.$route.name).hasVisited
+
       this.$nextTick(() => {
-        this.calcSvgContainerViewBox(
-          // see the method declaration for explanation of this madness...
-          this.pageMap.find(page => page.name === this.$route.name).hasVisited
-        )
+        this.calcSvgContainerViewBox(hasVisited)
       })
     },
 
