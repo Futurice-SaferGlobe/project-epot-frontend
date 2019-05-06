@@ -142,12 +142,7 @@ export default {
        * to be misplaced. This negates it by using the body elements'
        * height, making it correct again.
        */
-      const y = includeBodyHeight
-        ? originalY + document.body.getBoundingClientRect().height - 68
-        : originalY - 68
-
-      console.log(originalY+document.body.getBoundingClientRect().height-68)
-      console.log(originalY-68)
+      const y = includeBodyHeight ? originalY + document.body.getBoundingClientRect().height - 68: originalY - 68;
 
       svgContainerEl.setAttribute(
         'viewBox',
