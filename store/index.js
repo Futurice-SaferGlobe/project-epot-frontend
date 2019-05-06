@@ -16,10 +16,14 @@ export const state = () => ({
   availableOperations: ['fututest'],
   selectedOperations: ['fututest'],
   labels: [
-    { id: 1, title: 'Recently Changed' },
-    { id: 2, title: 'Constantly Changing' },
-    { id: 3, title: 'Key Learning' },
-    { id: 4, title: 'Key Success' }
+    { id: 1, title: 'Innovation' },
+    { id: 2, title: 'Good practice' },
+    { id: 3, title: 'Requires attention' },
+    { id: 4, title: 'Key success' },
+    { id: 5, title: 'Turning point' },
+    { id: 6, title: 'Constantly evolving' },
+    { id: 7, title: 'Key finding' },
+    { id: 8, title: 'Not evaluated' }
   ],
   activeLabel: null,
   activeHeader: { depth: 1, uid: 'REALMAN_SUB_CONGRU' },

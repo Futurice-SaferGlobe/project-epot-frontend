@@ -6,7 +6,7 @@
     <ul class="nav">
       <div class="link">
         <nuxt-link to="/">Operations</nuxt-link>
-        <nuxt-link :to="{ path: '/about', query: { dir: 'next' } }">About</nuxt-link>
+        <nuxt-link :to="{ path: '/about', query: { dir: 'next' } }">Effects</nuxt-link>
       </div>
       <some-buttons/>
     </ul>

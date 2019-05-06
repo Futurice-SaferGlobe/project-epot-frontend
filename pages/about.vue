@@ -62,7 +62,7 @@
                   </li>
                   <li>
                     <i>Indirect or structural prevention</i>, i.e. actions, steps or initiatives the peace operation
-                    has taken which may have contributed to preventing violent conflict.
+                    has taken to influence the underlying structural causes that generate risks to the civilian population..
                   </li>
                 </ul>
               </li>
