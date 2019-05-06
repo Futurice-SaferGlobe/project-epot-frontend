@@ -159,6 +159,7 @@ export default {
 
     .operation-visual {
       flex: 1;
+      min-width: 0;
       height: calc(100% - 48px * 2);
     }
     .operation-header {
