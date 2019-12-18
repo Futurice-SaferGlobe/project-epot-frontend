@@ -25,6 +25,11 @@
               <a href="https://saferglobe.fi/en/" target="_blank">SaferGlobe</a> and
               <a href="https://www.futurice.com/" target="_blank">Futurice</a>.
             </p>
+            <p class="about-intro-text">
+              <a href="https://saferglobe.fi/en/" target="_blank"><img class="logo-img" src="/logo-saferglobe.png"></a>
+              <a href="https://www.zif-berlin.org/en.html" target="_blank"><img class="logo-img" src="/logo-zif.png"></a>
+              <a href="https://www.futurice.com/" target="_blank"><img id="logo-futurice" class="logo-img" src="/logo-futurice.png"></a>
+            </p>
           </div>
         </div>
       </div>
@@ -167,6 +172,16 @@ export default {
               ul {
                 list-style-type: circle;
               }
+            }
+          }
+
+          img.logo-img {
+            height: 30px;
+            display: inline-block;
+            margin-right: 100px;
+
+            &#logo-futurice {
+              height: 20px;
             }
           }
         }
