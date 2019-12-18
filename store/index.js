@@ -10,6 +10,7 @@ import { layoutEnum } from '@/constants'
 export const state = () => ({
   pageMap: [
     { name: 'index', active: false, background: 'dark', hasVisited: false },
+    { name: 'effects', active: false, background: 'light', hasVisited: false },
     { name: 'about', active: false, background: 'light', hasVisited: false }
   ],
   routerPushDirectionState: null,
@@ -89,7 +90,7 @@ export const mutations = {
       state.layout = newLayout
     } else {
       throw new Error(`
-        changeLayout: '${newLayout}' is invalid layout name. 
+        changeLayout: '${newLayout}' is invalid layout name.
         Valid layout names: ${validLayoutNames.join(', ')}
       `)
     }
