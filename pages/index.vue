@@ -126,7 +126,6 @@ export default {
 
   mounted() {
     eventBus.$on('onNodeMouseIntention', ({ type, ...newHeader }) => {
-      console.log(type)
       if (type === 'click') {
         this.changeActiveHeader(newHeader)
       }
