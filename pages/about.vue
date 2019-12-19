@@ -10,22 +10,22 @@
               Institute of International Affairs (NUPI), which undertakes research into the effectiveness
               of peace operations. For further information, see
               <a href="https://effectivepeaceops.net/" target="_blank">effectivepeaceops.net</a>.
-            </p>
-            <p class="about-intro-text">
+            <br>
+            <br>
               The Effectiveness of Peace Operations Tool (EPOT) is a tool designed to provide an
               interactive web-based visualization of the complexity of peace operations. It aims to ease
               understanding of multiple issues to be considered in research on peace operations, and the relationship
               between these issues. It highlights central research findings and contributes to the comparability of
               research conducted in EPON as well as supports the research conducted in the field.
               The visualization aims to make research more accessible and usable and, in turn, increase its impact.
-            </p>
-            <p class="about-intro-text">
+            <br>
+            <br>
               The Effectiveness of Peace Operations Tool was created in collaboration with
               <a href="https://www.zif-berlin.org/en.html" target="_blank">Zif Berlin</a>,
               <a href="https://saferglobe.fi/en/" target="_blank">SaferGlobe</a> and
               <a href="https://www.futurice.com/" target="_blank">Futurice</a>.
-            </p>
-            <p class="about-intro-text">
+            <br>
+            <br>
               <a href="https://saferglobe.fi/en/" target="_blank"><img class="logo-img" src="/logo-saferglobe.png"></a>
               <a href="https://www.zif-berlin.org/en.html" target="_blank"><img class="logo-img" src="/logo-zif.png"></a>
               <a href="https://www.futurice.com/" target="_blank"><img id="logo-futurice" class="logo-img" src="/logo-futurice.png"></a>
