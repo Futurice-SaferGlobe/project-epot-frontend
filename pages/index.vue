@@ -1,10 +1,14 @@
 <template>
   <div class="explorer">
-    <epot-header 
+    <epot-header
       site-title="Effectiveness of Peace Operations"
     />
     <main>
+      <!--
+      TODO: THE LABELS ARE IMPLEMENTED IN THE CODE, BUT NOT UTILIZED BY THE DATA.
+      THE RIGHT WAY TO HIDE THIS WOULD BE TO TEST IF THE OPERATION HAS LABELS OR NOT.
       <label-legend/>
+      -->
       <loading-component class="loading-component" v-if="$apollo.queries.operationsWithConn.loading"/>
       <operation-visual
         class="operation-visual"
