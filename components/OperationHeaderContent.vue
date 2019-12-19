@@ -1,5 +1,5 @@
 <template>
-  <article v-if="!$apollo.queries.connHeader.loading">
+  <article>
     <p>
       {{ connHeader.content }}
     </p>
@@ -8,6 +8,7 @@
 
 <script>
 import { queries } from '@/graphql'
+import { getOperationHeader } from '@/jsondb'
 
 export default {
   props: {
@@ -21,17 +22,9 @@ export default {
     }
   },
 
-  apollo: {
-    connHeader: {
-      query: queries.getOperationHeader,
-      variables() {
-        return {
-          id: this.id,
-          uid: this.uid,
-          withConn: false
-        }
-      },
-      update: ({ operationHeader }) => operationHeader
+  data () {
+    return {
+      connHeader: { content: getOperationHeader(this.id, this.uid) }
     }
   },
 
