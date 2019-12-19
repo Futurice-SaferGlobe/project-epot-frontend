@@ -24,7 +24,7 @@ export default {
 
   data () {
     return {
-      connHeader: { content: getOperationHeader(this.id, this.uid) }
+      connHeader: getOperationHeader(this.id, this.uid)
     }
   },
 

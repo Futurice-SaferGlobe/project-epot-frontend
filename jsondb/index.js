@@ -11,7 +11,7 @@ export const getOperationHeader = (id, uid) => {
   return (function seekHeader(headers) {
     if (headers.length === 0) return null
 
-    if (headers[0].uid === uid) return headers[0].content
+    if (headers[0].uid === uid) return headers[0]
     if (headers[0].subheaders !== undefined && headers[0].subheaders.length > 0)
       return seekHeader(headers[0].subheaders) || seekHeader(headers.slice(1))
 
