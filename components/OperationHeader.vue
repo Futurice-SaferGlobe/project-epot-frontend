@@ -90,7 +90,7 @@ export default {
       },
       update: ({ operationHeader }) => operationHeader,
       result: (_, key) => {
-        console.log('moi haha', _)
+        
       }
     }
   }
