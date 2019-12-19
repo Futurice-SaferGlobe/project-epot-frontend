@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <main>
+
       <div class="about-content-wrapper">
         <div class="about-container">
           <div class="about-content">
@@ -201,55 +202,7 @@
 <script>
 import pageTransition from '@/mixins/pageTransition'
 export default {
-  mixins: [pageTransition],
-  /*data() {
-    return {
-      elems: null,
-      scroll_elem: null,
-      elem_positions: null
-    }
-  },
-  methods: {
-    calcPositions() {
-      const elems = Array.from(document.querySelectorAll('.about-getpos'))
-      this.elem_positions = elems.map(e => {
-        return e.offsetTop
-      })
-    },
-    updateIndexPos() {
-      for(let e of this.elems) {
-        const i = e.dataset.navId
-        const indexelem = document.querySelector('[data-hl-id="'+i+'"]')
-        if(this.isWithinScroller(e)) {
-          indexelem.classList.add("about-index-hl")
-        } else {
-          indexelem.classList.remove("about-index-hl")
-        }
-      }
-    },
-    isWithinScroller(elem) {
-      const scrollerBottom = this.scroll_elem.offsetTop + this.scroll_elem.clientHeight
-      const elemTop = elem.offsetTop - this.scroll_elem.scrollTop
-      const elemBottom = elemTop + elem.clientHeight
-      return elemTop < scrollerBottom && elemBottom > this.scroll_elem.offsetTop
-    },
-    scrollPage(e) {
-      const id = e.target.dataset.hlId
-      this.scroll_elem.scrollTo({
-        left: 0,
-        top: document.querySelector('[data-nav-id="'+id+'"]').offsetTop - this.scroll_elem.offsetTop,
-        behavior: 'smooth'
-      })
-    }
-  },
-  mounted() {
-    this.elems = Array.from(document.querySelectorAll('.about-getpos'))
-    this.scroll_elem = document.querySelector('.about-content-wrapper')
-    window.addEventListener("resize", this.updateIndexPos)
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.updateIndexPos)
-  }*/
+  mixins: [pageTransition]
 }
 </script>
 
@@ -340,7 +293,48 @@ export default {
 
 
     }
-    
+
+    /*.about-index {
+      flex-basis: 600px;
+      height: calc(100% - 48px * 2);
+      border-right: 2px solid epot-color('background');
+      padding: 60px 20px 20px 20px;
+
+      .about-index-hl {
+        text-decoration: underline;
+        font-weight: bolder;
+      }
+
+      h3 {
+        font-size: 24px;
+        margin-bottom: 1em;
+      }
+
+      h4 {
+        font-size: 18px;
+        margin: 2em 0 0.5em 1em;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      ul {
+        margin-left: 3em;
+
+        li {
+          font-size: 14px;
+          padding: 0.2em;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }*/
+
   }
 
 
