@@ -34,7 +34,7 @@
 
     </div>
     <div v-else class="loading-wrapper">
-      <loading-component spinner-size="100"/>
+      <loading-component v-bind:spinner-size="100"/>
     </div>
   </div>
 </template>
@@ -90,7 +90,7 @@ export default {
       },
       update: ({ operationHeader }) => operationHeader,
       result: (_, key) => {
-        
+
       }
     }
   }
