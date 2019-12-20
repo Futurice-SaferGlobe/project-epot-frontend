@@ -52,8 +52,7 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    'nuxt-sass-resources-loader',
-    '@nuxtjs/apollo'
+    'nuxt-sass-resources-loader'
   ],
   sassResources: ['@/assets/style/colors.scss'],
   /*
@@ -66,21 +65,6 @@ module.exports = {
         ? 'https://cors-anywhere.herokuapp.com/http://46.101.183.17:8080'
         : 'http://localhost:8080',
     errorHandler(error) {}
-  },
-
-  /**
-   * Apollo config
-   */
-  apollo: {
-    clientConfigs: {
-      default: {
-        httpEndpoint:
-          process.env.NODE_ENV === 'production' ||
-          process.env.DEPLOY_ENV === 'gh-pages'
-            ? 'https://cors-anywhere.herokuapp.com/http://46.101.183.17:8080/graphql'
-            : 'http://localhost:8080/graphql'
-      }
-    }
   },
 
   /*
