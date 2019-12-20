@@ -1,20 +1,69 @@
 import operations from './data/operations.json'
 import connections from './data/connections.json'
 
-export const getOperationHeader = (id, uid) => {
-  const ops = operations.filter(op => op.internalId === id)
-  if (ops.length === 0) {
-    console.log("WARNING! Couldn't find operation with id %s", id)
-    return null
-  }
+import { find, flattenDeep } from 'lodash'
 
-  return (function seekHeader(headers) {
-    if (headers.length === 0) return null
+export const getOperationHeader = (id, uid) => {
+  const operation = _getOperation(id)
+
+  const header = (function seekHeader(headers) {
+    if (!Array.isArray(headers) || headers.length === 0) return undefined
 
     if (headers[0].uid === uid) return headers[0]
     if (headers[0].subheaders !== undefined && headers[0].subheaders.length > 0)
       return seekHeader(headers[0].subheaders) || seekHeader(headers.slice(1))
 
     return seekHeader(headers.slice(1))
-  })(ops[0].data)
+  })(operation.data)
+
+  return _bindConnectionsToHeader(
+    header,
+    getOperationTitles(id),
+    _getConnectionsForOperation(id)
+  )
+}
+
+export const getOperationTitles = id => {
+  const operation = _getOperation(id)
+  if (operation === undefined) return []
+
+  return flattenDeep([
+    operation.data.map(({ title, uid }) => ({ title, uid })),
+    operation.data.map(({ subheaders }) => {
+      return subheaders.map(({ title, uid }) => ({ title, uid }))
+    })
+  ])
+}
+
+const _getOperation = id => {
+  const ops = operations.filter(op => op.internalId === id)
+  if (ops.length === 0) {
+    console.log("WARNING! Couldn't find operation with id %s", id)
+    return undefined
+  }
+  return ops[0]
+}
+
+const _getConnectionsForOperation = id => {
+  const conns = connections.filter(conn => conn.operationInternalId === id)
+  if (conns.length === 0) {
+    console.log("WARNING! Couldn't find connections with id %s", id)
+    return undefined
+  }
+  return conns[0].connections
+}
+
+const _bindConnectionsToHeader = (header, titles, connections) => {
+  if (header === undefined) return undefined
+  if (connections === undefined) return { ...header, connections: [] }
+
+  return {
+    ...header,
+    connections: connections
+      .filter(({ from, to }) => from === header.uid || to === header.uid)
+      .map(({ from, to }) => {
+        const connectionUid = from !== header.uid ? from : to
+        return find(titles, ({ title, uid }) => uid === connectionUid)
+      })
+  }
 }

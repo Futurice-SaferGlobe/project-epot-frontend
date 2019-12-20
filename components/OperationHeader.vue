@@ -1,6 +1,6 @@
 <template>
   <div class="operation-contents">
-    <div v-if="!$apollo.queries.header.loading" class="loaded">
+    <div class="loaded">
       <div class="operation-heading">
         <h1 class="operation-title">{{operationMetadata.name}}</h1>
         <span class="operation-area">{{operationMetadata.area}}</span>
@@ -33,15 +33,13 @@
       </div>
 
     </div>
-    <div v-else class="loading-wrapper">
-      <loading-component v-bind:spinner-size="100"/>
-    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { queries } from '@/graphql'
+import { getOperationHeader } from '@/jsondb'
 import OperationHeaderConnection from './OperationHeaderConnection'
 import LoadingComponent from './LoadingComponent'
 
@@ -60,14 +58,11 @@ export default {
 
   computed: {
     ...mapGetters(['activeHeader']),
+    header() {
+      return getOperationHeader(this.operationMetadata.internalId, this.activeHeader.uid)
+    },
     headerConnections() {
-      return this.header.connections.map(({ from, to }) =>
-        this.operationMetadata.operationTitles
-          .filter(
-            ({ uid }) => (uid === from || uid === to) && uid !== this.header.uid
-          )
-          .reduce((prev, next) => [...prev, next])
-      )
+      return this.header.connections
     }
   },
 
@@ -75,23 +70,6 @@ export default {
     ...mapMutations(['changeActiveHeader']),
     connectionClick(uid) {
       this.changeActiveHeader({ uid })
-    }
-  },
-
-  apollo: {
-    header: {
-      query: queries.getOperationHeader,
-      variables() {
-        return {
-          id: this.operationMetadata.internalId,
-          uid: this.activeHeader.uid,
-          withConn: true
-        }
-      },
-      update: ({ operationHeader }) => operationHeader,
-      result: (_, key) => {
-
-      }
     }
   }
 }
