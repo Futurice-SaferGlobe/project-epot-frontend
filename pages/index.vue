@@ -9,14 +9,12 @@
       THE RIGHT WAY TO HIDE THIS WOULD BE TO TEST IF THE OPERATION HAS LABELS OR NOT.
       <label-legend/>
       -->
-      <loading-component class="loading-component" v-if="$apollo.queries.operationsWithConn.loading"/>
       <operation-visual
         class="operation-visual"
-        v-else :operation="operationsWithConn[0]"
+        :operation="operationsWithConn[0]"
       />
       <operation-header
         class="operation-header"
-        v-if="!$apollo.queries.operationsWithConn.loading"
         :operationMetadata="operationMetadata"
       />
     </main>
@@ -26,6 +24,8 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import { queries } from '@/graphql/'
+
+import { getOperationsWithConnections, getOperationTitles } from '@/jsondb'
 
 import eventBus from '@/plugins/eventBus'
 
@@ -40,12 +40,6 @@ import LabelLegend from '@/components/LabelLegend'
 import flatten from 'lodash.flatten'
 
 export default {
-  data() {
-    return {
-      operationsWithConn: null,
-      operationTitles: null
-    }
-  },
 
   computed: {
     ...mapGetters([
@@ -54,6 +48,12 @@ export default {
       'isLayoutComparison'
     ]),
     ...mapState(['activeHeader']),
+    operationsWithConn() {
+      return getOperationsWithConnections()
+    },
+    operationTitles() {
+      return getOperationTitles()
+    },
     operationMetadata() {
       return {
         name: this.operationsWithConn[0].name,
@@ -80,48 +80,6 @@ export default {
       'changeOperationTitles',
       'changeHoverHeader'
     ])
-  },
-
-  apollo: {
-    operationsWithConn: {
-      query: queries.getOperationsWithConn,
-      variables() {
-        return {
-          ids: this.selectedOperations
-        }
-      },
-      update({ operations, operationConnections }) {
-        const getLink = (index, uid) =>
-          operationConnections[index].connections
-            .map(({ from, to }) => ({ from, to }))
-            .filter(({ from, to }) => {
-              return from === uid || to === uid
-            })
-            .map(conn => Object.values(conn).filter(val => val !== uid)[0])
-        const update = operations.map((op, index) => ({
-          ...op,
-          headers: op.headers.map(({ subheaders, uid, ...rest }) => ({
-            ...rest,
-            uid,
-            links: getLink(index, uid),
-            subheaders: subheaders.map(({ uid, ...rest }) => ({
-              ...rest,
-              uid,
-              links: getLink(index, uid)
-            }))
-          })),
-          connections: operationConnections[index].connections
-        }))
-        this.operationTitles = flatten([
-          ...update[0].headers.map(({ title, uid }) => ({ title, uid })),
-          ...update[0].headers.map(({ subheaders }) =>
-            subheaders.map(({ title, uid }) => ({ title, uid }))
-          )
-        ])
-
-        return update
-      }
-    }
   },
 
   mounted() {

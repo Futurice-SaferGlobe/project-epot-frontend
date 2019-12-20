@@ -3,6 +3,27 @@ import connections from './data/connections.json'
 
 import { find, flattenDeep } from 'lodash'
 
+export const getOperationsWithConnections = () => {
+  return operations.map(({ operation, area, internalId, data }) => {
+    const titles = getOperationTitles(internalId)
+    const conns = _getConnectionsForOperation(internalId)
+    return {
+      operation,
+      area,
+      internalId,
+      connections: conns,
+      headers: data.map(header => {
+        return {
+          ..._bindConnectionsAsLinksToHeader(header, titles, conns),
+          subheaders: header.subheaders.map(subheader => {
+            return _bindConnectionsAsLinksToHeader(subheader, titles, conns)
+          })
+        }
+      })
+    }
+  })
+}
+
 export const getOperationHeader = (id, uid) => {
   const operation = _getOperation(id)
 
@@ -65,5 +86,14 @@ const _bindConnectionsToHeader = (header, titles, connections) => {
         const connectionUid = from !== header.uid ? from : to
         return find(titles, ({ title, uid }) => uid === connectionUid)
       })
+  }
+}
+
+const _bindConnectionsAsLinksToHeader = (header, titles, connections) => {
+  const midstate = _bindConnectionsToHeader(header, titles, connections)
+  if (midstate === undefined) return undefined
+  return {
+    ...midstate,
+    links: midstate.connections.map(({ uid }) => uid)
   }
 }
