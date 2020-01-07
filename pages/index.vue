@@ -11,7 +11,7 @@
       -->
       <operation-visual
         class="operation-visual"
-        :operation="operationsWithConn[0]"
+        :operation="operationsWithConn[this.selectedOperation]"
       />
       <operation-header
         class="operation-header"
@@ -43,7 +43,7 @@ export default {
 
   computed: {
     ...mapGetters([
-      'selectedOperations',
+      'selectedOperation',
       'availableOperations',
       'isLayoutComparison'
     ]),
@@ -52,13 +52,13 @@ export default {
       return getOperationsWithConnections()
     },
     operationTitles() {
-      return getOperationTitles()
+      return getOperationTitles(this.selectedOperation)
     },
     operationMetadata() {
       return {
-        name: this.operationsWithConn[0].name,
-        internalId: this.operationsWithConn[0].internalId,
-        area: this.operationsWithConn[0].area,
+        name: this.operationsWithConn[this.selectedOperation].operation,
+        internalId: this.operationsWithConn[this.selectedOperation].internalId,
+        area: this.operationsWithConn[this.selectedOperation].area,
         operationTitles: this.operationTitles
       }
     }

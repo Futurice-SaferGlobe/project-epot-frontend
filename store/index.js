@@ -14,8 +14,8 @@ export const state = () => ({
     { name: 'about', active: false, background: 'light', hasVisited: false }
   ],
   routerPushDirectionState: null,
-  availableOperations: ['fututest'],
-  selectedOperations: ['fututest'],
+  availableOperations: ['fututest', 'unmiss'],
+  selectedOperation: 'fututest',
   labels: [
     { id: 1, title: 'Innovation' },
     { id: 2, title: 'Good practice' },
@@ -36,7 +36,7 @@ export const state = () => ({
 /** @type GetterTree */
 export const getters = {
   availableOperations: state => state.availableOperations,
-  selectedOperations: state => state.selectedOperations,
+  selectedOperation: state => state.selectedOperation,
   layout: state => state.layout,
   isLayoutComparison: state => state.layout === layoutEnum.COMPARISON,
   isLayoutSingle: state => state.layout === layoutEnum.SINGLE,
@@ -65,15 +65,8 @@ export const mutations = {
     state.operationTitles = titles
   },
 
-  changeSelectedOperations(state, operations) {
-    const MAX_LEN = 2
-    if (Array.isArray(operations) && operations.length <= MAX_LEN) {
-      state.selectedOperations = operations
-    } else {
-      console.error(
-        `changeSelectedOperations: payload was not an array, or is longer than ${MAX_LEN}`
-      )
-    }
+  changeSelectedOperation(state, operation) {
+    state.selectedOperation = operation
   },
 
   changeActiveHeader(state, activeHeaderObject) {

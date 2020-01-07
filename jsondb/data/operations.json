@@ -1,6 +1,6 @@
 [
   {
-    "operation": "FUTUTEST",
+    "operation": "EPOT",
     "area": "Finland",
     "internalId": "fututest",
     "data": [
@@ -18,6 +18,7 @@
             "labels": [],
             "content": "A viable political process is vital for a peace operation. The viability of a political process derives from whether it has been conceived of and planned in support of a political solution and whether it enjoys wide support among political decision-making bodies and other actors with a vested interest in ending a conflict. The existence of a political process and strategy is linked to other explanatory factors: For instance, the overarching political process guides and supports coordination among partners and should provide the framework that ensures coherence among the activities of various stakeholders including prioritisation, sequencing, and division of labour."
           },
+
           {
             "index": "2",
             "uid": "POLPRI_SUB_POLDIR",
@@ -32,7 +33,7 @@
         "uid": "REALMAN_TOP_HEADER",
         "title": "Realistic mandates and matching resources",
         "labels": [],
-        "content": "There have long been calls for “clear and concise” mandates matched by the necessary resources, reiterated in more recent recommendations for adequate and coherent mandates. As the ability to formulate ‘realistic’ mandates hinges on a thorough understanding of the context and the dynamics at play, the focus is shifting to a prioritized and sequenced process, in which mandates are adapted as the understanding of the circumstances and challenges of implementation grow.",
+        "content": "There have long been calls for \"clear and concise\" mandates matched by the necessary resources, reiterated in more recent recommendations for adequate and coherent mandates. As the ability to formulate ‘realistic’ mandates hinges on a thorough understanding of the context and the dynamics at play, the focus is shifting to a prioritized and sequenced process, in which mandates are adapted as the understanding of the circumstances and challenges of implementation grow.",
         "subheaders": [
           {
             "index": "1",
@@ -265,6 +266,278 @@
             "title": "Preventing SGBV and CRSV",
             "labels": [],
             "content": "Protection sexual and gender-based violence (SGBV) and conflict-related sexual violence (CRSV) Preventing CRSV and SGBV: The protection of women and men from sexual and gender-based/conflict-related sexual violence (SGBV/CRSV) during and after the armed conflict is an essential part of the UN’s protection agenda. Preventing and addressing SGBV/CRSV is an integrated and prioritised element in a peace operation’s protection strategy."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "operation": "UMISS",
+    "area": "South Sudan",
+    "internalId": "unmiss",
+    "data": [
+      {
+        "index": "1",
+        "uid": "POLPRI_TOP_HEADER",
+        "title": "Political primacy",
+        "labels": [],
+        "content": "UNMISS aims to ensure political primacy through its decentralised structure, which enables field offices to focus the Mission on the local conflict context, while at the same time linking their work to national strategic priorities. Field offices are required to articulate their plans in terms of support to the national political process, including how they spend resources. For instance, addressing intercommunal tensions had a strong tendency to reinforce both the PoC mandate and support the political process.",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "POLPRI_SUB_VIPOPR",
+            "title": "Viable political process",
+            "labels": [],
+            "content": "The national-level political process is largely driven by forces beyond UNMISS’ control, including longstanding competition between President Kiir and former Vice President Machar, the ripple effects of the oil market, regional positioning by the powerhouses of the Horn of Africa, and the constellation of bilateral actors with leverage over one or more parties. Still, in December 2018 South Sudanese, international diplomats, and UN officials spoke of the revitalised peace process as offering better prospects than its predecessor, mainly due to improved regional pressure on the parties."
+          },
+          {
+            "index": "2",
+            "uid": "POLPRI_SUB_POLDIR",
+            "title": "Political direction and support",
+            "labels": [],
+            "content": "Despite the relatively minor formal role of the UN, many of the people interviewed saw the UN’s support to the revitalised peace process as an important piece of the puzzle, in that the UN has worked to maintained contact with the Government and several opposition delegations, encouraging both to take inclusive approaches to the peace process. At the same time, there has been a noticeable withdrawal of international engagement since 2011. The guarantors of the peace process – the US, UK and Norway (collectively known as the Troika) – played a crucial role in delivering the referendum in South Sudan, and remain, in principle, core supporters of the ongoing peace process. However, the withdrawal of the US active engagement in South Sudan has left the Troika weakened in terms of political leverage."
+          }
+        ]
+      },
+      {
+        "index": "2",
+        "uid": "REALMAN_TOP_HEADER",
+        "title": "Realistic mandates and matching resources",
+        "labels": [],
+        "content": "",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "REALMAN_SUB_CONGRU",
+            "title": "Congruence",
+            "labels": [],
+            "content": "Taken together, the Mission strategy, the effects-based approach (including its “all of UN” aspects), and the decentralised nature of the Mission are the backbone of how the Mission has operationalised its mandate. Still, limited physical access to many parts of the country and a decline in locations with civilian personnel leaves the Mission with fewer “antennae” to establish situational awareness hampering the realisation of its early warning remit. [s. also capabilities]"
+          },
+          {
+            "index": "2",
+            "uid": "REALMAN_SUB_RELEVA",
+            "title": "Relevance",
+            "labels": [],
+            "content": "The UNMISS decentralization of authority to field offices appears to have allowed for greater flexibility and responsiveness on the ground. Field offices have a high degree of delegated authority and are expected to develop field-level integrated plans for the implementation of the mandate. According to the leadership of several field offices, this delegation has proven extremely effective in some key areas, including the ability to plan and execute joint visits to hotspots, the integrated management of the field office budget, and more coordinated conflict resolution activities across components. [s. also people-centred approach]"
+          },
+          {
+            "index": "3",
+            "uid": "REALMAN_SUB_CAPABI",
+            "title": "Capabilities",
+            "labels": [],
+            "content": "The PoC sites currently consume an enormous portion of the Mission’s resources, including – according to UNMISS – roughly 70 percent of the military component’s 12 infantry battalions, all of the mission’s five FPUs, and nearly 400 IPOs. The Mission has limited resources for establishing the kind of presence that would contribute to protection in  isolated peripheries of the country, coupled with continuing reports of under-performance by some parts of UNMISS [s. credibility]. In July 2016, the Security Council raised the troop ceiling to 17,000 troops, including a 4,000-strong “Regional Protection Force” (RPF) which has been deployed to a newly-minted Sector Juba, in effect projecting a greater presence in the Equatorias than providing the planned deterrent in Juba. Following a 19 percent decline in overall civilian staffing between 2011 and 2017, civilian staffing has remained relatively stable since 2014, though there has been an increase in the ratio of the civilian staff at Headquarters, following the closure of the County Support Bases after the discontinuation of the state-building mandate (now more than 60 percent are located in Juba)."
+          },
+          {
+            "index": "4",
+            "uid": "REALMAN_SUB_GENCON",
+            "title": "Gender considerations",
+            "labels": [],
+            "content": "As of December 2018, UNMISS has deployed the following female troops and police: 404 out of 12,814 troops; 19 out of 174 military experts; 51 out of 333 staff officers; 122 out of 482 individual police officers (IPOs); and 152 out of 835 officers in formed police units (FPUs). Among the senior leadership of the Mission, only the Police Commissioner was female (one out of five), while at the director and senior advisor levels, the number of women was higher, including more than half of the Heads of Field Offices (HoFOs). While direct causality is difficult to measure in conflict contexts, the views of UNMISS and other interlocutors are quite consistent: continuing to increase the number of women peacekeepers – and focusing on deploying them in active roles – can improve the effectiveness of the Mission."
+          }
+        ]
+      },
+      {
+        "index": "3",
+        "uid": "PEOCEN_TOP_HEADER",
+        "title": "People-centred approach",
+        "labels": [],
+        "content": "An important element of the decentralised structure of the Mission is the ability of field offices to focus the Mission on the local conflict context, while at the same time linking those with the Mission’s national strategic priorities. The PoC sites also provide opportunities for “people-centred” approaches, where UNMISS peacekeepers are in frequent contact with South Sudanese, continuously patrolling the communities, and staying actively involved in the day-to-day life of the residents.",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "PEOCEN_SUB_NATLOC",
+            "title": "National and local ownership",
+            "labels": [],
+            "content": "Systemic obstructions to the freedom of movement of UNMISS and its partners – by the Government and other parties – has created serious impediments to the Mission’s ability to deliver on its protection and humanitarian mandates. At the local level, UNMISS’ role in facilitating a series of commander meetings between the Government and the opposition has led to improved security and a sense among many stakeholders that the peace process is moving in a positive direction. These approaches also point to some of the ways UNMISS is contributing to local ownership, building capacities that will outlast the Mission’s time on the ground. [s. also fragmentation of society]"
+          },
+          {
+            "index": "2",
+            "uid": "PEOCEN_SUB_NONSTA",
+            "title": "Non-state actors",
+            "labels": [],
+            "content": "Some stressed the important role of the UN Special Envoy for Sudan and South Sudan (OSESS), who had often managed to engage with a broader range of opposition groups than was possible for UNMISS, helping to build consensus towards the peace process. It is important to emphasise that the trajectory of the peace process is very uncertain. Recent violence in Central Equatoria demonstrates that not all armed groups have been brought into the agreement. Without a clear sense of how key issues in the peace process will proceed, such as cantonment, there remains a serious risk that the parties could again fall into conflict."
+          },
+          {
+            "index": "3",
+            "uid": "PEOCEN_SUB_COMENG",
+            "title": "Community and civil society engagement",
+            "labels": [],
+            "content": "The Mission has helped to broker local-level agreements – including between former belligerents in the civil war – with consequent reductions in violence. South Sudanese citizens often pointed to local engagement as the most tangible effect of the Mission."
+          },
+          {
+            "index": "4",
+            "uid": "PEOCEN_SUB_PARWOM",
+            "title": "Participation of women",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "PEOCEN_SUB_ABSCAP",
+            "title": "Absorption capacity",
+            "labels": [],
+            "content": "Not assessed in the case study."
+          },
+          {
+            "index": "6",
+            "uid": "PEOCEN_SUB_ELICAP",
+            "title": "Elite capture",
+            "labels": [],
+            "content": "Longstanding and relatively unconditional flows of aid are part of the political  economy of South Sudan, susceptible to manipulation by patronage systems overseen by  political elites, at times perceived as contributing to intercommunal tensions, and an  essential aspect of how power and resources are distributed across the country. In fact,  many South Sudanese stakeholders have described the UN’s early support to State  institutions as putting a “finger on the scales” in favour of the Dinka-dominated Government,  helping to shore up President Kiir’s support network at the expense of meaningful  decentralisation to the other communities of South Sudan. Understanding how customary,  traditional, State and military actors converge in the governance realm is one of the key  analytic and operational challenges for the UN."
+          },
+          {
+            "index": "7",
+            "uid": "PEOCEN_SUB_FRASOC",
+            "title": "Fragmentation of societies",
+            "labels": [],
+            "content": "Long-standing conflict dynamics between and among the  hundreds of communities of South Sudan play a central role in the way in which violence has  escalated over recent years, and in how local and national actors have responded. But rather  than think solely in terms of intercommunal identity as a conflict driver, it is more accurate to  consider how identity is politicised and how inter-communal fault lines are instrumentalised  by power-brokers in South Sudan. Through the PoC sites UNMISS was able to isolate  polarized communities and prevent broader violence. Decisions as to where to place services  will influence where people decide to move upon leaving PoC sites. Striking a balance  between Government-controlled cities and opposition strongholds is complicated by the  deep divisions in the country. Simply proposing a Sudanese-led process does not provide a  viable way forward."
+          }
+        ]
+      },
+      {
+        "index": "4",
+        "uid": "LEGCRE_TOP_HEADER",
+        "title": "Legitimacy and credibility",
+        "content": "",
+        "labels": [],
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "LEGCRE_SUB_LEGITI",
+            "title": "Legitimacy",
+            "labels": [],
+            "content": "UNMISS has a unique protection narrative. No other peace operation in the  world can so clearly and convincingly point to the direct protection of more than 200,000  people. Across all stakeholders, there was agreement that UNMISS had played a crucial role  in preventing further violence against the PoC site residents, and in facilitating the delivery of  life-saving assistance to them. This role clearly increased the mission’s legitimacy and  credibility among much of the population. And yet, the sheer scale of the violence in South  Sudan presents insurmountable challenges for UNMISS. How can the Mission protect more  of the two million internally displaced persons (IDPs) given the impenetrable terrain and  limited air assets available? How can it create the conditions for voluntary return when many  of those displaced have no viable options open to them? But perhaps the most difficult  question is the role of the State itself. How can a peacekeeping mission operate with the  consent of a government whose forces have proven themselves willing to attack sections of  its population?"
+          },
+          {
+            "index": "2",
+            "uid": "LEGCRE_SUB_CREDIB",
+            "title": "Credibility",
+            "labels": [],
+            "content": "[s.a. capabilities] Reports have highlighted the lack of robust posture and an  unwillingness of some troops to respond quickly and strongly to threats. The push to do  more foot patrols and engage more visibly with the communities is certainly a good initiative.  The SRSG’s call to push harder at roadblocks and camp overnight if needed to get through  could also send a good message about the willingness of the Mission to access all areas.  However, it may be difficult for UNMISS to shake the reputation of some of its troops with  the population, a concern based on the strong perceptions gathered from South Sudanese."
+          },
+          {
+            "index": "3",
+            "uid": "LEGCRE_SUB_STRCOM",
+            "title": "Strategic Communication",
+            "labels": [],
+            "content": "The combination of ambitious mandate language alongside finite  resources often creates large gaps between what the South Sudanese expect from the UN    and what the Mission can realistically deliver. There are huge expectations among many  South Sudanese communities that the UN will play a central role in bettering their lives and  providing protections if the situation again worsens, or indeed within the current peace  process. A challenge for UNMISS is to create a positive narrative about its impact in South  Sudan without unrealistically raising expectations."
+          },
+          {
+            "index": "4",
+            "uid": "LEGCRE_SUB_MISCON",
+            "title": "Misconduct",
+            "labels": [],
+            "content": "Not assessed in the case study."
+          },
+          {
+            "index": "5",
+            "uid": "LEGCRE_SUB_INTUNT",
+            "title": "Intended and unintended consequences",
+            "labels": [],
+            "content": "The process of supporting voluntary, dignified  returns, and extending humanitarian services to the at-risk communities beyond the UNMISS  sites presents a significant challenge for the Mission today. In deciding where to place  services, the broader UN family is confronted with difficult questions about needing to  respond to the wishes of the displaced people, but also needing to support institutional  capacities to deliver in the longer term. Taking these decisions in close consultation with the  affected communities is a stated priority of the UNMISS leadership. However, the enormous  challenge of identifying needs and intentions in such a delicate situation should not be  underestimated. UNMISS is moving forward on the plan to support the voluntary return or  relocation of the PoC residents, which creates potential tension between short-term  protection needs and longer-term risks to the country. Here, the UN system’s decisions  about where to place services will have an enormous impact. Based on needs assessments  and consultations with communities, the UN will make important decisions about whether to  encourage returns back to the formerly mixed urban areas where the displaced people  resided before the war, or to ethnically homogeneous areas currently under opposition  control."
+          }
+        ]
+      },
+      {
+        "index": "5",
+        "uid": "COOHOR_TOP_HEADER",
+        "title": "Coordination and coherence",
+        "content": "",
+        "labels": [],
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "COOHOR_SUB_SYSCOH",
+            "title": "System coherence",
+            "labels": [],
+            "content": "In 2017, the SRSG issued a Mission-wide directive defining operational priorities for each field office, and calling for an “effects-based approach” in which the Mission components and field offices must justify their activities, specifically in terms of how they will support the priorities identified under the two pillars of the strategy. Within this, it is apparent from the strategic and operational planning documents that the Mission leadership has demanded an “all of UN” approach, where the Mission’s components are expected to coordinate closely across the Mission and with UNCT partners on their planning."
+          },
+          {
+            "index": "2",
+            "uid": "COOHOR_SUB_EXTCOH",
+            "title": "External coherence",
+            "labels": [],
+            "content": "South Sudan is extraordinarily reliant on international and regional support, and has been essentially dependent upon international aid for decades. On the one hand, this has given donors entry points with many of the key actors in the country. On the other, South Sudan has often become embroiled in the broader regional competition between the more powerful players in the Horn."
+          },
+          {
+            "index": "3",
+            "uid": "COOHOR_SUB_FRACOO",
+            "title": "Frameworks for coordination",
+            "labels": [],
+            "content": "UNMISS has no formal role within Joint Monitoring and Evaluation Commission, which was established during the 2015 peace process, but was kept on in the revitalized agreement as the main vehicle for monitoring implementation, or the Ceasefire and Transitional Security Arrangements Monitoring and Verification Mechanism, but participates in both forums and provides some logistical support. Despite its relatively minor formal role in revitalized agreement, the UN’s support is regarded as an important piece of the puzzle."
+          },
+          {
+            "index": "4",
+            "uid": "COOHOR_SUB_REGINV",
+            "title": "Regional involvement",
+            "labels": [],
+            "content": "South Sudan has largely been treated as a pawn in the regional struggles for resources and influence, with powerbrokers benefiting directly and indirectly from the conflict itself. UNMISS is only one part of a much broader regional and international  constellation of actors working to stabilize the country and encourage conflict parties to enter into a meaningful peace process. The regional players are simultaneously crucial for the success of the peace process, but also insufficiently united to play a consistently positive role. Evidence of impact appeared most clear where the UN was able to align approaches with key stakeholders – the Inter-Governmental Authority on Development, the African Union and the parties – given their more direct influence over the conflict parties."
+          },
+          {
+            "index": "5",
+            "uid": "COOHOR_SUB_BILINT",
+            "title": "Bilateral interests",
+            "labels": [],
+            "content": "Signs that the Government has not put forward a convincing plan to fund implementation of the revitalized agreement are a recurrent concern of major donors. It is worrying that the parties and guarantors of the agreement appear to be increasingly excluding partners like the UN and AU from the core talks. Finding ways to work with a government that has often misused the support provided to it over the years remains a serious challenge for the UN and its partners, and one which was highlighted by ambassadors of many of the key donor countries represented in Juba. Currently, there is also uncertainty surrounding South Sudan’s debt and resource capability, and no clear financial commitment by the Government to fund implementation of the agreement."
+          },
+          {
+            "index": "5",
+            "uid": "COOHOR_SUB_BURSHA",
+            "title": "Burden sharing",
+            "labels": [],
+            "content": "Not assessed in the case study."
+          },
+          {
+            "index": "5",
+            "uid": "COOHOR_SUB_EXTSCE",
+            "title": "External sceptics and spoilers",
+            "labels": [],
+            "content": "The 2015 peace process failed in part because it was seen as an exclusive pact between elite representatives of two sides, and one which left out key communities. The 2018 process has the appearance of a more inclusive process, and the signature of most of the major constituency leaders has been touted as a positive sign. However, the risks that it will be founded on many of the same rocks as the earlier process are clear. UNMISS’ role here in pushing for inclusivity, and in supporting more local-level agreements in support of the agreement, does appear to have positively influenced the process."
+          }
+        ]
+      },
+      {
+        "index": "6",
+        "uid": "WOPESE_TOP_HEADER",
+        "title": "Women, peace & security",
+        "labels": [],
+        "content": "",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "WOPESE_SUB_GENEQU",
+            "title": "Gender mainstreaming",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "WOPESE_SUB_PARWOM",
+            "title": "Participation of women",
+            "labels": [],
+            "content": "The broader and distinct impact of the conflict on women’s role in the peace process and in efforts to take forward UNMISS’ mandate is reflected in the following statement by a female activist, \"Women pull back and keep a low profile. They trying to keep safe. If the rest are scared, there is the probability of whatever is left to relapse to zero.\""
+          },
+          {
+            "index": "3",
+            "uid": "WOPESE_SUB_GENCON",
+            "title": "Gendered conflict analysis",
+            "labels": [],
+            "content": "Not assessed in the case study."
+          },
+          {
+            "index": "4",
+            "uid": "WOPESE_SUB_EARWAR",
+            "title": "Early-warning mechanisms",
+            "labels": [],
+            "content": "Not assessed in the case study."
+          },
+          {
+            "index": "5",
+            "uid": "WOPESE_SUB_SGBCRS",
+            "title": "Preventing SGBV and CRSV",
+            "labels": [],
+            "content": "Tens of thousands of people have been subjected to sexual violence, including brutal cases of rape, sexual mutilation and torture. The lack of accountability is seen by many South Sudanese as a major impediment to long-term stability in the country, and a potential trigger for future violence. Working closely with the UN Development Programme and other partners, the Mission has contributed to the establishment of a court to try sexual crimes, doubling the caseload in 2018. Views are extremely divided as to the extent UNMISS has been effective in its work against sexual violence. Some sections stated that documentation and public advocacy around CRSV was a key priority of the Mission, and pointed to disaggregated reporting and dedicated personnel within the Mission as evidence of this prioritisation. However, other senior UNMISS officials were extremely critical of the Mission’s willingness to prioritise the overall WPS agenda,  arguing that it was a \"second tier\" issue that received few resources and little meaningful attention."
           }
         ]
       }
