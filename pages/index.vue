@@ -2,6 +2,7 @@
   <div class="explorer">
     <epot-header
       site-title="Effectiveness of Peace Operations"
+      :operationMetadata="operationMetadata"
     />
     <main>
       <!--
@@ -25,7 +26,7 @@
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import { queries } from '@/graphql/'
 
-import { getOperationsWithConnections, getOperationTitles } from '@/jsondb'
+import { getAvailableOperations, getOperationsWithConnections, getOperationTitles } from '@/jsondb'
 
 import eventBus from '@/plugins/eventBus'
 
@@ -48,6 +49,9 @@ export default {
       'isLayoutComparison'
     ]),
     ...mapState(['activeHeader']),
+    availableOperations() {
+      return getAvailableOperations()
+    },
     operationsWithConn() {
       return getOperationsWithConnections()
     },

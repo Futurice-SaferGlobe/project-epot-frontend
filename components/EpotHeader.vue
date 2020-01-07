@@ -5,7 +5,7 @@
     </div>
     <ul class="nav">
       <div class="link">
-        <nuxt-link to="/">Operations</nuxt-link>
+        <nuxt-link to="/">Operation: <span class="operation-name">{{operationMetadata.name}}</span></nuxt-link>
         <nuxt-link :to="{ path: '/effects', query: { dir: 'next' } }">Effects</nuxt-link>
         <nuxt-link :to="{ path: '/about', query: { dir: 'next' } }">About</nuxt-link>
       </div>
@@ -26,6 +26,10 @@ export default {
     siteTitle: {
       type: String,
       default: 'Effectiveness of Peace Operations'
+    },
+    operationMetadata: {
+      type: Object,
+      required: true
     }
   }
 }
@@ -65,6 +69,10 @@ header {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    .operation-name {
+      color: epot-color('foreground', 'dark');
+    }
   }
 }
 </style>

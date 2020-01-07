@@ -3,6 +3,13 @@ import connections from './data/connections.json'
 
 import { find, flattenDeep } from 'lodash'
 
+export const getAvailableOperations = () => {
+  return operations.map(({ internalId, operation }) => ({
+    internalId,
+    operation
+  }))
+}
+
 export const getOperationsWithConnections = () => {
   return operations.reduce((acc, { operation, area, internalId, data }) => {
     const titles = getOperationTitles(internalId)
