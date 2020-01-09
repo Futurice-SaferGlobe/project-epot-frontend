@@ -5,7 +5,10 @@
     </div>
     <ul class="nav">
       <div class="link">
-        <nuxt-link to="/">Operation: <span class="operation-name">{{operationMetadata.name}}</span></nuxt-link>
+        <nuxt-link to="/">Operation:
+          <span class="operation-name">{{operationMetadata.name}}</span>
+          <operation-selector :operationsWithConn="operationsWithConn" />
+        </nuxt-link>
         <nuxt-link :to="{ path: '/effects', query: { dir: 'next' } }">Effects</nuxt-link>
         <nuxt-link :to="{ path: '/about', query: { dir: 'next' } }">About</nuxt-link>
       </div>
@@ -16,10 +19,12 @@
 
 <script>
 import SomeButtons from './SomeButtons'
+import OperationSelector from './OperationSelector'
 
 export default {
   components: {
-    SomeButtons
+    SomeButtons,
+    OperationSelector
   },
 
   props: {
@@ -28,6 +33,10 @@ export default {
       default: 'Effectiveness of Peace Operations'
     },
     operationMetadata: {
+      type: Object,
+      required: true
+    },
+    operationsWithConn: {
       type: Object,
       required: true
     }

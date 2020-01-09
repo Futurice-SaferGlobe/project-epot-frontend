@@ -3,6 +3,7 @@
     <epot-header
       site-title="Effectiveness of Peace Operations"
       :operationMetadata="operationMetadata"
+      :operationsWithConn="operationsWithConn"
     />
     <main>
       <!--
