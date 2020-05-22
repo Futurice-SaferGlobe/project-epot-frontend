@@ -1,10 +1,9 @@
 <template>
   <div class="about">
     <main>
-
       <div class="about-content-wrapper">
         <div class="about-container">
-          <div class="about-content">
+          <div v-if="selectedOperation === 'fututest'" class="about-content">
             <h1>Effects of peace operations</h1>
             <p class="about-intro-text">Typically, the underlying objective of a peace operation is reducing the conflict dynamics in the area
                 of operation, including by preventing violent conflict, increasing stability and protecting civilians, and
@@ -104,9 +103,6 @@
                 essential part of the UN’s protection agenda. Preventing and addressing SGBV/CRSV is an
                 integrated and prioritised element in a peace operation’s protection strategy.
               </li>
-            <!--/ul>
-            <h2 class="about-getpos" data-nav-id="8">2. Building and fostering sustainable peace</h2>
-            <ul-->
               <li class="about-getpos" data-nav-id="9">
                 <b>Promoting national reconciliation:</b>
                 National reconciliation  creates a  foundation  for  the
@@ -193,6 +189,51 @@
               </li>
             </ul>
           </div>
+          <div v-if="selectedOperation === 'unmiss'" class="about-content">
+            <h1>UNMISS and its effects</h1>
+            <p class="about-intro-text">
+              The EPON report (2/2019, <a href="https://effectivepeaceops.net/" target="_blank">https://effectivepeaceops.net/</a>) assesses the extent to which the UN Mission in South Sudan (UNMISS) is achieving its current strategic objectives and what impact the Mission has had on the political and security situation in South Sudan. As a large, multidimensional peacekeeping operation – with 17,000 troops, 2,000 police and 2,000 civilians – UNMISS has been provided with significant resources and an extraordinarily ambitious mandate. Examining the four key mandate areas—protection of civilians, facilitation of humanitarian delivery, human rights, and the political process—this report finds clear evidence of the significant impact of the mission on the everyday lives of South Sudanese citizens, but also many of the ways in which the effectiveness of the mission has been limited. It explores some of the key dilemmas facing UNMISS today as the UN struggles to protect against immediate risks while also helping to put in place the conditions for long-term peace.
+            </p>
+            <ul>
+              <li class="about-getpos" data-nav-id="1">
+                <strong>Preventing conflict:</strong>
+                UNMISS is mandated to implement an early warning strategy, which includes information-gathering, monitoring, verification, and response mechanisms to PoC threats and human rights violations. While views on the effectiveness of the early warning system varied across the Mission, there was a general consensus that the Field Integrated Operations Centre structures were appropriate for the task of early warning and a good example of decentralised authority. The use of mixed patrols, where members of human rights, civil affairs, protection and other civilian components accompany patrols to potential hotspots, was cited as a positive practice that has allowed the Mission to identify emerging threats in a more holistic manner than in previous years.
+              </li>
+              <li class="about-getpos" data-nav-id="2">
+                <strong>Building confidence:</strong>
+                UNMISS played a critical role in facilitating a series of commander-level meetings on the ground. These events create the opportunity to demonstrate a commitment to the peace agreement, engage with local populations, and ultimately build confidence to overcome deep mutual mistrust. Confidence-building measures between the parties have freed up the movement of people in many areas, and the 31 October peace celebration was viewed as a strong sign of commitment by the respective sides.
+              </li>
+              <li class="about-getpos" data-nav-id="3">
+                <strong>Stabilisation and extension of state authority:</strong>
+                UNMISS is faced with the dilemma of having to balance stabilisation with the recognition that the Government is seen by large portions of the population as a party to the conflict and a continuing protection threat. As a result, the Mission has to find ways to support the country without legitimising a government that has perpetrated widespread abuses. UNMISS’ establishment of temporary bases in Leer and Yei have had multiple positive impacts: the continuous presence of the force appears to have diminished the active conflict in the immediate vicinity of the towns, while also creating a more protective atmosphere for civilians and increasing the capacity of humanitarians to work in the town.
+              </li>
+              <li class="about-getpos" data-nav-id="4">
+                <strong>Protecting civilians (including preventing CRSV and SGBV):</strong>
+                By offering refuge for those fleeing massive and widespread violence in 2013 and 2014, UNMISS provided immediate physical protection for more than 200,000 people, including large numbers of women and children. The majority have remained in what have become known as the “PoC [Protection of Civilians] sites” through 2018. Interlocutors across the country pointed to these PoC sites as unmistakable evidence of direct impact by protecting lives under imminent threat. With a mandate to protect civilians “within its capacity and areas of deployment,” but also to deter violence outside of the PoC site and foster an environment conducive to returns, UNMISS is faced with a dilemma. It can either continue to focus its assets on the PoC sites, where the impact is more readily measured, or work to extend the force and police presence to serve the broader vulnerable population, where direct impact is harder to achieve and measure.
+              </li>
+              <li class="about-getpos" data-nav-id="5">
+                <strong>Strengthening public safety:</strong>
+                A range of stakeholders were also concerned about protection within the PoC sites, given reports of high crime rates, up-ward trends of sexual violence, potential arms entering the sites, and overall politicisation of the sites. There was, however, a recognition among residents that the presence of UNMISS police within the sites – in line with their mandated task to provide public safety – was having a positive effect, limiting criminality, and mitigating protection risks.
+              </li>
+              <li class="about-getpos" data-nav-id="6">
+                <strong>Promoting human rights:</strong>
+                There was general agreement by interlocutors that over the last two years there has been increased visibility of UNMISS’ human rights reporting. The commitment to investigating and reporting publicly on rights violations may be contributing to improving the human rights situation indirectly, influencing decision-making by major stakeholders including in New York, and, more directly, moderating the behaviour of parties to the conflict. While Mission leadership argues that the reports offer useful “entry points” for discussions with South Sudanese leadership, most South Sudanese saw little impact of the reports when it came to deterring or influencing the behaviour of actors on the ground.
+              </li>
+              <li class="about-getpos" data-nav-id="7">
+                <strong>Contributing to peace dividends:</strong>
+                The harsh reality is that the populations in the peripheries of South Sudan are extremely unlikely to see many tangible benefits of the peace process in the short-term. At the same time, there are huge expectations among many South Sudanese communities that the UN will play a central role in bettering their lives and providing protections if the peace process again collapses. UNMISS continues to play a clear and important role in facilitating humanitarian delivery by providing protection to humanitarian convoys and/or flights into inaccessible parts of the country. The Mission’s perimeter security, internal coordination, provision of public order, and other activities are crucial enablers for large-scale delivery to some of the most vulnerable people in South Sudan.
+              </li>
+              <li class="about-getpos" data-nav-id="8">
+                <strong>Supporting institution building and development:</strong>
+                Since a more comprehensive mandate for institution building was scrapped in 2014, engagement in this area has been limited. However, UNMISS has developed dozens of standard operating procedures and guidance to address the many unique challenges of the PoC sites, creating over the past five years a form of lex loci within the sites that reflects an innovative and dynamic approach to producing guidance at the Mission level, and one that may well offer future UN operations a useful resource.
+              </li>
+              <li class="about-getpos" data-nav-id="9">
+                <strong>Promoting the rule of law:</strong>
+                Work to strengthen the rule of law capacities – not just State institutions, but also other authorities that have a role in resolving conflicts and addressing impunity – was described as a lynchpin in securing durable peace, but one where the current mandate of the Mission offers few clear opportunities and extremely limited resources. Though the 2014 shift in UNMISS’ mandate nearly eliminated capacity building, the Mission retains a small Rule of
+                Law Advisory Section that remains largely focused on helping national actors build anti-impunity, human rights, and due process capacities.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </main>
@@ -200,9 +241,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import pageTransition from '@/mixins/pageTransition'
+
 export default {
-  mixins: [pageTransition]
+  mixins: [pageTransition],
+
+  computed: {
+    ...mapGetters([
+      'selectedOperation'
+    ])
+  }
 }
 </script>
 
@@ -293,47 +342,6 @@ export default {
 
 
     }
-
-    /*.about-index {
-      flex-basis: 600px;
-      height: calc(100% - 48px * 2);
-      border-right: 2px solid epot-color('background');
-      padding: 60px 20px 20px 20px;
-
-      .about-index-hl {
-        text-decoration: underline;
-        font-weight: bolder;
-      }
-
-      h3 {
-        font-size: 24px;
-        margin-bottom: 1em;
-      }
-
-      h4 {
-        font-size: 18px;
-        margin: 2em 0 0.5em 1em;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      ul {
-        margin-left: 3em;
-
-        li {
-          font-size: 14px;
-          padding: 0.2em;
-          cursor: pointer;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }*/
 
   }
 
