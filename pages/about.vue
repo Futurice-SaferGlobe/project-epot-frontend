@@ -5,31 +5,52 @@
         <div class="about-container">
           <div class="about-content">
             <h1>About</h1>
-            <p class="about-intro-text">
-              EPON is an international network of over 40 partners established by the Norwegian
-              Institute of International Affairs (NUPI), which undertakes research into the effectiveness
-              of peace operations. For further information, see
-              <a href="https://effectivepeaceops.net/" target="_blank">effectivepeaceops.net</a>.
-            <br>
-            <br>
-              The Effectiveness of Peace Operations Tool (EPOT) is a tool designed to provide an
-              interactive web-based visualization of the complexity of peace operations. It aims to ease
-              understanding of multiple issues to be considered in research on peace operations, and the relationship
-              between these issues. It highlights central research findings and contributes to the comparability of
-              research conducted in EPON as well as supports the research conducted in the field.
-              The visualization aims to make research more accessible and usable and, in turn, increase its impact.
-            <br>
-            <br>
-              The Effectiveness of Peace Operations Tool was created in collaboration with
-              <a href="https://www.zif-berlin.org/en.html" target="_blank">Zif Berlin</a>,
-              <a href="https://saferglobe.fi/en/" target="_blank">SaferGlobe</a> and
-              <a href="https://www.futurice.com/" target="_blank">Futurice</a>.
-            <br>
-            <br>
+
+            <h3>On the Effectiveness of Peace Operations Visualization Tool (EPOT)</h3>
+
+            <p>The Effectiveness of Peace Operations Visualization Tool (EPOT) is an interactive web-based visualization to show complexity in peace operations based on the methodology of the Effectiveness of Peace Operations Network (EPON). The EPOT is a qualitative tool that aids description and understanding of peace operations, rather than a quantitative tool.</p>
+            <p>The EPOT is designed to visualize the complexity of peace operations and help its understanding. Through visualization of explanatory factors, different aspects of peace operations and their interconnections, the EPOT makes research more accessible and usable increasing the impact of EPON’s research. The EPOT can also support the research conducted in the field.</p>
+
+            <h3>More specifically, the tool is designed to</h3>
+            <ul>
+              <li>Provide a visualization of the complexity of peace operations.</li>
+              <li>Ease understanding of the number of issues to be considered in research on peace operations, and the relationships between these issues.</li>
+              <li>Highlight central research findings.</li>
+              <li>Contribute to the comparability of the research conducted in EPON.</li>
+            </ul>
+
+            <h3>The EPOT has three components</h3>
+            <ol>
+              <li>Six explanatory factors derived from the EPON methodology as well as aspects of these factors that help to provide a more detailed picture.</li>
+              <li>The connections between and among explanatory factors and aspects. These connections are not causal and can be tailored to a specific case</li>
+              <li>Brief text on each explanatory factor and each aspect.</li>
+            </ol>
+
+            <h3>The EPOT encourages</h3>
+            <ul>
+              <li>Learning: Users can explore the complexity of peace operations in general as well as the association of various aspects and explanatory factors by hovering, clicking and highlighting.</li>
+              <li>Tailoring: The EPOT can be tailored to a specific case or peace operation by selecting explanatory factors, aspects, and connections as well as inserting own text.</li>
+              <li>The tool is designed to be versatile in use and as such can be used for a number of target audiences including the research community, political decision makers or local peace builders.</li>
+            </ul>
+
+            <h3>On the Effectiveness of Peace Operations Network (EPON)</h3>
+            <p>EPON is an international network of over 40 partners established by the Norwegian Institute of International Affairs (NUPI), which undertakes research into the effectiveness of peace operations.</p>
+
+            <h3>On the partners</h3>
+            <p>
+              <a href="https://www.zif-berlin.org/en.html" target="_blank">The Berlin Center for International Peace Operations (ZIF)</a> was established in 2002. ZIF’s mandate includes training, recruitment, deployment and support of civilian personnel for peace operations and election monitoring missions, providing analyses and policy advice on peace operations as well as on the improvement of structures and processes of international partner organizations.
+              <br><br>
+              <a href="https://www.futurice.com/" target="_blank">Futurice</a> is a digital service and innovation agency. We employ over 500 professionals in technology, design and business. Our offices are located in Helsinki, Tampere, London, Berlin, Munich, Stuttgart, and Oslo.
+              <br><br>
+              <a href="https://saferglobe.fi/en/" target="_blank">SaferGlobe</a> is Finland´s leading independent think tank on peace and security. We combine cross-disciplinary knowledge with technology to create new understanding.
+            </p>
+
+            <p id="logos">
               <a href="https://saferglobe.fi/en/" target="_blank"><img class="logo-img" src="/logo-saferglobe.png"></a>
               <a href="https://www.zif-berlin.org/en.html" target="_blank"><img class="logo-img" src="/logo-zif.png"></a>
               <a href="https://www.futurice.com/" target="_blank"><img id="logo-futurice" class="logo-img" src="/logo-futurice.png"></a>
             </p>
+
           </div>
         </div>
       </div>
@@ -159,9 +180,14 @@ export default {
             margin: 1em;
           }
 
-          ul {
-            margin-left: 20px;
+          h3 {
             font-size: 18px;
+            margin: 2em 0 0.5em;
+          }
+
+          ul, ol {
+            margin-left: 20px;
+            font-size: 15px;
             padding: 0.7em 0;
 
             li {
@@ -173,6 +199,10 @@ export default {
                 list-style-type: circle;
               }
             }
+          }
+
+          p#logos {
+            padding-top: 3em;
           }
 
           img.logo-img {
