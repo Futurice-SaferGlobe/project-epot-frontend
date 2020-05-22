@@ -1,33 +1,33 @@
 <template>
-  <div 
+  <div
     class="operation-visual"
     @mousemove="translateView"
     @mouseleave="translateView"
-    ref="visualWrapper" 
+    ref="visualWrapper"
   >
-    <svg 
-      v-if="hierarchy" 
-      ref="svgContainer" 
+    <svg
+      v-if="hierarchy"
+      ref="svgContainer"
       class="svg-container"
-      focusable="true" 
+      focusable="true"
       tabindex="0"
-      version="1.1" 
-      xmlns="http://www.w3.org/2000/svg" 
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <g ref="visualGroup" class="visual-group">
         <g class="arcs">
           <svg-arc
-            v-for="(connection, index) in connectionLinks" 
+            v-for="(connection, index) in connectionLinks"
             :key="index"
             :connectionData="connection"
             :elementId="index"
           />
         </g>
         <g class="nodes">
-          <svg-node 
-            v-for="(node, index) in hierarchy.descendants()" 
-            :key="index" 
+          <svg-node
+            v-for="(node, index) in hierarchy.descendants()"
+            :key="index"
             :nodeData="node"
           />
         </g>
@@ -61,7 +61,8 @@ export default {
     return {
       hierarchy: null,
       svgNodesSelection: null,
-      svgLinksSelection: null
+      svgLinksSelection: null,
+      treeLayout: d3.tree().size([2 * Math.PI, style.size]).separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth)
     }
   },
 
@@ -72,6 +73,7 @@ export default {
 
   computed: {
     ...mapState(['pageMap']),
+
     transformedOperation() {
       const { headers, ...rest } = this.operation
 
@@ -84,6 +86,7 @@ export default {
         }))
       }
     },
+
     connectionLinks() {
       return generateLinks(
         [...this.hierarchy.children, ...this.hierarchy.leaves()],
@@ -97,21 +100,28 @@ export default {
   },
 
   mounted() {
-    this.initD3View()
+    this.buildHierarchy()
+    this.initHasVisited()
+  },
+
+  watch: {
+    operation: function (val) {
+      this.buildHierarchy()
+    }
   },
 
   methods: {
     /**
      * Initializes D3 Treelayout
      */
-    initD3View() {
-      const treeLayout = d3
-        .tree()
-        .size([2 * Math.PI, style.size])
-        .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth) // hierarchy separation logic
+    buildHierarchy() {
+      this.hierarchy = this.treeLayout(d3.hierarchy(this.transformedOperation))
+    },
 
-      this.hierarchy = treeLayout(d3.hierarchy(this.transformedOperation))
-
+    /**
+     * Initializes navigation
+     */
+     initHasVisited() {
       let hasVisited = this.pageMap.find(page => page.name === this.$route.name).hasVisited
 
       this.$nextTick(() => {
