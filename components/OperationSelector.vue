@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import eventBus from '@/plugins/eventBus'
 import { mapState, mapMutations } from 'vuex'
 
 import OperationSelectorButton from './OperationSelectorButton'
@@ -59,6 +60,7 @@ export default {
     operationSelected(internalId) {
       this.ye()
       this.changeSelectedOperation(internalId)
+      eventBus.$emit('onNodeMouseIntention', { uid: null, depth: 0, links: [] })
     }
   }
 }
