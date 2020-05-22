@@ -1,3 +1,5 @@
+<!-- TODO: This page has hard coded content for operations. Consider building a more sustainable way of fetching the data. -->
+
 <template>
   <div class="explorer">
     <epot-header
