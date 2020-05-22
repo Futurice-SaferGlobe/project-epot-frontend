@@ -35,11 +35,6 @@ export default {
 
   data() {
     return {
-      d: generatePathCurve({
-        source: this.connectionData.source,
-        target: this.connectionData.target
-      }),
-
       styleConnected: false
     }
   },
@@ -57,6 +52,12 @@ export default {
   },
 
   computed: {
+    d() {
+      return generatePathCurve({
+        source: this.connectionData.source,
+        target: this.connectionData.target
+      })
+    },
     generatePath() {
       return (
         `M${this.d.start.x}, ${this.d.start.y} ` + // starting x/y
