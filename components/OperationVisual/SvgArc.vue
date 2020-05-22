@@ -42,7 +42,7 @@ export default {
   mounted() {
     const { source, target } = this.connectionData
     eventBus.$on('onNodeMouseIntention', ({ uid }) => {
-      if ([source.uid, target.uid].includes(uid)) {
+      if ([this.connectionData.source.uid, this.connectionData.target.uid].includes(uid)) {
         this.styleConnected = true
         this.animateArc()
       } else {
