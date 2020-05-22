@@ -16,7 +16,7 @@
             "uid": "POLPRI_SUB_VIPOPR",
             "title": "Viable political process",
             "labels": [],
-            "content": "A viable political process is vital for a peace operation. The viability of a political process derives from whether it has been conceived of and planned in support of a political solution and whether it enjoys wide support among political decision-making bodies and other actors with a vested interest in ending a conflict. The existence of a political process and strategy is linked to other explanatory factors: For instance, the overarching political process guides and supports coordination among partners and should provide the framework that ensures coherence among the activities of various stakeholders including prioritisation, sequencing, and division of labour."
+            "content": "A viable political process is vital for a peace operation to succeed. The viability of a political process derives from whether it has been conceived of and planned in support of a political solution and whether it enjoys wide support among political decision-making bodies and other actors with a vested interest in ending a conflict. The existence of a political process and strategy is linked to other explanatory factor. For instance, the overarching political process guides and supports coordination among partners and should provide the framework that ensures coherence among the activities of various stakeholders. In that way, it should also drive issues such as prioritisation, sequencing and division of labour. National ownership also impacts the viability and sustainability of a political process."
           },
 
           {
@@ -33,7 +33,7 @@
         "uid": "REALMAN_TOP_HEADER",
         "title": "Realistic mandates and matching resources",
         "labels": [],
-        "content": "There have long been calls for \"clear and concise\" mandates matched by the necessary resources, reiterated in more recent recommendations for adequate and coherent mandates. As the ability to formulate ‘realistic’ mandates hinges on a thorough understanding of the context and the dynamics at play, the focus is shifting to a prioritized and sequenced process, in which mandates are adapted as the understanding of the circumstances and challenges of implementation grow.",
+        "content": "There have long been calls for \"clear and concise\" mandates matched by the necessary resources, reiterated in more recent recommendations for adequate and coherent mandates. As the ability to formulate ‘realistic’ mandates hinges on a thorough understanding of the context and the dynamics at play, the focus is shifting to a prioritised and sequenced process, in which mandates are adapted as the understanding of the circumstances and challenges of implementation grows. How realistic a mandate is will depend on its relevance to the conflict dynamics.",
         "subheaders": [
           {
             "index": "1",
@@ -47,14 +47,14 @@
             "uid": "REALMAN_SUB_RELEVA",
             "title": "Relevance",
             "labels": [],
-            "content": "Relevance indicates whether the operation deals with the actual problems as experienced and understood by the people affected by the conflict and those who are engaged with the operation on a day-to-day basis."
+            "content": "Relevance indicates whether the operation deals with the actual problems as experienced and understood by the people affected by the conflict and those who are engaged with the operation on a day-to-day basis. This adds an important aspect to the analysis, which an assessment in terms of mere mandate fulfilment would not encompass, and thus contributes to a more comprehensive analysis of the operation’s effectiveness."
           },
           {
             "index": "3",
             "uid": "REALMAN_SUB_CAPABI",
             "title": "Capabilities",
             "labels": [],
-            "content": "Capabilities refer to the personnel, material, resources and skills a peace operation requires to carry out and maintain its mandated task. A peace operation’s access to the right capabilities in the right quantity at the right time is important to its relevance, legitimacy, credibility, effectiveness and impact."
+            "content": "Capabilities refer to the personnel, material, resources and skills a peace operation requires to carry out and maintain its mandated tasks. A peace operation’s access to the right capabilities in the right quantity at the right time is important to its relevance, legitimacy, credibility, effectiveness and impact. Access to the right capabilities is especially important when it comes to the ability of an operation to increase its presence in remote areas or when protecting civilians."
           },
           {
             "index": "4",
@@ -70,7 +70,7 @@
         "uid": "PEOCEN_TOP_HEADER",
         "title": "People-centred approach",
         "labels": [],
-        "content": "Peace operations have been criticised for being too state-centric, for focussing most of their attention on the host state and parties to the conflict, and for being primarily concerned with formal state institutions. The political strategy of a peace operation should be guided by a people-centred approach, which requires the operation to be responsive to the legitimate needs and desires of affected communities. Local populations, including potentially marginalised groups, should be engaged in mission analysis, planning, coordination, and performance assessment. Creating more people-centred peace operations requires a conscious shift in the focus of the mission and a reorientation towards protecting and serving those that an operation has been mandated to assist.",
+        "content": "Peace operations have been criticised for being too state centric, for focussing most of their attention on the host state and parties to the conflict, and for being primarily concerned with formal state institutions. This has led to calls for the political strategy of a peace operation to be guided by a people-centred approach, which requires the operation to be responsive to the legitimate needs and desires of affected communities. Local populations, including potentially marginalised groups, should be engaged in mission analysis, planning, coordination, and performance assessment. Creating more people-centred peace operations requires a conscious shift in the focus of the mission and a reorientation towards protecting and serving those that an operation has been mandated to assist. The assumption is that if a peace operation is more relevant and geared towards the needs of the people, it will be more effective and perceived as more credible.",
         "subheaders": [
           {
             "index": "1",
@@ -91,14 +91,14 @@
             "uid": "PEOCEN_SUB_COMENG",
             "title": "Community and civil society engagement",
             "labels": [],
-            "content": "Community and civil society engagement broadens a state-centric approach to ensure that peace operations never lose sight of the needs, fears, and grievances of communities beyond the state. A focus on community engagement and local-level conflict management can take place in a variety of intervention formats, ranging from conflict mitigation through mediation or dialogue, to financial, logistic or capacity-building support to community initiatives or to advocacy and awareness raising to address perceptions or narratives. Civil society organisations are often important partners in the peace process and can be mobilised as reform constituencies or champions of peace. Many have operated throughout the conflict and had a central role in helping the local population."
+            "content": "Community and civil society engagement broadens a state-centric approach to ensure that peace operations never lose sight of the needs, fears and grievances of communities beyond the state. A focus on community engagement and local-level conflict management can take place in a variety of intervention formats, ranging from conflict mitigation through mediation or dialogue, to financial, logistic or capacity-building support to community initiatives or to advocacy and awareness raising to address perceptions or narratives. Civil society organisations are often important partners in the peace process and can be mobilised as reform constituencies or champions of peace. Many have operated throughout a conflict and had a central role in helping the local population."
           },
           {
             "index": "4",
             "uid": "PEOCEN_SUB_PARWOM",
             "title": "Participation of women",
             "labels": [],
-            "content": "The participation of women is a key tenet of the women, peace and security (WPS) agenda. Participation of women in peace operations can range from mediation efforts to the design and implementation of the disarmament, demobilisation and reintegration campaigns can take place at different levels, from grassroots to senior government, in different areas, from social, political to economic and others, and can be formal or informal. Ensuring participation of women requires a detailed understanding of the conflict, as women may be less visible in public spaces at first sight."
+            "content": "The participation of women is a key tenet of the women, peace and security (WPS) agenda. Participation of women in peace operations can range from mediation efforts to the design and implementation of disarmament, demobilisation and reintegration campaigns, can take place at different levels, from grassroots to senior government, in different areas, from social, political to economic and others, and can be formal or informal. Ensuring participation of women requires a detailed understanding of the conflict, as women may be less visible in public spaces at first sight."
           },
           {
             "index": "5",
@@ -119,7 +119,7 @@
             "uid": "PEOCEN_SUB_FRASOC",
             "title": "Fragmentation of societies",
             "labels": [],
-            "content": "Fragmentation of societies into various factions is likely to hamper national ownership, as there may be opposing visions for the way forward and varying capacities to engage. A peace operation will have to navigate this fragmentation and take different visions into account. The importance of understanding the multitude of interests, needs, and concerns in a conflict area is a prerequisite for overcoming or ameliorating fragmentation in post-conflict societies. In turn, reducing fragmentation is a precondition for arriving at a coherent and common political strategy to guide a peace process."
+            "content": "Fragmentation of societies into various factions is likely to hamper national ownership, as there may be opposing visions for the way forward and varying capacities to engage. A peace operation will have to navigate this fragmentation and take different visions into account. The importance of understanding the multitude of interests, needs and concerns in a conflict area is a prerequisite for overcoming or ameliorating fragmentation in post-conflict societies. In turn, reducing fragmentation is a precondition for arriving at a coherent and common political strategy to guide a peace process."
           }
         ]
       },
@@ -135,35 +135,35 @@
             "uid": "LEGCRE_SUB_LEGITI",
             "title": "Legitimacy",
             "labels": [],
-            "content": "Legitimacy: In the UN Capstone Doctrine, the international legitimacy of a peace operation is linked to its mandate, i.e. its legality in international law, and the fact that it represents a broad range of UN Member States who themselves contribute to the peace operation.  In addition, legitimacy is about the perception of the peace operation and how it implements its mandate, including the conduct of its personnel and the degree to which it understands and respects the local context."
+            "content": "Legitimacy: In the UN Capstone Doctrine, the international legitimacy of a peace operation is linked to its mandate, i.e. its legality in international law, and the fact that it represents a broad range of UN Member States who themselves contribute to the peace operation. In addition, legitimacy is about the perception of the peace operation and how it implements its mandate, including the conduct of its personnel and the degree to which it understands and respects the local context."
           },
           {
             "index": "2",
             "uid": "LEGCRE_SUB_CREDIB",
             "title": "Credibility",
             "labels": [],
-            "content": "Credibility: In the UN Capstone Doctrine, the credibility of a peace operation is linked to its perceived ability to carry out and achieve its mandate.  Important elements are the peace operation’s actual capability, its demonstrated effectiveness and its ability to manage and meet expectations. The speed with which it is able to become operational in a new mission area, the resources it brings and, in turn, its ability to deter spoilers are also essential factors that impact credibility. Finally, a clear and clearly communicated mandate with matching resources contributes to the credibility of the mission."
+            "content": "Credibility: In the UN Capstone Doctrine, the credibility of a peace operation is linked to its perceived ability to carry out and achieve its mandate. Important elements are the peace operation’s actual capability, its demonstrated effectiveness and its ability to manage and meet expectations. The speed with which it is able to become operational in a new mission area, the resources it brings and, in turn, its ability to deter spoilers are also essential factors that impact credibility. Finally, a clear and clearly communicated mandate with matching resources contribute to the credibility of the mission."
           },
           {
             "index": "3",
             "uid": "LEGCRE_SUB_STRCOM",
             "title": "Strategic Communication",
             "labels": [],
-            "content": "Strategic Communication: While not an objective measure of its effectiveness, public perception of a peace operation is an essential factor for its legitimacy and credibility and can vary significantly between different stakeholders. In part, public perception is a product of the peace operation’s conduct, but to some extent, the perception can also be managed through strategic communication to explain the mandate and work of the peace operation or to manage popular expectations. Managing expectations is a critical factor for legitimacy and credibility where the gap between the population’s hopes and a peace operation’s ability and willingness to deliver on those hopes widens."
+            "content": "Strategic Communication: While not an objective measure of its effectiveness, public perception of a peace operation is an essential factor for its legitimacy and credibility and can vary significantly between different stakeholders. In part, this is a product of the peace operation’s conduct, but to some extent the perception can also be managed through strategic communication to explain the mandate and work of the peace operation or to manage popular expectations. Managing expectations is a critical factor for legitimacy and credibility where the gap between the population’s hopes and a peace operation’s ability and willingness to deliver on those hopes widens. Peace operations need to find a balance between explaining their role in a country – thereby fostering legitimacy – but not over-promising on what they can deliver – thereby running the risk of undermining their credibility. Paradoxically, engaging extensively with communities is intended to increase the relevance of a peace operation’s activities but can also excessively raise expectations."
           },
           {
             "index": "4",
             "uid": "LEGCRE_SUB_MISCON",
             "title": "Misconduct",
             "labels": [],
-            "content": "Misconduct: Beyond the general conduct and stance of a peace operation, misconduct by mission personnel has a direct impact on the peace operation’s legitimacy, credibility and effectiveness, especially when it comes to how an operation prioritises the prevention and responds to incidents of sexual exploitation and abuse (SEA). Key questions relate to whether the operation has a code of conduct, how it implements the zero-tolerance policy and how it handles cases of alleged harassment by mission personnel."
+            "content": "Misconduct: Beyond the general conduct and stance of a peace operation, misconduct by mission personnel has a direct impact on the peace operation’s legitimacy, credibility and effectiveness, especially when it comes to how an operation prioritises the prevention and responds to incidents of sexual exploitation and abuse (SEA). Key questions relate to whether the operation has a code of conduct, how it implements the zero-tolerance policy and how it handles cases of alleged harassment by mission personnel. Preventing and responding to SEA is also important for the women, peace and security agenda as SEA tends to disproportionately affect women and children."
           },
           {
             "index": "5",
             "uid": "LEGCRE_SUB_INTUNT",
             "title": "Intended and unintended consequences",
             "labels": [],
-            "content": "Peace operations have both intended and unintended consequences for communities and their environment, which may be positive or negative. While positive unintended consequences may be maximised, efforts are needed for operations to recognise any unintended negative consequences and to minimise them. These approaches are often referred to as “do no harm” or “conflict sensitivity”. Typical unintended consequences include the environmental footprint of a peace operation and uneven distribution of benefits among communities, especially where there are prior ethnic or religious divides."
+            "content": "Peace operations have both intended and unintended consequences for communities and their environment, which may be positive or negative. While positive unintended consequences may be maximised, efforts are needed for operations to recognise any negative unintended consequences and to minimise them. These approaches are often referred to as “do no harm” or “conflict sensitivity”. Typical unintended consequences include the environmental footprint of a peace operation and uneven distribution of benefits among communities, especially where there are prior ethnic or religious divides."
           }
         ]
       },
@@ -171,7 +171,7 @@
         "index": "5",
         "uid": "COOHOR_TOP_HEADER",
         "title": "Coordination and coherence",
-        "content": "",
+        "content": "Coherence is about the role of the peace operation within the context of the overall international effort and division of tasks among regional and international actors, including managing bilateral interests. For one, a peace operation benefits from a coherent vision that underpins the international effort in support of the political process. But coherence also involves practical measures, such as partnership frameworks and mechanisms between different operations in the same country or region. This also includes joint, integrated and system-wide mechanisms of coordination, such as joint programmes to foster internal coherence. Inclusiveness is an essential aspect of coherence and partnerships, and entails having all the stakeholders – system, sub-national, national, regional and international – around the table.",
         "labels": [],
         "subheaders": [
           {
@@ -179,28 +179,28 @@
             "uid": "COOHOR_SUB_SYSCOH",
             "title": "System coherence",
             "labels": [],
-            "content": "Coherence is about the role of the peace operation within the context of the overall international effort and division of tasks among regional and international actors, including managing bilateral interests. A peace operation benefits from a coherent vision that underpins the international effort in support of the political process. However, coherence also involves practical measures, such as partnership frameworks and mechanisms between different operations in the same country or region. Inclusiveness is an essential aspect of coherence and partnerships and entails having all the stakeholders – system, sub-national, national, regional and international – around the table."
+            "content": "System coherence: A peace operation is usually just one of many representatives of an international organisation in a conflict area, thus necessitating close cooperation with other representatives. This has been pursued under various headings, such as integrated or comprehensive approaches or “One UN”. In the UN, the long-standing goal of system coherence is a more effective, efficient, coherent and better performing country presence with reduced transaction costs for host countries. The double-hatting of the resident coordinator as the Deputy Special Representative of the Secretary General, the coordination of agency, funds and programme activities with the peace operation, or the existence of management, programming and monitoring frameworks have all been introduced to promote system coherence. More recently, integration has focused on transitions, looking at system coherence throughout different phases of international deployment, including before and after a peace operation."
           },
           {
             "index": "2",
             "uid": "COOHOR_SUB_EXTCOH",
             "title": "External coherence",
             "labels": [],
-            "content": "System coherence: A peace operation is usually just one of many representatives of an international organisation in a conflict area, thus necessitating close cooperation with other representatives. System coherence is at the core of several approaches such as the integrated or comprehensive approaches or “One UN”. In the UN, the long-standing goal of system coherence is a more effective, efficient, coherent and better-performing country presence with reduced transaction costs for host countries."
+            "content": "External coherence: Often, a number of international organisations or coalitions are present in a conflict area. The challenge for a peace operation is to ensure effective division of labour and to minimise duplication of effort or, worse, contradictory approaches vis-à-vis the host nation, the parties to the conflict and other regional and international actors. In reality, each organisation or coalition is pursuing its specific agenda that may or may not coincide with that of a peace operation and may impact the degree of influence that a peace operation can exercise on the political process."
           },
           {
             "index": "3",
             "uid": "COOHOR_SUB_FRACOO",
             "title": "Frameworks for coordination",
             "labels": [],
-            "content": "Frameworks for coordination: Examples of coordination mechanisms or frameworks include joint trust funds, nationally-led coordination boards or international coordination meetings. Often, these coordination mechanisms address a particular issue, such as support or security sector reform, aid delivery or protection of civilians. Coordination frameworks exist at different levels, ranging from national NGO consortia to government-level donor meetings. Past experience indicates that a strong national role is essential to increase the chances of activities, funding and material support being appropriate and having sustainable impact."
+            "content": "Frameworks for coordination: There are many examples of coordination mechanisms or frameworks, such as joint trust funds, nationally-led coordination boards or international coordination meetings. Often, these coordination mechanisms address a particular issue, such as support for security sector reform, aid delivery or protection of civilians. Coordination frameworks exist at different levels, ranging from national NGO consortia to government-level donor meetings. Past experience indicates that a strong national role is essential to increase the chances of activities, funding and material support being appropriate and having sustainable impact."
           },
           {
             "index": "4",
             "uid": "COOHOR_SUB_REGINV",
             "title": "Regional involvement",
             "labels": [],
-            "content": "Regional involvement: Neighbouring states, other states in the region and regional organisations tend to share security concerns and are directly impacted by the conflict and therefore have a particular interest in the sustainable resolution of a conflict. Their involvement can range from positive and supportive, for instance engaging host governments in formal intergovernmental (negotiation) processes, to negative and obstructive but will, in any case, affect the political process. An important factor for a peace operation is how its political engagement can be aligned to that of regional actors. Coherence with efforts of regional actors, ranging from operations deployed by a regional organisation or peace negotiations led by a regional alliance, is pivotal."
+            "content": "Regional involvement: Neighbouring states, other states in the region and regional organisations tend to share security concerns, are directly impacted by a conflict and therefore have a particular interest in the sustainable resolution of a conflict. Their involvement can range from positive and supportive, for instance engaging host governments in formal intergovernmental (negotiation) processes, to negative and obstructive but will in any case affect the political process. An important factor for a peace operation is how its political engagement can be aligned to that of regional actors. Coherence with efforts of regional actors, ranging from operations deployed by a regional organisation or peace negotiations led by a regional alliance, is pivotal."
           },
           {
             "index": "5",
@@ -214,7 +214,7 @@
             "uid": "COOHOR_SUB_BURSHA",
             "title": "Burden sharing",
             "labels": [],
-            "content": "Burden sharing is usually used in connection with the distribution of risk and expenditure among countries contributing troops and police to peace operations, as well as with the division of labour and sharing of costs among different international organisations. Burden sharing is an essential element of partnerships in peace operations and reflects the extent and nature of political support for a peace operation."
+            "content": "Burden-sharing is usually used in connection with the distribution of risk and expenditure among countries contributing troops and police to peace operations, as well as with the division of labour and sharing of costs among different international organisations. Burden-sharing is an essential element of partnerships in peace operations and reflects the extent and nature of political support for a peace operation."
           },
           {
             "index": "5",
@@ -230,42 +230,42 @@
         "uid": "WOPESE_TOP_HEADER",
         "title": "Women, peace & security",
         "labels": [],
-        "content": "Making sure that women, along with all members of society, are treated equally in terms of opportunities, protection, access to resources and services and participation in decision making, is essential and will make the peace operation more effective. The WPS agenda has internal aspects that pertain to how the operation integrates WPS goals into its plans and performance system and how the peace operation’s leadership implements a gendered approach in its interaction with local and national stakeholders. In addition, the WPS agenda addresses external aspects, such as how conflict impacts men, women, girls and boys differently and how access to elements of a peace process varies.",
+        "content": "Even though key questions related to the women, peace and security (WPS) agenda have been mainstreamed into other explanatory factors above, they warrant a separate explanatory factor due to their complexity and importance. There is a tendency to reduce gender to one dimension, such as equality in staffing or protection from SGBV/CRSV, but making sure that women, along with all members of society, are treated equally in terms of opportunities, protection, access to resources and services, and participation in decision making, is essential and will make the peace operation more effective. The WPS agenda has internal aspects that pertain to how the operation integrates WPS goals into its plans and performance system and how the peace operation’s leadership implements a gendered approach in its interaction with local and national stakeholders. In addition, the WPS agenda addresses external aspects, such as how conflict impacts men, women, girls and boys differently and how access to elements of a peace process varies. In practice, minimising the negative impact of conflict on women requires gender awareness throughout a peace operation’s efforts at conflict prevention and management. Emphasis is placed on women’s agency – rather than viewing women as victims of a conflict only. For a peace operation, promoting the WPS agenda also entails prioritising the prevention of and response to sexual exploitation and abuse, and incorporating conflict-related sexual violence into its protection strategy.",
         "subheaders": [
           {
             "index": "1",
             "uid": "WOPESE_SUB_GENEQU",
-            "title": "Gender mainstreaming",
+            "title": "Gender equality",
             "labels": [],
-            "content": "Gender mainstreaming means that gender considerations are (or should be) mainstreamed into all measures to ensure security and promote stability, including mission plans and the performance system. Gender mainstreaming requires certain structures and competencies in a peace operation. Of special interest in gender mainstreaming are the male-to-female ratio of staff, the placement of women in an operation, the existence of dedicated functions such as gender units, advisers or focal points to drive forward the WPS strategy and specific in-mission gender training, as well as qualitative or quantitative evidence of gender mainstreaming in an operation’s organisational culture."
+            "content": "How is the goal of gender equality reflected in the composition of the operation and in the operation’s approach towards national counterparts?"
           },
           {
             "index": "2",
             "uid": "WOPESE_SUB_PARWOM",
             "title": "Participation of women",
             "labels": [],
-            "content": "The participation of women is a key tenet of the women, peace and security (WPS) agenda. Participation of women in peace operations can range from mediation efforts to the design and implementation of the disarmament, demobilisation and reintegration campaigns can take place at different levels, from grassroots to senior government, in different areas, from social, political to economic and others, and can be formal or informal. Ensuring participation of women requires a detailed understanding of the conflict, as women may be less visible in public spaces at first sight."
+            "content": "How have women participated in key decision making both within the operation, but also as part of the peace process? What steps has the peace operation taken to address the structural barriers which marginalise women in decision making?"
           },
           {
             "index": "3",
             "uid": "WOPESE_SUB_GENCON",
             "title": "Gendered conflict analysis",
             "labels": [],
-            "content": "Gendered conflict analysis: Conflict impacts different groups differently. Developing a differentiated understanding of how conflict impacts women, girls, men and boys and their respective roles in society is necessary for implementing the WPS agenda. Conflicts often exacerbate pre-existing inequalities by, for example, restricting women’s ownership of land, reducing access to education, and increasing child marriage or maternal mortality, resulting in long-lasting consequences. In practice, minimising the negative impact of conflict on women requires consideration of the gender perspective throughout a peace operation’s efforts at conflict prevention and management."
+            "content": "How have gendered drivers and gendered impact of the conflict been integrated into the conflict analysis?"
           },
           {
             "index": "4",
             "uid": "WOPESE_SUB_EARWAR",
             "title": "Early-warning mechanisms",
             "labels": [],
-            "content": ""
+            "content": "How do established mechanisms for information gathering incorporate gendered early-warning indicators and integrate systematic and regular information about and from women?"
           },
           {
             "index": "5",
             "uid": "WOPESE_SUB_SGBCRS",
             "title": "Preventing SGBV and CRSV",
             "labels": [],
-            "content": "Protection sexual and gender-based violence (SGBV) and conflict-related sexual violence (CRSV) Preventing CRSV and SGBV: The protection of women and men from sexual and gender-based/conflict-related sexual violence (SGBV/CRSV) during and after the armed conflict is an essential part of the UN’s protection agenda. Preventing and addressing SGBV/CRSV is an integrated and prioritised element in a peace operation’s protection strategy."
+            "content": "How has the peace operation promoted a holistic approach to preventing and protecting against SGBV and CRSV? What efforts has it put into ensuring the safety and dignity of survivors and their equal access to protection and justice?"
           }
         ]
       }
@@ -507,9 +507,9 @@
           {
             "index": "1",
             "uid": "WOPESE_SUB_GENEQU",
-            "title": "Gender mainstreaming",
+            "title": "Gender equality",
             "labels": [],
-            "content": ""
+            "content": "Not assessed in the case study."
           },
           {
             "index": "2",
@@ -530,7 +530,7 @@
             "uid": "WOPESE_SUB_EARWAR",
             "title": "Early-warning mechanisms",
             "labels": [],
-            "content": "Not assessed in the case study."
+            "content": ""
           },
           {
             "index": "5",
