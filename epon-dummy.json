@@ -1,0 +1,273 @@
+[
+  {
+    "operation": "FUTUTEST",
+    "area": "Finland",
+    "internalId": "fututest",
+    "data": [
+      {
+        "index": "1",
+        "uid": "POLPRI_TOP_HEADER",
+        "title": "Political primacy",
+        "labels": [],
+        "content": "",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "POLPRI_SUB_VIPOPR",
+            "title": "Viable political process",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "POLPRI_SUB_POLDIR",
+            "title": "Political direction and support",
+            "labels": [],
+            "content": ""
+          }
+        ]
+      },
+      {
+        "index": "2",
+        "uid": "REALMAN_TOP_HEADER",
+        "title": "Realistic mandates and matching resources",
+        "labels": [],
+        "content": "",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "REALMAN_SUB_CONGRU",
+            "title": "Congruence",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "REALMAN_SUB_RELEVA",
+            "title": "Relevance",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "3",
+            "uid": "REALMAN_SUB_CAPABI",
+            "title": "Capabilities",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "4",
+            "uid": "REALMAN_SUB_GENCON",
+            "title": "Gender considerations",
+            "labels": [],
+            "content": ""
+          }
+        ]
+      },
+      {
+        "index": "3",
+        "uid": "PEOCEN_TOP_HEADER",
+        "title": "People-centred approach",
+        "labels": [],
+        "content": "",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "PEOCEN_SUB_NATLOC",
+            "title": "National and local ownership",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "PEOCEN_SUB_NONSTA",
+            "title": "Non-state actors",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "3",
+            "uid": "PEOCEN_SUB_COMENG",
+            "title": "Community and civil society engagement",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "4",
+            "uid": "PEOCEN_SUB_PARWOM",
+            "title": "Participation of women",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "PEOCEN_SUB_ABSCAP",
+            "title": "Absorption capacity",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "6",
+            "uid": "PEOCEN_SUB_ELICAP",
+            "title": "Elite capture",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "7",
+            "uid": "PEOCEN_SUB_FRASOC",
+            "title": "Fragmentation of societies",
+            "labels": [],
+            "content": ""
+          }
+        ]
+      },
+      {
+        "index": "4",
+        "uid": "LEGCRE_TOP_HEADER",
+        "title": "Legitimacy and credibility",
+        "content": "",
+        "labels": [],
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "LEGCRE_SUB_LEGITI",
+            "title": "Legitimacy",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "LEGCRE_SUB_CREDIB",
+            "title": "Credibility",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "3",
+            "uid": "LEGCRE_SUB_STRCOM",
+            "title": "Strategic Communication",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "4",
+            "uid": "LEGCRE_SUB_MISCON",
+            "title": "Misconduct",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "LEGCRE_SUB_INTUNT",
+            "title": "Intended and unintended consequences",
+            "labels": [],
+            "content": ""
+          }
+        ]
+      },
+      {
+        "index": "5",
+        "uid": "COOHOR_TOP_HEADER",
+        "title": "Coordination and coherence",
+        "content": "",
+        "labels": [],
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "COOHOR_SUB_SYSCOH",
+            "title": "System coherence",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "COOHOR_SUB_EXTCOH",
+            "title": "External coherence",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "3",
+            "uid": "COOHOR_SUB_FRACOO",
+            "title": "Frameworks for coordination",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "4",
+            "uid": "COOHOR_SUB_REGINV",
+            "title": "Regional involvement",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "COOHOR_SUB_BILINT",
+            "title": "Bilateral interests",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "COOHOR_SUB_BURSHA",
+            "title": "Burden sharing",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "COOHOR_SUB_EXTSCE",
+            "title": "External sceptics and spoilers",
+            "labels": [],
+            "content": ""
+          }
+        ]
+      },
+      {
+        "index": "6",
+        "uid": "WOPESE_TOP_HEADER",
+        "title": "Women, peace & security",
+        "labels": [],
+        "content": "",
+        "subheaders": [
+          {
+            "index": "1",
+            "uid": "WOPESE_SUB_GENEQU",
+            "title": "Gender equality",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "2",
+            "uid": "WOPESE_SUB_PARWOM",
+            "title": "Participation of women in decision making",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "3",
+            "uid": "WOPESE_SUB_GENCON",
+            "title": "Gendered conflict analysis",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "4",
+            "uid": "WOPESE_SUB_EARWAR",
+            "title": "Early-warning mechanisms",
+            "labels": [],
+            "content": ""
+          },
+          {
+            "index": "5",
+            "uid": "WOPESE_SUB_SGBCRS",
+            "title": "SGBV and CRSV",
+            "labels": [],
+            "content": ""
+          }
+        ]
+      }
+    ]
+  }
+]
